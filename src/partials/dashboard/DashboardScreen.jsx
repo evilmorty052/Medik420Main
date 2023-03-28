@@ -60,7 +60,11 @@ const {avatar, firstname, lastname, transactions, accounts, claimed} = userdetai
         
         } />
         <Route key={'ll'} path="/messages/*" element={<MessageUi/>} />
-        <Route key={'llj'} path="/hub" element={<MobileHub/>} />
+        <Route key={'llj'} path="/hub" element={
+          <LaptopDisplay>
+          <MobileHub/>
+        </LaptopDisplay>
+        } />
         <Route key={'llj'} path="/withdraw/*" element={<Withdraw accounts={accounts}/>} />
     </Routes>
    </div>
