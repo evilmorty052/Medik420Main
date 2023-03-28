@@ -170,8 +170,8 @@ const AllAccountsPage = () => {
             <div className='p-2'>
                 <h3 className='text-[28px] font-semibold text-gray-800'>Your Portfolios</h3>
             </div>
-         <div className='flex justify-center'>
-         <div className='flex items-center flex-col gap-y-4 mb-8 sm:grid grid-cols-2 grid-flow-row sm:gap-x-4 lg:grid-cols-3 lg:gap-x-8 '>  
+         <div className='flex justify-center md:justify-start md:px-2'>
+         <div className='flex items-center flex-col gap-y-4 mb-8 sm:grid grid-cols-2 grid-flow-row sm:gap-x-4  lg:gap-x-8 '>  
              {
                 yourportfolios?.map((portfolio)=> {
                     return(
@@ -184,8 +184,8 @@ const AllAccountsPage = () => {
          <div className='p-2'>
                 <h3 className='text-[28px] font-semibold text-gray-800'>Available Portfolios</h3>
         </div>
-         <div className='flex justify-center'>
-         <div className='flex items-center flex-col gap-y-4 sm:grid grid-cols-2 grid-flow-row sm:gap-x-4 lg:grid-cols-3'>
+         <div className='flex justify-center md:justify-start md:px-2'>
+         <div className='flex items-center flex-col gap-y-4 sm:grid grid-cols-2 grid-flow-row sm:gap-x-4 '>
              {availableportfolios?.map((portfolio)=> {
                 return(
                     <>

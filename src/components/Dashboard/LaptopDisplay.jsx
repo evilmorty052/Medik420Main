@@ -1,5 +1,5 @@
 import React from 'react'
-import { FaHome } from 'react-icons/fa'
+import { FaBriefcase, FaComments, FaCreditCard, FaGlobe, FaHome } from 'react-icons/fa'
 import { Link, Routes, Route } from 'react-router-dom'
 import { DebitCard, NewsTab } from '../../partials/dashboard'
 import { people01 } from '../../assets'
@@ -17,28 +17,23 @@ const LaptopDisplay = ({avatar, logo, name , children}) => {
       },
       {
         name: 'Portfolio',
-        icon: <FaHome style={{fontSize: '20px', color: 'white'}}/>,
+        icon: <FaBriefcase style={{fontSize: '20px', color: 'white'}}/>,
         to: 'dashboard/portfolio'
       },
       {
         name: 'Withdraw',
-        icon: <FaHome style={{fontSize: '20px', color: 'white'}}/>,
-        to: 'withdraw'
+        icon: <FaCreditCard style={{fontSize: '20px', color: 'white'}}/>,
+        to: 'dashboard/withdraw'
       },
       {
         name: 'Hub',
-        icon: <FaHome style={{fontSize: '20px', color: 'white'}}/>,
-        to: 'hub'
-      },
-      {
-        name: 'Hub',
-        icon: <FaHome style={{fontSize: '20px', color: 'white'}}/>,
-        to: 'hub'
+        icon: <FaGlobe style={{fontSize: '20px', color: 'white'}}/>,
+        to: 'dashboard/hub'
       },
       {
         name: 'Chat',
-        icon: <FaHome style={{fontSize: '20px', color: 'white'}}/>,
-        to: 'messages'
+        icon: <FaComments style={{fontSize: '20px', color: 'white'}}/>,
+        to: 'dashboard/messages'
       },
     ]
 
@@ -124,7 +119,7 @@ const LaptopDisplay = ({avatar, logo, name , children}) => {
           <>
           <div class="fixed z-60 top-0 md:left-[72px] right-0 h-16 border-b bg-white  md:py-2.5">
             <div class="flex items-center justify-between space-x-4 px-6 2xl:container">
-              <h5  class="text-2xl font-medium text-gray-600 lg:block ">Dashboard</h5>
+              <h5  class="text-[30px] font-black uppercase text-gray-800 lg:block ml-2 ">Medik <span className='text-green-300'>420</span></h5>
               {/* <button class="-mr-2 h-16 w-12 border-r lg:hidden ">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -203,7 +198,7 @@ const LaptopDisplay = ({avatar, logo, name , children}) => {
                     />
                   </svg>
                 </button>
-                {/* <button
+                <button
                   aria-label="notification"
                   class="h-10 w-10 rounded-xl border bg-gray-100 active:bg-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:active:bg-gray-800"
                 >
@@ -217,7 +212,7 @@ const LaptopDisplay = ({avatar, logo, name , children}) => {
                       d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"
                     />
                   </svg>
-                </button> */}
+                </button>
                 <h3 className='text-xl font-space tracking-wide'>EVIL MORTY</h3>
               </div>
               
@@ -255,7 +250,7 @@ const LaptopDisplay = ({avatar, logo, name , children}) => {
   return (
    
         <>
-        <body class="h-screen  "> 
+        <body class="h-screen bg-white "> 
      <LaptopSidebar avatar={people01} stashlogo={logo}/>
       <LaptopHeader/>
       <div class="ml-auto mb-6 md:w-[calc(100vw-100px)] lg:w-[75%] xl:w-[80%] 2xl:w-[85%] ">
