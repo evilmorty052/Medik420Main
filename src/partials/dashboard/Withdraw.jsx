@@ -448,8 +448,8 @@ const TransferPage = () => {
 const HomePage = () => {
     return (
         <>
-        <Header fullmenu={true}/>
-        <div className='pt-10 pb-[93px]'>
+        <div className='md:hidden'> <Header fullmenu={true}/></div>
+        <div className='pt-10  pb-[93px] md:pt-0'>
              <Tabs setactive={handleTabs} section1={'Withdraw'} section2={'Transfer'} tab1={withdraw} tab2={transfer} />
              {/* {
              withdraw &&

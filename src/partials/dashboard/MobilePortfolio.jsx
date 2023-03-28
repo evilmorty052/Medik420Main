@@ -352,7 +352,7 @@ const SyndicatesHeader = ()=>{
 }
 
 switch (path) {
-    case '/dashboard/Portfolio':
+    case '/dashboard/portfolio':
       view =  <DefaultHeader/> 
         break;
     case '/dashboard/Portfolio/crypto':

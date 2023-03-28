@@ -65,7 +65,11 @@ const {avatar, firstname, lastname, transactions, accounts, claimed} = userdetai
           <MobileHub/>
         </LaptopDisplay>
         } />
-        <Route key={'llj'} path="/withdraw/*" element={<Withdraw accounts={accounts}/>} />
+        <Route key={'llj'} path="/withdraw/*" element={
+        <LaptopDisplay>
+          <Withdraw accounts={accounts}/>
+        </LaptopDisplay>
+        } />
     </Routes>
    </div>
     </>

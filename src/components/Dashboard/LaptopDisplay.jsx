@@ -7,11 +7,64 @@ import { people01 } from '../../assets'
 const LaptopDisplay = ({avatar, logo, name , children}) => {
    
    
-    function LaptopSidebar({avatar , stashlogo}) {
+  function LaptopSidebar({avatar , stashlogo}) {
+
+    const links = [
+      {
+        name: 'Dashboard',
+        icon: <FaHome style={{fontSize: '20px', color: 'white'}}/>,
+        to: 'dashboard'
+      },
+      {
+        name: 'Portfolio',
+        icon: <FaHome style={{fontSize: '20px', color: 'white'}}/>,
+        to: 'dashboard/portfolio'
+      },
+      {
+        name: 'Withdraw',
+        icon: <FaHome style={{fontSize: '20px', color: 'white'}}/>,
+        to: 'withdraw'
+      },
+      {
+        name: 'Hub',
+        icon: <FaHome style={{fontSize: '20px', color: 'white'}}/>,
+        to: 'hub'
+      },
+      {
+        name: 'Hub',
+        icon: <FaHome style={{fontSize: '20px', color: 'white'}}/>,
+        to: 'hub'
+      },
+      {
+        name: 'Chat',
+        icon: <FaHome style={{fontSize: '20px', color: 'white'}}/>,
+        to: 'messages'
+      },
+    ]
+
+   const SideBarLink = ({to, name, icon}) => {
+    return(
+      <>
+      <li>
+                <Link to={`/${to}`}>
+                <a
+                  
+                  aria-label="dashboard"
+                  class="relative flex items-center justify-center space-x-4 rounded-xl bg-gradient-to-r from-sky-600 to-cyan-400 px-4 py-3 md:w-[40px] lg:w-[250px] "
+                >
+                  <span>{icon}</span>
+                  <span class="-mr-1 font-medium hidden lg:block text-white flex-1">{name}</span>
+                </a>
+                </Link>
+              </li>
+      </>
+    )
+   }
+
         return(
           <>
           <aside
-          class="fixed top-0 z-[600]  flex h-screen w-full flex-col justify-between border-r bg-slate-400 px-6 pb-3 transition duration-300 md:w-[100px] lg:ml-0 lg:w-[25%] xl:w-[20%] 2xl:w-[15%] "
+          class="fixed top-0 z-[600]  flex h-screen w-full flex-col justify-between border-r bg-white px-6 pb-3 transition duration-300 md:w-[100px] lg:ml-0 lg:w-[25%] xl:w-[20%] 2xl:w-[15%] "
         >
           <div>
             {/* <div class="-mx-6 px-6 py-4">
@@ -30,17 +83,15 @@ const LaptopDisplay = ({avatar, logo, name , children}) => {
               <span class="hidden text-gray-400 lg:block">Admin</span>
             </div>
       
-            <ul class="mt-8 space-y-2 tracking-wide">
-              <li>
-                <a
-                  href="#"
-                  aria-label="dashboard"
-                  class="relative flex items-center justify-center space-x-4 rounded-xl bg-gradient-to-r from-sky-600 to-cyan-400 px-4 py-3 "
-                >
-                  <span><FaHome style={{fontSize: '20px', color: 'white'}}/></span>
-                  <span class="-mr-1 font-medium hidden lg:block text-white">Dashboard</span>
-                </a>
-              </li>
+            <ul class="mt-8 space-y-4 tracking-wide">
+               {
+                links?.map((link)=>(
+                  <SideBarLink 
+                    name={link.name}
+                    to={link.to}
+                    icon={link.icon}/>
+                ))
+               }
             </ul>
           </div>
       

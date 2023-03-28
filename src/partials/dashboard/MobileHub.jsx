@@ -1048,7 +1048,7 @@ if(!coinvestors){
 
   return (
     <>
-    <div className="py-16  bg-scroll">
+    <div className="py-16 md:py-0  bg-scroll">
      <div className="container relative h-screen overflow-y-scroll mx-auto max-w-5xl p-2 space-y-4">
  <div className="fixed bg-white left-0 right-0 z-[80] top-0 w-full"><Tabs setactive={handleTabs} section1={'For you'} section2={'Following'} tab1={foryou} tab2={following} /></div>
       <div>
