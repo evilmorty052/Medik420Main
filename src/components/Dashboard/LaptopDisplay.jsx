@@ -204,7 +204,7 @@ const LaptopDisplay = ({avatar, logo, name , children}) => {
   return (
    
         <>
-        <body class="h-screen bg-black "> 
+        <body class="h-screen bg-white  "> 
      <LaptopSidebar avatar={people01} stashlogo={logo}/>
       <LaptopHeader/>
       <div class="ml-auto mb-6 md:w-[calc(100vw-100px)] lg:w-[75%] xl:w-[80%] 2xl:w-[85%] ">

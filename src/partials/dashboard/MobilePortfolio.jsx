@@ -412,7 +412,7 @@ const AllPortfolios = () => {
            <div className="px-2 pt-8 ">
                <div className="space-y-8 ">
                   <h3 className={styles.UiHeading}>New features</h3>
-                <div className="flex justify-center">
+                <div className="flex justify-center md:justify-start">
                 <PortfolioCard func={() => setSharedPortfolio(true)} header={'Shared Portfolio'} description={'find out how easy it is to share a portfolio with another user.'} buttontext={'Explore'}/>
                 </div>
                </div>
