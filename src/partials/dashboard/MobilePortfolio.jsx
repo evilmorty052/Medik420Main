@@ -464,7 +464,7 @@ const AllPortfolios = () => {
         <>
         
         <div className="md:hidden"><Header setisExpanded={setexpanded} fullmenu={true} halfmenu={false}/></div>
-        <div onClick={()=> expanded && setexpanded(false)} className="pb-[90px] h-screen overflow-y-scroll md:pb-10 md:container mx-auto bg-white  md:px-20">
+        <div onClick={()=> expanded && setexpanded(false)} className="pb-[90px] pt-4 md:pt-0 h-screen overflow-y-scroll md:pb-10 md:container mx-auto bg-white  md:px-20">
          <SearchInvestments/>
            <div className="px-2 pt-8 space-y-10 ">
                <div className="space-y-8 md:space-y-10">
