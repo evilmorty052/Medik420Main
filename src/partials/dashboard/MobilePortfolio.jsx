@@ -12,6 +12,7 @@ import JSConfetti from 'js-confetti'
 import Header from "../Header"
 import Startups from "./Startups"
 import Sidebar from "../Sidebar2"
+import { bitcoin } from "../../assets"
 
 
 const MobilePortfolio = ({portfolios}) => {
@@ -23,32 +24,88 @@ const [expanded, setexpanded] = useState(null)
 const jsConfetti = new JSConfetti()
 const navigate = useNavigate()
 
-const Tabs = () => {
+const Tabs = ({image}) => {
+
     return(
-        <>
-        
-           <Link to={'crypto'}> 
-           <a  className="p-2 shadow-2xl ring-1 ring-white text-gray-700 font-space font-semibold bg-green-200 flex justify-center  max-w-[120px] min-w-[120px] rounded-3xl">
-                Crypto
-            </a>
-            </Link>
-            {/* <a className="p-2 shadow-2xl ring-1 ring-white text-gray-700 font-space font-semibold bg-green-200 flex justify-center  max-w-[100px] min-w-[100px] rounded-3xl">
-                Stocks
-            </a> */}
-            <Link to={'startups'}>
-            <a className="p-2 shadow-2xl ring-1 ring-white text-gray-700 font-space font-semibold bg-green-200 flex justify-center  max-w-[120px] min-w-[120px] rounded-3xl">
-                Startups
-            </a>
-            </Link>
-            
-            <Link to={'syndicates'}>
-            
-            <a className="p-2 shadow-2xl ring-1 ring-white text-gray-700 font-space font-semibold bg-green-200 flex justify-center  max-w-[120px] min-w-[120px] rounded-3xl">
-                Syndicates
-            </a>
-            </Link>
-        </>
+      <>
+       <div className="gap-x-10 flex">
+       <Link to={'crypto'}> 
+       <div>
+           <div className=" w-32 h-32 sm:w-44 sm:h-44 p-4 relative bg-gray-200 bg-cover bg-center bg-no-repeat rounded-xl"
+            style={{backgroundImage: `url(${bitcoin})`}}>
+              <div className="z-50">
+                 <h3 className="text-white z-50 font-extrabold text-base absolute bottom-2 left-2">Crypto</h3>
+              </div>
+             <div className="absolute inset-0 bg-gray-700/40 rounded-xl"></div>   
+           </div>
+       </div>
+       </Link>
+       <Link to={'startups'}> 
+       <div>
+           <div className=" w-32 h-32 sm:w-44 sm:h-44 p-4 relative bg-gray-200 bg-cover bg-center bg-no-repeat rounded-xl"
+            style={{backgroundImage: `url(${bitcoin})`}}>
+              <div className="z-50">
+                 <h3 className="text-white z-50 font-extrabold text-base absolute bottom-2 left-2">Startups</h3>
+              </div>
+             <div className="absolute inset-0 bg-gray-700/40 rounded-xl"></div>   
+           </div>
+       </div>
+       </Link>
+       <Link to={'stocks'}> 
+       <div>
+           <div className=" w-32 h-32 sm:w-44 sm:h-44 p-4 relative bg-gray-200 bg-cover bg-center bg-no-repeat rounded-xl"
+            style={{backgroundImage: `url(${bitcoin})`}}>
+              <div className="z-50">
+                 <h3 className="text-white z-50 font-extrabold text-base absolute bottom-2 left-2">Stocks</h3>
+              </div>
+             <div className="absolute inset-0 bg-gray-700/40 rounded-xl"></div>   
+           </div>
+       </div>
+       </Link>
+       <Link to={'syndicates'}> 
+       <div>
+           <div className="  w-32 h-32 sm:w-44 sm:h-44 p-4 relative bg-gray-200 bg-cover bg-center bg-no-repeat rounded-xl"
+            style={{backgroundImage: `url(${bitcoin})`}}>
+              <div className="z-50">
+                 <h3 className="text-white z-50 font-extrabold text-base absolute bottom-2 left-2">Syndicates</h3>
+              </div>
+             <div className="absolute inset-0 bg-gray-700/40 rounded-xl"></div>   
+           </div>
+       </div>
+       </Link>
+       </div>
+      </>
     )
+
+    // return(
+    //     <>
+        
+    //        <Link to={'crypto'}> 
+    //        <a  className="p-2  ring-1 ring-white text-gray-700 font-space font-semibold bg-green-200 flex justify-center  max-w-[120px] min-w-[120px] rounded-3xl">
+    //             Crypto
+    //         </a>
+    //         </Link>
+            
+    //         <Link to={'startups'}>
+    //         <a className="p-2  ring-1 ring-white text-gray-700 font-space font-semibold bg-green-200 flex justify-center  max-w-[120px] min-w-[120px] rounded-3xl">
+    //             Startups
+    //         </a>
+    //         </Link>
+            
+    //         <Link to={'stocks'}>
+            
+    //         <a className="p-2  ring-1 ring-white text-gray-700 font-space font-semibold bg-green-200 flex justify-center  max-w-[120px] min-w-[120px] rounded-3xl">
+    //             Stocks
+    //         </a>
+    //         </Link>
+    //         <Link to={'syndicates'}>
+            
+    //         <a className="p-2  ring-1 ring-white text-gray-700 font-space font-semibold bg-green-200 flex justify-center  max-w-[120px] min-w-[120px] rounded-3xl">
+    //             Syndicates
+    //         </a>
+    //         </Link>
+    //     </>
+    // )
 }
 
 const Pricing = () => {
@@ -298,19 +355,19 @@ let view
 const DefaultHeader = () => {
     return(
         <>
-           <div className="space-y-4 sm:min-w-[700px]">
+           <div className="space-y-4 sm:min-w-[700px] md:flex flex-col items-center">
         <div className="flex justify-between px-2">
             <h3 className="text-[28px] font-bold">Build Your Investment Portfolio</h3>
             {/* <span>explore investments</span> */}
         </div>
         <div className="px-4">
-        <div className="flex items-center space-x-2 p-2 bg-gray-100 rounded-xl">
+        <div className="flex items-center space-x-2 p-2 bg-gray-100 max-w-xl md:min-w-[768px] rounded-xl">
              <FaSearch/>
              <hr className="w-px  h-6 bg-slate-200 mx-4" />
              <input placeholder="Search all investments" className="flex-1 bg-transparent border-0 focus:border-0 focus:ring-0" type="text" />
         </div>
         </div>
-        <div className="w-full flex space-x-8 sm:justify-center  p-4 overflow-x-scroll"><Tabs/></div> 
+        <div className="w-full flex space-x-8 sm:justify-center  p-4 overflow-x-scroll"><Tabs image={bitcoin}/></div> 
      </div>
         </>
     )
@@ -407,18 +464,29 @@ const AllPortfolios = () => {
         <>
         
         <div className="md:hidden"><Header setisExpanded={setexpanded} fullmenu={true} halfmenu={false}/></div>
-        <div onClick={()=> expanded && setexpanded(false)} className="pb-[90px] h-screen overflow-y-scroll md:pb-0">
+        <div onClick={()=> expanded && setexpanded(false)} className="pb-[90px] h-screen overflow-y-scroll md:pb-10 md:container mx-auto bg-white  md:px-20">
          <SearchInvestments/>
-           <div className="px-2 pt-8 ">
-               <div className="space-y-8 ">
-                  <h3 className={styles.UiHeading}>New features</h3>
-                <div className="flex justify-center md:justify-start">
+           <div className="px-2 pt-8 space-y-10 ">
+               <div className="space-y-8 md:space-y-10">
+                  <div className="md:px-14">
+                    <h3 className={styles.UiHeading}>New features</h3>
+                  </div>
+                <div className="md:flex gap-x-10 hidden justify-center ">
+                <PortfolioCard func={() => setSharedPortfolio(true)} header={'Shared Portfolio'} description={'find out how easy it is to share a portfolio with another user.'} buttontext={'Explore'}/>
+                <div>
                 <PortfolioCard func={() => setSharedPortfolio(true)} header={'Shared Portfolio'} description={'find out how easy it is to share a portfolio with another user.'} buttontext={'Explore'}/>
                 </div>
+                </div>
+                 <div className="sm:hidden flex justify-center">
+                 <PortfolioCard func={() => setSharedPortfolio(true)} header={'Shared Portfolio'} description={'find out how easy it is to share a portfolio with another user.'} buttontext={'Explore'}/>
+                 </div>
                </div>
-               <div className="space-y-8 py-4">
-                  <h3 className={styles.UiHeading}>Your Portfolios</h3>
-                <div className="flex flex-col  gap-y-6 items-center sm:grid grid-cols-2 grid-flow-row ">
+
+             { yourportfolios && 
+              <div className="space-y-8 py-4 md:space-y-10">
+                  <div className="md:px-14"><h3 className={styles.UiHeading}>Your Portfolios</h3></div>
+                <div className="flex  justify-center">
+                <div className="flex flex-col gap-x-10 gap-y-6 items-center sm:grid grid-cols-2 grid-flow-row ">
                  {yourportfolios?.map((portfolio) => (
                               <PortfolioCard
                               func={()=> {
@@ -429,29 +497,36 @@ const AllPortfolios = () => {
                                  header={`${portfolio.type} Portfolio`} description={'Explore stocks startups and crypto and invest as you see fit '} buttontext={'View'}/>
                  ))}
                 </div>
+                </div>
                </div>
-               <div className="space-y-8 py-4 ">
+               }
+
+               {
+                availableportfolios &&
+                <div className="space-y-8 py-4 md:space-y-10">
+                  <div className="md:px-14">
                   <h3 className={styles.UiHeading}>Available Portfolios</h3>
-                {/* <div className="flex flex-col gap-y-8 items-center">
-                <PortfolioCard header={'Smart Portfolio'} buttontext={'Set up'} description={'Get an automatically balanced portfolio in a few clicks'}/>
-                <PortfolioCard header={'Retirement Portfolio'} buttontext={'Set up'} description={'Setup a retirement account with tax benefits and deposit bonuses'}/>
-                <PortfolioCard header={'Kids Portfolio'} buttontext={'Set up'} description='Setup a custodial account for dependents'/>
-                </div> */}
-                <div className="flex flex-col gap-y-8 items-center sm:grid grid-cols-2 grid-flow-row">
+                  </div>
+                 <div className="flex justify-center">
+                 <div className="flex gap-x-10 flex-col gap-y-8  items-center sm:grid grid-cols-2 grid-flow-row ">
                 {availableportfolios?.map((portfolio)=>{
                     
                     return(
                         <>
+                        
                         <PortfolioCard func={()=> {
                             setactivePortfolio(portfolio)
                             navigate('setup')
                             }} header={`${portfolio.type} portfolio`} description={portfolio.description} buttontext={'Setup'}/>
+                  
                         </>
                     )
                 })}
                 </div>
+                 </div>
            
                </div>
+               }
            </div>
          
          </div>
@@ -691,6 +766,156 @@ client
   )
  }
 
+ const StocksScreen = () => {
+  const [stocks, setstocks] = useState([])
+  const [activeStock, setactiveStock] = useState(null)
+
+  const fetchStocks = async () => {
+      const res = await fetch("https://financialmodelingprep.com/api/v3/stock-screener?marketCapMoreThan=1000000000&betaMoreThan=1&volumeMoreThan=10000&sector=Energy&exchange=NASDAQ&dividendMoreThan=0&limit=20&apikey=d3112acd4e081291c5239fb8af8763e7")
+      const data = await res.json()
+      setstocks(data)
+      console.log(data)
+  }
+  
+  useEffect(() => {
+    fetchStocks()
+  
+  }, [])
+
+
+  const StockTabs = () => {
+    return(
+        <>
+        
+           <Link to={'crypto'}> 
+           <a  className="p-2 shadow-2xl ring-1 ring-white text-gray-700 font-space font-semibold bg-green-200 flex justify-center  max-w-[120px] min-w-[120px] rounded-3xl">
+                Technology
+            </a>
+            </Link>
+            {/* <a className="p-2 shadow-2xl ring-1 ring-white text-gray-700 font-space font-semibold bg-green-200 flex justify-center  max-w-[100px] min-w-[100px] rounded-3xl">
+                Stocks
+            </a> */}
+            <Link to={'startups'}>
+            <a className="p-2 shadow-2xl ring-1 ring-white text-gray-700 font-space font-semibold bg-green-200 flex justify-center  max-w-[120px] min-w-[120px] rounded-3xl">
+                Consumer
+            </a>
+            </Link>
+            
+            <Link to={'stocks'}>
+            
+            <a className="p-2 shadow-2xl ring-1 ring-white text-gray-700 font-space font-semibold bg-green-200 flex justify-center  max-w-[120px] min-w-[120px] rounded-3xl">
+                Finance
+            </a>
+            </Link>
+            <Link to={'syndicates'}>
+            
+            <a className="p-2 shadow-2xl ring-1 ring-white text-gray-700 font-space font-semibold bg-green-200 flex justify-center  max-w-[120px] min-w-[120px] rounded-3xl">
+                Communication
+            </a>
+            </Link>
+        </>
+    )
+}
+  const StocksHeader = () => {
+    return(
+        <>
+           <div className="space-y-4 sm:min-w-[700px]">
+        <div className="flex justify-between px-2">
+            <h3 className="text-[28px] font-bold">Invest In Stocks With Auto-Balancing</h3>
+            {/* <span>explore investments</span> */}
+        </div>
+        <div className="px-4">
+        <div className="flex items-center space-x-2 p-2 bg-gray-100 rounded-xl">
+             <FaSearch/>
+             <hr className="w-px  h-6 bg-slate-200 mx-4" />
+             <input placeholder="Search stocks" className="flex-1 bg-transparent border-0 focus:border-0 focus:ring-0" type="text" />
+        </div>
+        </div>
+        <div className="w-full flex space-x-8 sm:justify-center  p-4 overflow-x-scroll"><StockTabs/></div> 
+     </div>
+        </>
+    )
+}
+
+const StockPage = ({activeStock}) => {
+const [stockdata, setstockdata] = useState(null)
+const [stockNews, setstockNews] = useState(null)
+
+  const fetchStock = async () => {
+      const res = await fetch(`https://financialmodelingprep.com/api/v3/profile/${activeStock.symbol}?apikey=d3112acd4e081291c5239fb8af8763e7      `)
+      const data = await res.json()
+      const news = await fetch(`https://financialmodelingprep.com/api/v3/stock_news?tickers=${activeStock.symbol}&page=0&apikey=d3112acd4e081291c5239fb8af8763e7&limit=5`)
+      const newsdata = await news.json()
+      setstockNews(newsdata)
+      setstockdata(data)
+      console.log(newsdata)
+  }
+
+  useEffect(() => {
+    fetchStock()
+  }, [])
+
+  if (!stockdata) {
+    return(
+      <div className="flex justify-center">
+         .... loading
+      </div>
+    )
+    
+  }
+
+  return(
+    <> 
+       {activeStock && <Stocks name={activeStock.name} companyName={activeStock.companyName} price={activeStock.price} func={()=> setactiveStock(null)}/>}
+    </>
+  )
+}
+
+const Stocks = ({name, companyName, price, func}) => {
+  return(
+    <> 
+      <div>
+        <div onClick={func} className="flex justify-between">
+             <div>
+             <h3>{name}</h3>
+             <p>{companyName}</p>
+             </div>
+             <p>{price}</p>
+        </div>
+      </div>
+    </>
+  )
+}
+
+if (activeStock) {
+  return(
+    <>
+    <StockPage activeStock={activeStock} />
+    </>
+  )
+}
+
+
+  return(
+    <>
+    <div className="py-4">
+     <StocksHeader/>
+     <div className="flex">
+         <div className="flex flex-col">
+             {
+                 stocks?.map((stock, index) => {
+                     return(
+                         <Stocks func={()=> setactiveStock(stock)} key={index} name={stock.symbol} companyName={stock.companyName} price={stock.price}/>
+                         )
+                 })
+             }
+         </div>
+     </div>
+    </div>
+    </>
+  )
+ }
+
 if(sharedPortfolio){
     return(
         <>
@@ -705,7 +930,7 @@ if(sharedPortfolio){
   return (
    <> 
    <div className="md:hidden"><Sidebar sidebarOpen={expanded}  setSidebarOpen={setexpanded} /></div>
-   <motion.div  initial={{x:'-100%'}} animate={{x:'0', }} transition={{duration:0.5, delayChildren:0.7}} className="  sm:container mx-auto  ">
+   <motion.div  initial={{x:'-100%'}} animate={{x:'0', }} transition={{duration:0.5, delayChildren:0.7}} className=" md:container  ">
          {/* <div className="sm:flex sm:justify-center"><SearchInvestments/></div>  */}
         {/* <div className="w-full flex space-x-8 sm:justify-center  p-4 overflow-x-scroll"><Tabs/></div>  */}
         <Routes>
@@ -714,6 +939,7 @@ if(sharedPortfolio){
             <Route path="startups" element={<StartupsPage/>}/>
             <Route path="portfolio" element={<PortfolioScreen ActivePortfolio={activePortfolio}/>}/>
             <Route path="syndicates/*" element={<SyndicatesInvestmentScreen/>}/>
+            <Route path="stocks/*" element={<StocksScreen/>}/>
             <Route path="setup/*" element={<SetupScreen/>}/>
         </Routes>
     </motion.div>

@@ -198,6 +198,10 @@ export const explainers = {
       },
   sharedPortfolioQuestion:{
     answer: "A shared portfolio helps users pool resources with other users to target a single investment. payouts are automatically calculated and shared  by medik 420 according to investment size  "
+  },
+  portfolioBalance:{
+    question: "Portfolio Balance ?",
+    answer: "To ensure you always maintain a diversified portfolio keep an eye out for key updates and tips on how to improve portfolio diversification by viewing your portfolio breakdown"
   }
 }
   

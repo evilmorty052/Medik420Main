@@ -125,7 +125,7 @@ function BottomNavigation  ({func}) {
                   }`}
                 >
                 {/* <Link to={`/dashboard/${menu.name}`}> <ion-icon name={menu.icon}></ion-icon></Link>  */}
-                <Link to={`/dashboard/${menu.name}`}> {menu.icon} </Link> 
+                <Link to={`/dashboard/${menu.name.toLowerCase()}`}> {menu.icon} </Link> 
                 </span>
                 <span
                   className={` ${
@@ -141,6 +141,9 @@ function BottomNavigation  ({func}) {
           ))}
         </ul>
       </div>}
+
+      {/* tablet Version */}
+
       {!invisible && <div className="bg-gray-100 max-h-[4.4rem] z-10 px-6 mt-10 fixed bottom-0 w-full hidden ss:block md:hidden rounded-t-xl">
         <ul className="flex w-full justify-between relative md:hidden ">
           {/* <span
@@ -171,7 +174,7 @@ function BottomNavigation  ({func}) {
                   }`}
                 >
                 {/* <Link to={`/dashboard/${menu.name}`}> <ion-icon name={menu.icon}></ion-icon></Link>  */}
-                <Link to={`/dashboard/${menu.name}`}> {menu.icon} </Link> 
+                <Link to={`/dashboard/${menu.name.toLowerCase()}`}> {menu.icon} </Link> 
                 </span>
                 <span
                   className={` ${

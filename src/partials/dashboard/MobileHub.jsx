@@ -27,7 +27,7 @@ const [ref, bounds ] = useMeasure()
 const [modal, setmodal] = useState(null)
 const [question, setquestion] = useState(null)
 const [answer, setanswer] = useState(null)
-const [username, setusername] = useState(null)
+// const [username, setusername] = useState(null)
 const uid = localStorage.getItem('email')
 
 
@@ -35,7 +35,7 @@ const uid = localStorage.getItem('email')
 
 
 const { chatClient } = useContext(StreamContext);
-// const username = localStorage.getItem('firstname')
+const username = localStorage.getItem('firstname')
 
 const handleChannelCreate = async (friend) => {
   const channel = chatClient.channel('messaging', {
@@ -52,8 +52,8 @@ async function fetchMembers(params) {
   const coinvestors = await client.fetch(query).then(res => res)
   setcoinvestors(coinvestors)
   setuserid(userid._id)
-  setusername(userid.firstname)
-  console.log()
+  // setusername(userid.firstname)
+ 
 }
 
 async function handleJoin(host) {

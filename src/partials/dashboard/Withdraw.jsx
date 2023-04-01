@@ -1,7 +1,7 @@
 import { useState, useEffect} from 'react'
 import Header from '../Header'
 import { stashlogo, pattern } from '../../assets'
-import { FaArrowLeft, FaChevronRight } from 'react-icons/fa'
+import { FaArrowLeft, FaChevronRight, FaUser } from 'react-icons/fa'
 import { Routes, Route, useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from '../../hooks/useMotion'
 import JSConfetti from 'js-confetti'
@@ -9,6 +9,7 @@ import {  Result } from 'antd'
 import { Questions, Agreements } from '../../pages'
 import { client } from '../../../lib/client'
 import ScaleLoader from "react-spinners/ScaleLoader";
+import { BankOutlined } from '@ant-design/icons'
 
 
 
@@ -28,7 +29,7 @@ const testAccounts = [
     {
     type: 'Smart',
     balance: 0,
-    deployed: false,
+    deployed: true,
     },
     {
     type: 'Retirement',
@@ -157,10 +158,6 @@ function handleTabs(params) {
 
 const AllAccountsPage = () => {
 
-    
-   
-
-
     return(
         <>
         {
@@ -170,7 +167,7 @@ const AllAccountsPage = () => {
             <div className='p-2'>
                 <h3 className='text-[28px] font-semibold text-gray-800'>Your Portfolios</h3>
             </div>
-         <div className='flex justify-center md:justify-start md:px-2'>
+         <div className='flex justify-center'>
          <div className='flex items-center flex-col gap-y-4 mb-8 sm:grid grid-cols-2 grid-flow-row sm:gap-x-4  lg:gap-x-8 '>  
              {
                 yourportfolios?.map((portfolio)=> {
@@ -184,8 +181,8 @@ const AllAccountsPage = () => {
          <div className='p-2'>
                 <h3 className='text-[28px] font-semibold text-gray-800'>Available Portfolios</h3>
         </div>
-         <div className='flex justify-center md:justify-start md:px-2'>
-         <div className='flex items-center flex-col gap-y-4 sm:grid grid-cols-2 grid-flow-row sm:gap-x-4 '>
+         <div className='flex justify-center  md:px-2'>
+         <div className='flex items-center flex-col gap-y-4 sm:grid grid-cols-2 grid-flow-row sm:gap-x-4 md:gap-x-20 lg:gap-x-8 lg:grid-cols-3 '>
              {availableportfolios?.map((portfolio)=> {
                 return(
                     <>
@@ -433,13 +430,98 @@ client
 }
 
 const TransferPage = () => {
+
+  const [transferTo, settransferTo] = useState(null)
+  const [transferFrom, settransferFrom] = useState(null)
+
+  const AccountItem = ({type, balance,func}) => {
+    return(
+      <>
+        <div onClick={func} className='flex justify-between items-center  border-b border-gray-600 pb-4'>
+                      <div className='flex items-center flex-1 gap-x-4 '>
+                         {/* <BankOutlined/> */}
+                         <FaUser style={{color:'gray', fontSize:'18px'}}/>
+                         <div className=''>
+                         <p className='text-lg text-gray-800 font-semibold'>{type} Portfolio</p> 
+                          <p>Available Cash: $0.00</p>
+                         </div>
+                      </div>
+                      <FaChevronRight style={{color:'gray', fontSize:'18px'}}/>
+         </div>
+      </>
+    )
+  }
+
+  const TransferToPage = ({activeAccount}) => {
+    
+    const [targetAccount, setTargetAccount] = useState(null)
+    const availableAccounts = testAccounts?.filter((account)=>{
+       
+      return account.type != activeAccount?.type
+
+    })
+
+    const TransferringPage = () => {
+      return(
+         <div>
+           {`transfering from ${activeAccount.type} Portfolio to ${targetAccount.type} Portfolio`}
+         </div>
+      )
+    }
+
+    if (targetAccount) {
+      return(
+        <TransferringPage/>
+      )
+    }
+
+    return(
+      <>
+         <div className='py-4'>
+            <div className='px-2'>
+               <p className='text-2xl text-gray-800 font-semibold'>To</p>
+            </div>
+            <div className='px-2 py-4 flex flex-col gap-y-6'>
+                {
+                  availableAccounts?.map((account)=>(
+                    <AccountItem func={()=> setTargetAccount(account) } type={account.type}/>
+                  ))
+                } 
+            </div>
+             <div onClick={()=> settransferFrom(null)} className='px-2 py-4 flex items-center gap-x-2'>
+                 <p><FaArrowLeft/></p>
+                 <p>Back</p>
+             </div>
+            </div>
+      </>
+    )
+  }
+
+  if (transferFrom) {
+    return(
+      <>
+      <TransferToPage activeAccount={transferFrom}/>
+      </>
+    )
+  }
     return(
         <>
          {
             transfer && 
-            <div>
-                transfer
+          <>
+            <div className='py-4'>
+            <div className='px-2'>
+               <p className='text-2xl text-gray-800 font-semibold'>From</p>
             </div>
+            <div className='px-2 py-4 flex flex-col gap-y-6 sm:px-20 sm:gap-y-10'>
+                {
+                  testAccounts.map((account)=>(
+                    <AccountItem func={()=> settransferFrom(account) } type={account.type}/>
+                  ))
+                } 
+            </div>
+            </div>
+          </>
          }
         </>
     )
@@ -451,25 +533,6 @@ const HomePage = () => {
         <div className='md:hidden'> <Header fullmenu={true}/></div>
         <div className='pt-10  pb-[93px] md:pt-0'>
              <Tabs setactive={handleTabs} section1={'Withdraw'} section2={'Transfer'} tab1={withdraw} tab2={transfer} />
-             {/* {
-             withdraw &&
-               <>
-                <div className='p-2'>
-                    <h3 className='text-[28px] font-semibold text-gray-800'>Your Portfolios</h3>
-                </div>
-             <div className='flex items-center flex-col gap-y-4'>  
-                 <DebitCard amount={'10'} account={'Personal Portfolio'}/>
-             </div>
-             <div className='p-2'>
-                    <h3 className='text-[28px] font-semibold text-gray-800'>Available Portfolios</h3>
-                </div>
-             <div className='flex items-center flex-col gap-y-4'>
-                 <DebitCard amount={'0'} account={'Smart Portfolio'}/>
-                 <DebitCard amount={'0'} account={'Retirement Portfolio'}/>
-                 <DebitCard amount={'0'} account={'Custodial Portfolio'}/>
-             </div>
-               </>
-             } */}
              <AllAccountsPage/>
              <TransferPage/>
         </div>

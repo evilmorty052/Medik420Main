@@ -42,22 +42,16 @@ export default function NewsTab() {
         },
       ],
       Trending: [
+
         {
           id: 1,
-          title: 'How to Add Specific Products to your plan',
-          date: '2d ago',
-          commentCount: 9,
-          shareCount: 5,
-        },
-        {
-          id: 2,
           title: "Digital Farming NFT ",
           date: '4d ago',
           commentCount: 1,
           shareCount: 2,
         },
         {
-          id: 3,
+          id: 2,
           title: "Claire Mac ",
           date: '4min ago',
           commentCount: 1,
@@ -70,7 +64,7 @@ export default function NewsTab() {
       <>
       <motion.div >
         
-      <div className="w-full max-w-md min-w-[350px] sm:min-w-[600px] md:min-w-[400px] 2xl:min-w-[600px]  px-2  sm:px-0">
+      <div className="w-full   px-2  sm:px-0">
         <Tab.Group>
           <Tab.List className="flex space-x-1 rounded-xl bg-blue-900/20 p-1">
             {Object.keys(categories).map((category) => (
@@ -90,7 +84,7 @@ export default function NewsTab() {
               </Tab>
             ))}
           </Tab.List>
-          <Tab.Panels className="mt-2 ">
+          <Tab.Panels className="mt-2 sm:min-w-[470px] max-w-[470px]">
             {Object.values(categories).map((posts, idx) => (
               <Tab.Panel
                 key={idx}

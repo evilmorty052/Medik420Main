@@ -371,14 +371,14 @@ const AllCrypto = () =>{
             <h3 className="text-[28px] font-bold sm:text-center ">Build Your Crypto Portfolio With Protection</h3>
         </div>
         </div>
-        <div className="px-4 py-4">
-          <div className="flex items-center space-x-2 p-2 bg-gray-100 rounded-xl">
+        <div className="px-4 py-4 md:flex justify-center">
+          <div className="flex items-center space-x-2 p-2 bg-gray-100 rounded-xl max-w-[768px] md:min-w-[768px]">
                <FaSearch/>
                <hr className="w-px  h-6 bg-slate-200 mx-4" />
                <input value={coinQuery} onChange={(e) => handleSearch(e.target.value)} placeholder="Search all Crypto" className="flex-1 bg-transparent border-0 focus:border-0 focus:ring-0" type="text" />
           </div>
          </div>
-        <div  className="pb-[80px] sm:flex justify-center">
+        <div  className="pb-[80px] sm:flex justify-center md:pt-10">
         <ul className="flex gap-y-8 flex-col sm:grid grid-cols-2 grid-flow-row md:grid-cols-3 sm:gap-x-4 items-center  ">
                 {coins.map((coin)=>{
                     return(

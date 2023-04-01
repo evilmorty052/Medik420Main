@@ -48,7 +48,7 @@ module.exports = {
         md: "1024px",
         lg: "1200px",
         xl: "1700px",
-        '2xl': '1536px',
+        // xxl: '1536px',
       },
       borderWidth: {
         3: '3px',

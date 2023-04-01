@@ -28,7 +28,7 @@ const {avatar, firstname, lastname, transactions, accounts, claimed} = userdetai
     <>
     {/* <Header/> */}
    
-   <div className="min-h-screen  bg-white lg:hidden">
+   <div className="min-h-screen  bg-white sm:block md:hidden">
    <Routes>
         <Route key={'jg'} path="dashboard/*" element={<MobileDashboard  accounts={accounts}  claimed={claimed} transactions={transactions} firstname={firstname} lastname={lastname}/>} />
         <Route key={'kk'} path="/" element={<MobileDashboard    accounts={accounts} claimed={claimed} transactions={transactions} firstname={firstname} lastname={lastname}/>} />
@@ -38,11 +38,10 @@ const {avatar, firstname, lastname, transactions, accounts, claimed} = userdetai
         <Route key={'llj'} path="/withdraw/*" element={<Withdraw accounts={accounts}/>} />
     </Routes>
    </div>
-
     <BottomNavigation/>
 
     
-    <div className="min-h-screen  bg-white hidden md:block">
+    <div className=" hidden md:block">
    <Routes>
         <Route key={'jg'} path="dashboard/*" element={
         <LaptopDisplay>
