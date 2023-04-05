@@ -1,9 +1,10 @@
 import { motion, AnimatePresence } from "../hooks/useMotion"
-import { FaArrowRight } from "react-icons/fa"
+import { FaArrowRight, FaMoneyBill, FaClock, FaClipboard } from "react-icons/fa"
 import { useState, useEffect } from "react"
 import ScaleLoader from "react-spinners/ScaleLoader";
 import { client } from "../../lib/client";
 import { CloseOutlined } from "@ant-design/icons";
+import { Empty } from "antd";
 
 import JSConfetti from 'js-confetti'
 
@@ -323,5 +324,120 @@ switch (currentView) {
 //         </>
 //       )
 //     }
+
+
+export const BreakDownModal = ({modal , setmodal,}) => {
+
+  const Outstandings = () => {
+    return(
+      <>
+      <div className='container space-y-8 py-4 px-2'>
+           <div className='flex justify-between pb-4 border-b border-gray-800'>
+                    <div className='flex gap-x-2 items-center'>
+                       <span className='text-xl'><FaMoneyBill /></span>
+                       <p className='sm:text-[24px] text-gray-800 font-semibold'>All Investments</p>
+                    </div>
+                    <div>
+                        <p className='text-base sm:text-xl font-semibold text-gray-800'>$0.00</p>
+                    </div>
+           </div>
+           <div className='flex justify-between pb-4 border-b border-gray-800'>
+                    <div className='flex gap-x-2 items-center'>
+                        <span className='text-xl'><FaMoneyBill /></span>
+                        <p className='sm:text-[24px] text-gray-800 font-semibold'>Unique Investments</p>
+                    </div>
+                    <div>
+                        <p className='text-base sm:text-xl font-semibold text-gray-800'>$0.00</p>
+                    </div>
+           </div>
+          
+           <div className='flex justify-between pb-4 border-b border-gray-800'>
+                    <div className='flex gap-x-2 items-center'>
+                      <a className='text-xl'><FaClock/></a> 
+                       <p className='sm:text-[24px] text-gray-800 font-semibold'>Unsettled Investments</p>
+                    </div>
+                    <div>
+                        <p className='text-base sm:text-xl font-semibold text-gray-800'>$0.00</p>
+                    </div>
+           </div>
+      </div>
+      </>
+    )
+  }
+
+  return(
+    <>
+            <AnimatePresence>
+     {modal && 
+     <div onClick={()=> modal && setmodal(false)} key={'moda'} className='fixed md:z-[500]  flex justify-center items-center inset-0 bg-black/40 px-2'>
+             <div className="relative">
+             <motion.div key={'modalo'}  exit={{y:'200%'}} initial={{y:'-100%'}} animate={{y:'0'}} className='bg-white py-8 px-2 rounded-2xl space-y-5  min-w-[calc(100vw-5vw)] '>
+                 <div className="py-4 space-y-5">
+                       <h3 className="text-center text-xl text-gray-800 font-semibold">Investment Breakdown</h3>
+                      <Outstandings/>
+                       <div className="px-2">
+                           <h3 className="text-start text-lg text-gray-800 font-semibold mb-2">Diversification Score:</h3>
+                           <p className="text-[40px] font-bold text-gray-800">0%</p>
+                           <div className="py-2">
+                               <p className="text-sm text-gray-600">Your diversification score is currently at zero because you have no investments, start investing to get tips here on how to diversify your portfolio.</p>
+                           </div>
+                       </div>
+                 </div>
+             </motion.div>
+                <div onClick={()=> setmodal(!modal)} className='absolute top-1 right-1'>
+                  <CloseOutlined className='text-sm'/>
+                </div>
+             </div>
+      </div>
+            
+            }
+      </AnimatePresence> 
+    </>
+  )
+}
+
+
+export const RefferalModal = ({modal, setmodal}) => {
+  return(
+    <>
+            <AnimatePresence>
+     {modal && 
+     <div onClick={()=> modal && setmodal(false)} key={'moda'} className='fixed md:z-[500]  flex justify-center items-center inset-0 bg-black/40 px-2'>
+             <div className="relative">
+             <motion.div key={'modalo'}  exit={{y:'200%'}} initial={{y:'-100%'}} animate={{y:'0'}} className='bg-white py-8 px-2 rounded-2xl space-y-5  min-w-[calc(100vw-5vw)] '>
+                 <div className=" space-y-5">
+                       <h3 className="text-center text-[25px] text-gray-800 font-semibold">Invite a Friend</h3>
+                           <div className="">
+                               <p className="text-base font-medium text-center text-gray-800">Get A $50 Boost To Your Portfolio for every verified friend that signs up using your refferal Code.</p>
+                           </div>
+                       <div className="px-2 flex justify-center">
+                          <div>
+                          <h3 className="text-center text-lg text-gray-800 font-semibold mb-2">Refferal Code:</h3>
+                           <div className="flex items-center space-x-2">
+                           <p className="text-[30px] font-bold text-gray-800 ">Evil0809</p>
+                           <p className="text-gray-300"><FaClipboard/></p>
+                           </div>
+                          </div>
+                       </div>
+
+                       <div className="flex py-4 justify-center">
+                       <button className='bg-green-200 flex gap-x-4 items-center justify-center w-11/12 p-4 rounded-2xl'>
+                       <span className='text-lg text-center'>View Documentation</span> <FaArrowRight style={{color: '#f9f8f8'}}/>
+                   </button>
+                       </div>
+                 </div>
+             </motion.div>
+                <div onClick={()=> setmodal(!modal)} className='absolute top-1 right-1'>
+                  <CloseOutlined className='text-sm'/>
+                </div>
+             </div>
+      </div>
+            
+            }
+      </AnimatePresence> 
+    </>
+  )
+}
+
 
   export default InformationModal

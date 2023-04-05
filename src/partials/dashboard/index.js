@@ -12,6 +12,9 @@ import LineChart from "../charts/Linechart";
 import SyndicatesInvestmentScreen from "./SyndicatesInvestmentScreen";
 import MessageUi from "./MessageUi";
 import Withdraw from "./Withdraw";
+import StocksScreen from "./StocksScreen";
+import { PortfolioCard, Pricing, SearchInvestments } from "./Elements";
+import DigitalFarmPage from "./DigitalFarmPage";
 
 export { 
     BottomNavigation,
@@ -27,5 +30,10 @@ export {
     LineChart,
     SyndicatesInvestmentScreen,
     MessageUi,
-    Withdraw
+    Withdraw,
+    StocksScreen,
+    PortfolioCard,
+    Pricing,
+    SearchInvestments,
+    DigitalFarmPage
 }

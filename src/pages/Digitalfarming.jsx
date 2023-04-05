@@ -1,8 +1,6 @@
 
-import Dynamicnav from '../partials/Dynamicnav'
+import { useState } from 'react'
 import { LandingPage, Hero } from './SmallBiz'
-import Header from '../partials/Header'
-import { newuser, fetch } from '../utils/init-firebase'
 import AnimatedSidebar from '../components/AnimatedSidebar'
 import { Navbar } from '../components'
 
@@ -45,7 +43,7 @@ function opensidebar(params) {
   }
   return (
 
-    <div className='bg-plat relative flex flex-col'>
+    <div className='bg-plat relative flex h-screen flex-col'>
     {/* <Dynamicnav/> */}
     <Navbar open={opensidebar} />
      <AnimatedSidebar

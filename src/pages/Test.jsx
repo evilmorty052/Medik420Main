@@ -1,5 +1,5 @@
 import React, { Children } from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   FaArrowLeft,
   FaArrowRight,
@@ -772,6 +772,8 @@ function ChatInput({ onSendMessage }) {
   const [attachedFile, setAttachedFile] = useState(null);
   const [filePreviewUrl, setFilePreviewUrl] = useState(null);
   const [isEmojiPickerOpen, setIsEmojiPickerOpen] = useState(false);
+
+  
 
 
   function handleMessageTextChange(event) {

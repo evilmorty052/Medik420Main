@@ -21,7 +21,7 @@ function BottomNavigation  ({func}) {
       setinvisible(true)
       break;
 
-    case '/dashboard/Portfolio':
+    case '/dashboard/portfolio':
       setActive(1)
       setinvisible(false)
       break;

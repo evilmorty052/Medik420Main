@@ -1,10 +1,10 @@
 import { Route, Routes } from "react-router-dom"
 import useFetch from "../../hooks/useFetch"
-import {BottomNavigation, MobileDashboard, MobilePortfolio, MessageScreen, MobileHub, MessageUi, Withdraw} from "./index"
-import UserProvider from "../../contexts/UserContext"
+import {BottomNavigation, MobileDashboard, MobilePortfolio, MessageScreen, MobileHub, MessageUi, Withdraw, StocksScreen, DigitalFarmPage} from "./index"
 import { urlFor } from "../../../lib/client"
 import { LaptopDisplay } from "../../components"
 import { LaptopDashboard } from "../../components/Dashboard/LaptopDisplay"
+
 
 const DashboardScreen = () => {
 const emailID = localStorage.getItem('email')
@@ -33,9 +33,11 @@ const {avatar, firstname, lastname, transactions, accounts, claimed} = userdetai
         <Route key={'jg'} path="dashboard/*" element={<MobileDashboard  accounts={accounts}  claimed={claimed} transactions={transactions} firstname={firstname} lastname={lastname}/>} />
         <Route key={'kk'} path="/" element={<MobileDashboard    accounts={accounts} claimed={claimed} transactions={transactions} firstname={firstname} lastname={lastname}/>} />
         <Route key={'ik'} path="/portfolio/*" element={<MobilePortfolio portfolios={accounts}/>} />
+        <Route key={'ik'} path="/stocks/*" element={<StocksScreen/>} />
         <Route key={'ll'} path="/messages/*" element={<MessageUi/>} />
         <Route key={'llj'} path="/hub" element={<MobileHub/>} />
         <Route key={'llj'} path="/withdraw/*" element={<Withdraw accounts={accounts}/>} />
+        <Route key={'llj'} path="/digitalfarm/*" element={<DigitalFarmPage/>} />
     </Routes>
    </div>
     <BottomNavigation/>

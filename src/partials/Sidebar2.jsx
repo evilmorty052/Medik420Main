@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { FaArrowRight, FaHandHoldingUsd, FaBriefcase, FaGraduationCap, FaChartLine, FaPowerOff, FaUserTie, FaCog } from 'react-icons/fa';
+import { FaArrowRight, FaHandHoldingUsd, FaBriefcase, FaGraduationCap, FaChartLine, FaPowerOff, FaUserTie, FaCog, FaLeaf } from 'react-icons/fa';
 import { Tooltip } from 'antd';
 import UserAvatar from '../images/user-avatar-32.png';
 
@@ -203,6 +203,32 @@ function Sidebar({
                         </span>
                       </div>
                     </NavLink>
+                   
+                  </li>
+                </div>
+                <div className="hover:bg-green-400 rounded-3xl">
+                  <li
+                    className={`px-3 py-2 rounded-sm mb-0.5 last:mb-0 ${
+                      pathname === "/" && "bg-slate-900"
+                    }`}
+                  >
+                     <NavLink
+                      end
+                      to="/dashboard/digitalfarm"
+                      className={`block text-glass hover:text-white truncate transition duration-150 ${
+                        pathname === "/" && "hover:text-slate-200"
+                      }`}
+                    >
+                      <div className="flex items-center">
+                        <span className="text-2xl">
+                          <FaLeaf />
+                        </span>
+                        <span className="font-bold font-poppins flex gap-4 justify-center items-center  text-lg ml-3 lg:opacity-100 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                          Digital Farm{" "}
+                        </span>
+                      </div>
+                    </NavLink>
+                   
                   </li>
                 </div>
                

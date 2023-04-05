@@ -3,10 +3,10 @@ import { useState, useEffect } from 'react'
 import {DebitCard, NewsTab, Agents,} from './index'
 import { motion, AnimatePresence } from '../../hooks/useMotion'
 import Header from '../Header'
-import { ClaimModal } from '../../components'
+import { BreakDownModal, ClaimModal, RefferalModal } from '../../components'
 import Sidebar from '../Sidebar2'
 import { wrappedgift } from '../../assets'
-import { Progress } from 'antd'
+import { Empty, Progress } from 'antd'
 import {InformationModal} from '../../components'
 import { explainers } from '../../constants'
 
@@ -20,6 +20,8 @@ const [expanded, setexpanded] = useState(false)
 const [showInfo, setshowInfo] = useState(null)
 const [question, setquestion] = useState(null)
 const [answer, setanswer] = useState(null)
+const [breakDown, setbreakDown] = useState()
+const [referral, setReferral] = useState()
 
 
 
@@ -219,7 +221,7 @@ const Performance = () =>{
      <p className='text-xs'>Portfolio diversification is something you always need to maintain. We can help you get closer to your ideal balance.</p>
 
      <div className='py-4'>
-     <button className='py-2 px-4 rounded-3xl bg-green-300 shadow-md focus:bg-green-500 transition-all duration-500 ease-in'>
+     <button onClick={()=> setbreakDown(true)} className='py-2 px-4 rounded-3xl bg-green-300 shadow-md focus:bg-green-500 transition-all duration-500 ease-in'>
          See my breakdown
      </button>
      </div>
@@ -286,13 +288,86 @@ const RecentInvestments = ({investments}) => {
     )
 }
 
+const DigitalFarms = ({investments}) => {
+
+    const NoData = () => {
+        return(
+            <>
+               <h3>No Farms</h3>
+            </>
+        )
+    }
+
+    const InvestmentActivity = ({name, amount, avatar, status}) => {
+        return(
+          <>
+           <li class="py-3 sm:py-4">
+                    <div class="flex items-center space-x-4">
+                        <div class="flex-shrink-0">
+                            <img class="w-8 h-8 rounded-full" src={avatar} alt="Neil image"/>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-sm font-medium text-gray-900 truncate ">
+                                {name}
+                            </p>
+                            <p class="text-sm text-gray-500 truncate ">
+                                {status}
+                            </p>
+                        </div>
+                        <div class="inline-flex items-center text-base font-semibold text-gray-900 ">
+                            {formatter.format(amount)}
+                        </div>
+                    </div>
+                </li>
+          </>
+        )
+      }
+     
+    return(
+        <div class="w-full max-w-2xl p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 ">
+        <div class="flex items-center justify-between mb-4">
+            <h5 class="text-xl font-bold leading-none text-gray-900 ">Digital Farms <span><Infobutton/></span></h5> 
+            <a href="#bb" class="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">
+            <button id="dropdownButton" data-dropdown-toggle="dropdown" class="inline-block text-gray-500  hover:bg-gray-100  focus:ring-4 focus:outline-none focus:ring-gray-200  rounded-lg text-sm p-1.5" type="button">
+                <span class="sr-only">Open dropdown</span>
+                <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path></svg>
+            </button>
+            </a>
+       </div>
+       <div  class="flow-root my-4">
+            <ul  role="list" class="divide-y divide-gray-200 ">
+             <>
+             {investments ?
+               <>
+                  {investments?.map((investment)=>{
+          return(
+            <InvestmentActivity status={investment.status} avatar={urlFor(investment.startup.image)} amount={investment.amount} name={investment?.startup?.name}/>
+          )
+         })}
+              </>
+               :
+                <Empty description={<NoData/>}/>
+              }
+             </>
+            </ul>
+       </div>
+       <div className="">
+           <div>
+               <h3 className="text-[18px] text-gray-600 font-semibold">Revenue:</h3>
+               <p className="text-2xl font-bold text-gray-800">$0.00</p>
+           </div>
+       </div>
+    </div>
+    )
+}
+
 const Refferal = () => {
     return(
         <>
           <div className='bg-gray-200 p-4 rounded-lg'>
               <div className='flex items-center gap-x-4'>
                    <a className='text-xl' ><FaUserPlus/></a>
-                     <div className='flex flex-1 justify-between items-center '>
+                     <div onClick={()=> setReferral(true)} className='flex flex-1 justify-between items-center '>
                          <div className=''>
                          <h3 className='text-lg font-semibold text-gray-800'>Invite A Friend</h3>
                          <p>Boost your portfolio up to $500</p>
@@ -315,18 +390,19 @@ const Refferal = () => {
      <Sidebar setSidebarOpen={setexpanded} sidebarOpen={expanded}/>
      <Header setisExpanded={setexpanded} fullmenu={true}/>
      <AnimatePresence >
-     <motion.div onClick={()=> expanded && setexpanded(false)} key={'jjk'}  className=' h-screen relative overflow-y-scroll pb-[73px] slide-in-left sm:hidden '>
+     <motion.div onClick={()=> {expanded && setexpanded(false)}} key={'jjk'}  className=' h-screen relative overflow-y-scroll pb-[73px] slide-in-left sm:hidden '>
         <div key={'jkkk'} className='flex flex-col gap-y-8 items-center pb-4 mb-4'>
              <div className='px-2'><DebitCard amount={personalAccount?.[0].balance} lastname={lastname} firstname={firstname}/></div> 
              {claimed != true && <div className='px-2.5'><GiftCard/></div> }
         </div>
        <div key={'k'} className='space-y-12 px-4'>
        <div className='ss:flex justify-center'><LatestTransactions/></div>
+       <RecentInvestments/>
+       <DigitalFarms/>
        <Outstandings/>
        <TotalReturns/> 
        <Performance/>
        <Refferal/>
-       <RecentInvestments/>
        <div className='ss:flex justify-center w-full'>
          <div>
          {/* <Infobutton/> */}
@@ -369,6 +445,8 @@ const Refferal = () => {
      </motion.div>
      </div>
     <ClaimModal modal={claim} setmodal={setClaim}/>
+    <BreakDownModal modal={breakDown} setmodal={setbreakDown}/>
+    <RefferalModal modal={referral} setmodal={setReferral}/>
      </>
     )
  }
