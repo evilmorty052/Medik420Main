@@ -26,6 +26,19 @@ function BottomNavigation  ({func}) {
       setinvisible(false)
       break;
     
+      case '/dashboard/stocks':
+      setActive(1)
+      setinvisible(false)
+      break;
+      
+      case '/dashboard/stocks/stock':
+      setinvisible(true)
+      break;
+      
+      case '/dashboard/digitalfarm':
+      setinvisible(true)
+      break;
+    
       case '/dashboard/Portfolio/portfolio':
       setinvisible(true)
       break;
@@ -63,6 +76,7 @@ function BottomNavigation  ({func}) {
       break;
   
     default:
+      
       break;
   }
  }

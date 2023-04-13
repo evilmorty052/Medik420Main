@@ -1,13 +1,15 @@
 import { useState } from 'react'
-import { FaBriefcase, FaComments, FaCreditCard, FaGlobe, FaHome , FaClock, FaMoneyBill, FaChevronRight, FaUserPlus, FaInfoCircle } from 'react-icons/fa'
+import { FaBriefcase, FaComments, FaCreditCard, FaGlobe, FaHome , FaClock, FaMoneyBill, FaChevronRight, FaUserPlus, FaInfoCircle, FaCog, FaBell, FaAngleDown, FaLeaf, FaUser, FaGraduationCap, FaUserTie } from 'react-icons/fa'
 import { Link, Routes, Route } from 'react-router-dom'
 import { DebitCard, NewsTab } from '../../partials/dashboard'
 import { people01, wrappedgift } from '../../assets'
-import { ClaimModal } from '../InformationModal'
-import { Progress } from 'antd'
+import { ClaimModal, RefferalModal, BreakDownModal } from '../InformationModal'
+import { Progress , Empty} from 'antd'
+import { motion } from '../../hooks/useMotion'
+import Dropdown from '../Dropdown'
 
 const LaptopDisplay = ({avatar, logo, name , children}) => {
-   
+   const [dropDown, setdropDown] = useState(false)
    
   function LaptopSidebar({avatar , stashlogo}) {
 
@@ -144,6 +146,34 @@ const LaptopDisplay = ({avatar, logo, name , children}) => {
             to: 'dashboard/messages'
           },
         ]
+        const extralinks = [
+          {
+            name: 'Farming',
+            icon: <FaLeaf style={{fontSize: '16px', color: 'gray'}}/>,
+            to: 'dashboard'
+          },
+          {
+            name: 'Profile',
+            icon: <FaUser style={{fontSize: '16px', color: 'gray'}}/>,
+            to: 'dashboard/portfolio'
+          },
+          {
+            name: 'Coach',
+            icon: <FaGraduationCap style={{fontSize: '16px', color: 'gray'}}/>,
+            to: 'dashboard/withdraw'
+          },
+          {
+            name: 'Agents',
+            icon: <FaUserTie style={{fontSize: '16px', color: 'gray'}}/>,
+            to: 'dashboard/withdraw'
+          },
+          {
+            name: 'Settings',
+            icon: <FaCog style={{fontSize: '16px', color: 'gray'}}/>,
+            to: 'dashboard/withdraw'
+          },
+          
+        ]
 
         const HeaderLink = ({to, name, icon}) =>{
           return(
@@ -158,74 +188,54 @@ const LaptopDisplay = ({avatar, logo, name , children}) => {
 
         return(
           <>
-          <div class="fixed z-60 top-0 md:left-0 right-0 h-14 border-b shadow-md bg-white  py-2">
-            <div class="flex items-center justify-between space-x-4 px-6 2xl:container">
+          <div class={`fixed  z-60 top-0 md:left-0 right-0  border-b shadow-md bg-white   ${!dropDown ? 'h-14 py-2' : 'h-[90px] pb-10 pt-2'}`}>
+            <div class="flex  items-center justify-between space-x-4 px-6 2xl:container">
               <h5  class="text-[20px] font-black uppercase text-gray-800 lg:block ml-2 ">Medik <span className='text-green-300'>420</span></h5>
+               <div className='relative '>
                <ul className='flex flex-1 gap-x-8 pl-4'>
                  {links.map((link, index)=>{
                   return(
                     <HeaderLink key={index} to={link.to} name={link.name} icon={link.icon}/>
                   )
                  })}
+               <div className='self-center -ml-4'>
+               {/* <FaAngleDown onClick={()=> setdropDown(!dropDown)}/> */}
+               <Dropdown/>
+               </div>
                </ul>
+               {/* {
+                dropDown &&
+                <div className='absolute bg-red-300  -bottom-10 left-0 right-0 px-2 flex items-center transition-all duration-500 ease-in'>
+                <motion.ul initial={{x: '-100vh'}} animate={{x:'0'}} transition={{duration: 0.4, ease: 'easeInOut'}} className='flex  flex-1 gap-x-8 pl-2 '>
+                   {extralinks.map((link, index)=>{
+                    return(
+                      <HeaderLink key={index} to={link.to} name={link.name} icon={link.icon}/>
+                    )
+                   })}
+                 </motion.ul>   
+                </div>
+              } */}
+               </div>
+               {/* {Header-Rightside} */}
+
               <div class="flex space-x-4 items-center">   
                 <button
-                  aria-label="search"
-                  class="h-10 w-10 rounded-xl border bg-gray-100 active:bg-gray-200 md:hidden dark:bg-gray-700 dark:border-gray-600 dark:active:bg-gray-800"
+                  aria-label="notification"
+                  class="h-8 w-8 rounded-xl border bg-gray-100 active:bg-gray-200 flex justify-center items-center"
                 >
-                  <svg
-                    xmlns="http://ww50w3.org/2000/svg"
-                    class="mx-auto w-4 fill-current text-gray-600 dark:text-gray-300"
-                    viewBox="0 0 35.997 36.004"
-                  >
-                    <path
-                      id="Icon_awesome-search"
-                      data-name="search"
-                      d="M35.508,31.127l-7.01-7.01a1.686,1.686,0,0,0-1.2-.492H26.156a14.618,14.618,0,1,0-2.531,2.531V27.3a1.686,1.686,0,0,0,.492,1.2l7.01,7.01a1.681,1.681,0,0,0,2.384,0l1.99-1.99a1.7,1.7,0,0,0,.007-2.391Zm-20.883-7.5a9,9,0,1,1,9-9A8.995,8.995,0,0,1,14.625,23.625Z"
-                    ></path>
-                  </svg>
+                  <FaBell/>
                 </button>
                 {/* <button
-                  aria-label="chat"
-                  class="h-10 w-10 rounded-xl border bg-gray-100 active:bg-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:active:bg-gray-800"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="m-auto h-5 w-5 text-gray-600 dark:text-gray-300"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"
-                    />
-                  </svg>
-                </button> */}
-                <button
                   aria-label="notification"
-                  class="h-8 w-8 rounded-xl border bg-gray-100 active:bg-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:active:bg-gray-800"
+                  class="h-8 w-8 rounded-xl border bg-gray-100 active:bg-gray-200 flex justify-center items-center "
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="m-auto h-5 w-5 text-gray-600 dark:text-gray-300"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"
-                    />
-                  </svg>
-                </button>
+                <FaCog/>
+                </button> */}
                 <div className='max-w-[14ch] '>
                 <h3 className='text-[14px] font-space font-semibold  truncate '>Evil Morty</h3>
                 </div>
               </div>
-              
             </div>
-            
           </div>
           </>
         )
@@ -250,7 +260,7 @@ const LaptopDisplay = ({avatar, logo, name , children}) => {
   return (
    
         <>
-        <body class="h-screen bg-white overflow-y-scroll "> 
+        <body class="min-h-screen bg-white overflow-y-scroll "> 
      {/* <LaptopSidebar avatar={people01} stashlogo={logo}/> */}
       <LaptopHeader/>
         <DisplayArea  >
@@ -262,8 +272,136 @@ const LaptopDisplay = ({avatar, logo, name , children}) => {
   
 }
 
+export function LargeHeader(params) {
+  const [dropDown, setdropDown] = useState(false)
+
+
+  const links = [
+    {
+      name: 'Dashboard',
+      icon: <FaHome style={{fontSize: '16px', color: 'gray'}}/>,
+      to: 'dashboard'
+    },
+    {
+      name: 'Portfolio',
+      icon: <FaBriefcase style={{fontSize: '16px', color: 'gray'}}/>,
+      to: 'dashboard/portfolio'
+    },
+    {
+      name: 'Withdraw',
+      icon: <FaCreditCard style={{fontSize: '16px', color: 'gray'}}/>,
+      to: 'dashboard/withdraw'
+    },
+    {
+      name: 'Hub',
+      icon: <FaGlobe style={{fontSize: '16px', color: 'gray'}}/>,
+      to: 'dashboard/hub'
+    },
+    {
+      name: 'Chat',
+      icon: <FaComments style={{fontSize: '16px', color: 'gray'}}/>,
+      to: 'dashboard/messages'
+    },
+  ]
+  const extralinks = [
+    {
+      name: 'Farming',
+      icon: <FaLeaf style={{fontSize: '16px', color: 'gray'}}/>,
+      to: 'dashboard'
+    },
+    {
+      name: 'Profile',
+      icon: <FaUser style={{fontSize: '16px', color: 'gray'}}/>,
+      to: 'dashboard/portfolio'
+    },
+    {
+      name: 'Coach',
+      icon: <FaGraduationCap style={{fontSize: '16px', color: 'gray'}}/>,
+      to: 'dashboard/withdraw'
+    },
+    {
+      name: 'Agents',
+      icon: <FaUserTie style={{fontSize: '16px', color: 'gray'}}/>,
+      to: 'dashboard/withdraw'
+    },
+    {
+      name: 'Settings',
+      icon: <FaCog style={{fontSize: '16px', color: 'gray'}}/>,
+      to: 'dashboard/withdraw'
+    },
+    
+  ]
+
+  const HeaderLink = ({to, name, icon}) =>{
+    return(
+    <Link to={`/${to}`}>
+    <li className='flex items-center gap-x-2'>
+      <span>{icon}</span>
+      <span className='text-sm'>{name}</span>
+   </li>
+    </Link>
+    )
+  }
+
+  return(
+    <>
+    <div class={`hidden md:block fixed  z-60 top-0 md:left-0 right-0  border-b shadow-md bg-white   ${!dropDown ? 'h-14 py-2' : 'h-[90px] pb-10 pt-2'}`}>
+      <div class="flex  items-center justify-between space-x-4 px-6 2xl:container">
+        <h5  class="text-[20px] font-black uppercase text-gray-800 lg:block ml-2 ">Medik <span className='text-green-300'>420</span></h5>
+         <div className='relative '>
+         <ul className='flex flex-1 gap-x-8 pl-4'>
+           {links.map((link, index)=>{
+            return(
+              <HeaderLink key={index} to={link.to} name={link.name} icon={link.icon}/>
+            )
+           })}
+         <div className='self-center -ml-4'>
+         {/* <FaAngleDown onClick={()=> setdropDown(!dropDown)}/> */}
+         <Dropdown/>
+         </div>
+         </ul>
+         {/* {
+          dropDown &&
+          <div className='absolute bg-red-300  -bottom-10 left-0 right-0 px-2 flex items-center transition-all duration-500 ease-in'>
+          <motion.ul initial={{x: '-100vh'}} animate={{x:'0'}} transition={{duration: 0.4, ease: 'easeInOut'}} className='flex  flex-1 gap-x-8 pl-2 '>
+             {extralinks.map((link, index)=>{
+              return(
+                <HeaderLink key={index} to={link.to} name={link.name} icon={link.icon}/>
+              )
+             })}
+           </motion.ul>   
+          </div>
+        } */}
+         </div>
+         {/* {Header-Rightside} */}
+
+        <div class="flex space-x-4 items-center">   
+          <button
+            aria-label="notification"
+            class="h-8 w-8 rounded-xl border bg-gray-100 active:bg-gray-200 flex justify-center items-center"
+          >
+            <FaBell/>
+          </button>
+          {/* <button
+            aria-label="notification"
+            class="h-8 w-8 rounded-xl border bg-gray-100 active:bg-gray-200 flex justify-center items-center "
+          >
+          <FaCog/>
+          </button> */}
+          <div className='max-w-[14ch] '>
+          <h3 className='text-[14px] font-space font-semibold  truncate '>Evil Morty</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+    </>
+  )
+}
+
 export  function LaptopDashboard () {
   const [claim , setClaim] = useState()
+  const [breakDown, setbreakDown] = useState()
+  const [referral, setReferral] = useState()
 
   const Infobutton = ({func}) => {
     return (
@@ -455,7 +593,7 @@ const Performance = () =>{
    <p className='text-xs'>Portfolio diversification is something you always need to maintain. We can help you get closer to your ideal balance.</p>
 
    <div className='py-4'>
-   <button className='py-2 px-4 rounded-3xl bg-green-300 shadow-md focus:bg-green-500 transition-all duration-500 ease-in'>
+   <button onClick={()=> setbreakDown(true)}  className='py-2 px-4 rounded-3xl bg-green-300 shadow-md focus:bg-green-500 transition-all duration-500 ease-in'>
        See my breakdown
    </button>
    </div>
@@ -526,7 +664,7 @@ const Refferal = () => {
   return(
       <>
         <div className='bg-gray-200 p-4 rounded-lg md:min-w-[673px] '>
-            <div className='flex items-center gap-x-4'>
+            <div onClick={()=> setReferral(true)} className='flex items-center gap-x-4'>
                  <a className='text-xl' ><FaUserPlus/></a>
                    <div className='flex flex-1 justify-between items-center '>
                        <div className=''>
@@ -541,24 +679,100 @@ const Refferal = () => {
   )
 }
 
+const DigitalFarms = ({investments}) => {
+
+  const NoData = () => {
+      return(
+          <>
+             <h3>No Farms</h3>
+          </>
+      )
+  }
+
+  const InvestmentActivity = ({name, amount, avatar, status}) => {
+      return(
+        <>
+         <li class="py-3 sm:py-4">
+                  <div class="flex items-center space-x-4">
+                      <div class="flex-shrink-0">
+                          <img class="w-8 h-8 rounded-full" src={avatar} alt="Neil image"/>
+                      </div>
+                      <div class="flex-1 min-w-0">
+                          <p class="text-sm font-medium text-gray-900 truncate ">
+                              {name}
+                          </p>
+                          <p class="text-sm text-gray-500 truncate ">
+                              {status}
+                          </p>
+                      </div>
+                      <div class="inline-flex items-center text-base font-semibold text-gray-900 ">
+                          {formatter.format(amount)}
+                      </div>
+                  </div>
+              </li>
+        </>
+      )
+    }
+   
+  return(
+      <div class="w-full max-w-2xl p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 ">
+      <div class="flex items-center justify-between mb-4">
+          <h5 class="text-xl font-bold leading-none text-gray-900 ">Digital Farms <span><Infobutton/></span></h5> 
+          <a href="#bb" class="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">
+          <button id="dropdownButton" data-dropdown-toggle="dropdown" class="inline-block text-gray-500  hover:bg-gray-100  focus:ring-4 focus:outline-none focus:ring-gray-200  rounded-lg text-sm p-1.5" type="button">
+              <span class="sr-only">Open dropdown</span>
+              <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path></svg>
+          </button>
+          </a>
+     </div>
+     <div  class="flow-root my-4">
+          <ul  role="list" class="divide-y divide-gray-200 ">
+           <>
+           {investments ?
+             <>
+                {investments?.map((investment)=>{
+        return(
+          <InvestmentActivity status={investment.status} avatar={urlFor(investment.startup.image)} amount={investment.amount} name={investment?.startup?.name}/>
+        )
+       })}
+            </>
+             :
+              <Empty description={<NoData/>}/>
+            }
+           </>
+          </ul>
+     </div>
+     <div className="">
+         <div>
+             <h3 className="text-[18px] text-gray-600 font-semibold">Revenue:</h3>
+             <p className="text-2xl font-bold text-gray-800">$0.00</p>
+         </div>
+     </div>
+  </div>
+  )
+}
+
   return(
    <>
      <div>
-     <div className='  container flex flex-col items-center gap-y-14 mx-auto h-screen overflow-y-scroll max-w-[1080px]  '>
+     <div className='  container  flex flex-col items-center gap-y-14 mx-auto min-h-screen overflow-y-scroll max-w-[1080px] pb-20'>
           <div className=' flex gap-x-8 items-center'>
           <DebitCard/>
           <DebitCard/>
         </div>
           <LatestTransactions />
           <RecentInvestments/> 
+          <DigitalFarms/>
         <GiftCard/>
         <Outstandings/>
-        <Performance/>
         <TotalReturns/>
+        <Performance/>
         <Refferal/>
       </div>
-     </div>
       <ClaimModal modal={claim} setmodal={setClaim}/>
+      <BreakDownModal modal={breakDown} setmodal={setbreakDown}/>
+      <RefferalModal modal={referral} setmodal={setReferral}/>
+     </div>
    </>
   )
 }

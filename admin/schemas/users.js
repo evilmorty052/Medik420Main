@@ -71,6 +71,11 @@ export default {
       type: 'string',
     },
     { 
+      name: 'invitationcode',
+      title: 'Invitationcode',
+      type: 'string',
+    },
+    { 
       name: 'region',
       title: 'Region',
       type: 'string',

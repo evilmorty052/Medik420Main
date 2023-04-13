@@ -1,4 +1,4 @@
-import { FaChild, FaCheck, FaSearch , FaArrowLeft, } from "react-icons/fa"
+import { FaChild, FaCheck, FaSearch , FaArrowLeft, FaChevronLeft , FaChevronRight} from "react-icons/fa"
 import styles from "../../style"
 import { useState, useEffect } from "react"
 import { Result } from 'antd'
@@ -6,11 +6,11 @@ import {
   PortfolioScreen, 
   CryptoinvestmentScreen, 
   SyndicatesInvestmentScreen,
-  PortfolioCard, 
+
   Pricing,
   SearchInvestments
 } from "./index"
-import { Link, Route, Routes, useNavigate ,} from "react-router-dom"
+import { Link, Route, Routes, useNavigate , useLocation} from "react-router-dom"
 import {Questions, Agreements, } from "../../pages"
 import { motion, AnimatePresence } from "../../hooks/useMotion"
 import { client } from "../../../lib/client"
@@ -19,7 +19,10 @@ import JSConfetti from 'js-confetti'
 import Header from "../Header"
 import Startups from "./Startups"
 import Sidebar from "../Sidebar2"
-import { bitcoin } from "../../assets"
+import './MobilePortfolio.css'
+import { bitcoin, startupstab, digitalfarmstab, syndicatesicon, stockstab } from "../../assets"
+import { LargeHeader } from "../../components/Dashboard/LaptopDisplay"
+
 
 
 const MobilePortfolio = ({portfolios}) => {
@@ -31,28 +34,48 @@ const [expanded, setexpanded] = useState(null)
 const jsConfetti = new JSConfetti()
 const navigate = useNavigate()
 
+
 const AllPortfolios = () => {
 
-
+  const PortfolioCard = ({header, buttontext, func, description}) => {
+    return(
+        <>
+         <motion.div animate={{opacity: 1}} initial={{opacity: 0}}  className="flex items-center space-x-4 bg-gray-200 max-w-[350px] px-2 py-4 rounded-xl">
+             <div className="p-2 bg-white rounded-xl">
+                <FaChild/>
+             </div>
+             <div className="flex items-center space-x-2">
+                 <div className="flex-1">
+                    <h3 className="text-lg font-semibold mb-2">{header}</h3>
+                     <p className=" text-sm leading-normal" >{description} </p>
+                 </div>
+                 <button onClick={func} className="w-20  bg-green-300 py-1  rounded-3xl">{buttontext}</button>
+             </div>
+         </motion.div>
+        </>
+    )
+}
    
     
-    const availableportfolios = portfolios?.filter((portfolio) => portfolio.deployed != true)
-    const yourportfolios = portfolios?.filter((portfolio) => portfolio.deployed == true)
+    const availableportfolios = portfolios?.filter((portfolio) =>  {return portfolio.deployed != true})
+    const yourportfolios = portfolios?.filter((portfolio) => { return portfolio.deployed == true})
 
     
 
     return(
         <>
         
-        <div className="md:hidden"><Header setisExpanded={setexpanded} fullmenu={true} halfmenu={false}/></div>
-        <div onClick={()=> expanded && setexpanded(false)} className="pb-[90px] pt-4 md:pt-0 h-screen overflow-y-scroll md:pb-10 md:container mx-auto bg-white  md:px-20">
+        <div className="lg:hidden"><Header setisExpanded={setexpanded} fullmenu={true} halfmenu={false}/></div>
+        <div onClick={()=> expanded && setexpanded(false)} className="pb-[90px] pt-4 md:pt-20 min-h-screen  md:pb-10 md:container mx-auto bg-white  md:px-20">
+         <div className="w-full">
          <SearchInvestments/>
+         </div>
            <div className="px-2 pt-8 space-y-10 ">
                <div className="space-y-8 md:space-y-10">
                   <div className="md:px-14">
                     <h3 className={styles.UiHeading}>New features</h3>
                   </div>
-                <div className="md:flex gap-x-10 hidden justify-center ">
+                <div className="sm:flex gap-x-10 hidden justify-center ">
                 <PortfolioCard func={() => setSharedPortfolio(true)} header={'Shared Portfolio'} description={'find out how easy it is to share a portfolio with another user.'} buttontext={'Explore'}/>
                 <div>
                 <PortfolioCard func={() => setSharedPortfolio(true)} header={'Shared Portfolio'} description={'find out how easy it is to share a portfolio with another user.'} buttontext={'Explore'}/>
@@ -73,7 +96,7 @@ const AllPortfolios = () => {
                               func={()=> {
                                  // setactivePortfolio(true)
                                  setactivePortfolio(portfolio)
-                                 navigate('portfolio')
+                                 console.log(portfolio)
                              }} 
                                  header={`${portfolio.type} Portfolio`} description={'Explore stocks startups and crypto and invest as you see fit '} buttontext={'View'}/>
                  ))}
@@ -90,13 +113,14 @@ const AllPortfolios = () => {
                   </div>
                  <div className="flex justify-center">
                  <div className="flex gap-x-10 flex-col gap-y-8  items-center sm:grid grid-cols-2 grid-flow-row ">
-                {availableportfolios?.map((portfolio)=>{
+                {availableportfolios?.map((portfolio, index)=>{
                     
                     return(
                         <>
                         
-                        <PortfolioCard func={()=> {
+                        <PortfolioCard key={index} func={()=> {
                             setactivePortfolio(portfolio)
+                            console.log(activePortfolio)
                             navigate('setup')
                             }} header={`${portfolio.type} portfolio`} description={portfolio.description} buttontext={'Setup'}/>
                   
@@ -360,10 +384,17 @@ if(sharedPortfolio){
     )
 }
 
+// if(!portfolios){
+// return(
+//   <h3>loading</h3>
+// )
+// }
+
   return (
    <> 
+   <LargeHeader/>
    <div className="md:hidden"><Sidebar sidebarOpen={expanded}  setSidebarOpen={setexpanded} /></div>
-   <motion.div  initial={{x:'-100%'}} animate={{x:'0', }} transition={{duration:0.5, delayChildren:0.7}} className=" md:container  ">
+   <div   className=" md:container mx-auto max-w-4xl  ">
          {/* <div className="sm:flex sm:justify-center"><SearchInvestments/></div>  */}
         {/* <div className="w-full flex space-x-8 sm:justify-center  p-4 overflow-x-scroll"><Tabs/></div>  */}
         <Routes>
@@ -375,7 +406,7 @@ if(sharedPortfolio){
             {/* <Route path="stocks/*" element={<StocksScreen/>}/> */}
             <Route path="setup/*" element={<SetupScreen/>}/>
         </Routes>
-    </motion.div>
+    </div>
         
         </>
   )

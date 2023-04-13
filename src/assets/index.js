@@ -42,6 +42,13 @@ import syndicatesicon from './syndicatesicon.svg'
 import sharedportfolio from './sharedportfolio.svg'
 import pattern from './pattern.png'
 import stashlogo from './stashlogo.png'
+import healthcaretab from './healthcaretab.png'
+import financetab from './financetab.png'
+import technologytab from './technologytab.png'
+import communicationtab from './communication.png'
+import startupstab from './startups.png'
+import digitalfarmstab from './digitalfarm.png'
+import stockstab from './stockstab.jpg'
 
 
 export {
@@ -88,7 +95,14 @@ export {
   polkadot,
   algorand,
   pattern,
-  stashlogo
+  stashlogo,
+  technologytab,
+  financetab,
+  healthcaretab,
+  communicationtab,
+  digitalfarmstab,
+  startupstab,
+  stockstab
 
   
 

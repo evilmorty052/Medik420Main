@@ -13,8 +13,9 @@ import SyndicatesInvestmentScreen from "./SyndicatesInvestmentScreen";
 import MessageUi from "./MessageUi";
 import Withdraw from "./Withdraw";
 import StocksScreen from "./StocksScreen";
-import { PortfolioCard, Pricing, SearchInvestments } from "./Elements";
+import { PortfolioCard, Pricing, SearchInvestments, Infobutton } from "./Elements";
 import DigitalFarmPage from "./DigitalFarmPage";
+import DigitalFarmShop from "./DigitalFarmShop";
 
 export { 
     BottomNavigation,
@@ -35,5 +36,8 @@ export {
     PortfolioCard,
     Pricing,
     SearchInvestments,
-    DigitalFarmPage
+    DigitalFarmPage,
+    Infobutton,
+    DigitalFarmShop
+    
 }

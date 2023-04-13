@@ -906,9 +906,6 @@ const FilteredHivesTest = hiveData?.filter((item,index)=>{
 
 function Page ({ data, func, tags, handleFilter, tab1 , tab2, tab3, tab4 }) {
   const [currentPage, setCurrentPage] = useState(1);
- 
-  
- 
 
   const itemsPerPage = 4;
 
@@ -1033,6 +1030,8 @@ function Page ({ data, func, tags, handleFilter, tab1 , tab2, tab3, tab4 }) {
     </>
   );
 };
+
+
 function Tags({word,}) {
   const tags = [
     {

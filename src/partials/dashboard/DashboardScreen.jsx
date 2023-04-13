@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom"
 import useFetch from "../../hooks/useFetch"
-import {BottomNavigation, MobileDashboard, MobilePortfolio, MessageScreen, MobileHub, MessageUi, Withdraw, StocksScreen, DigitalFarmPage} from "./index"
+import {BottomNavigation, MobileDashboard, MobilePortfolio, MessageScreen, MobileHub, MessageUi, Withdraw, StocksScreen, DigitalFarmPage, DigitalFarmShop} from "./index"
 import { urlFor } from "../../../lib/client"
 import { LaptopDisplay } from "../../components"
 import { LaptopDashboard } from "../../components/Dashboard/LaptopDisplay"
@@ -38,12 +38,13 @@ const {avatar, firstname, lastname, transactions, accounts, claimed} = userdetai
         <Route key={'llj'} path="/hub" element={<MobileHub/>} />
         <Route key={'llj'} path="/withdraw/*" element={<Withdraw accounts={accounts}/>} />
         <Route key={'llj'} path="/digitalfarm/*" element={<DigitalFarmPage/>} />
+        <Route key={'llj'} path="/digitalfarmshop/*" element={<DigitalFarmShop/>} />
     </Routes>
    </div>
     <BottomNavigation/>
 
     
-    <div className=" hidden md:block">
+    <div className=" hidden md:block bg-white">
    <Routes>
         <Route key={'jg'} path="dashboard/*" element={
         <LaptopDisplay>
@@ -54,10 +55,10 @@ const {avatar, firstname, lastname, transactions, accounts, claimed} = userdetai
         <LaptopDisplay>
            <LaptopDashboard/>
         </LaptopDisplay>} />
-        <Route key={'ik'} path="/portfolio/*" element={
-          <LaptopDisplay>
+        <Route  path="/portfolio/*" element={
+         
          <MobilePortfolio portfolios={accounts}/>
-       </LaptopDisplay>
+       
         
         } />
         <Route key={'ll'} path="/messages/*" element={<MessageUi/>} />
@@ -71,6 +72,10 @@ const {avatar, firstname, lastname, transactions, accounts, claimed} = userdetai
           <Withdraw accounts={accounts}/>
         </LaptopDisplay>
         } />
+      <Route  path="/stocks/*" element={
+      <LaptopDisplay>
+   <StocksScreen/>
+    </LaptopDisplay>} />
     </Routes>
    </div>
     </>

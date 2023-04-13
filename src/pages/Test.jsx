@@ -2,6 +2,8 @@ import React, { Children } from "react";
 import { useState, useEffect } from "react";
 import {
   FaArrowLeft,
+  FaMoneyBill,
+  FaClock,
   FaArrowRight,
   FaBookmark,
   FaCog,
@@ -22,50 +24,232 @@ import { AnimatePresence, motion } from "../hooks/useMotion";
 import { stashlogo, bitcoin, people01 } from "../assets";
 import { day } from "../../lib/dayjs";
 import EmojiPicker from 'emoji-picker-react';
-
-
-
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import mapboxgl from 'mapbox-gl'
+import 'mapbox-gl/dist/mapbox-gl.css';
+import Header from "../partials/Header";
 
 const Test = ({ children }) => {
   const [activepage, setactivepage] = useState(null);
   const [modal, setmodal] = useState(null);
   const [modalquestion, setmodalquestion] = useState("");
   const [posts, setposts] = useState([<Post />])
+  const [map, setMap] = useState(null)
 
-  function flexModal(question) {
-    const [modal, setmodal] = useState(null);
 
-    return <ClaimModal question={question} modal={modal} setmodal={setmodal} />;
+  
+
+  useEffect(() => {
+    mapboxgl.accessToken = 'pk.eyJ1IjoiZXZpbG1vcnR5IiwiYSI6ImNsZ2F3ZHhzajFsNnczbG41cGtteTdoNXYifQ.6x-34M0_ngRCm3VjA1-HBQ';
+  const map = new mapboxgl.Map({
+  attributionControl: false,
+  container: 'map', // container ID
+  style: 'mapbox://styles/mapbox/streets-v12', // style URL
+  center: [-119.850900, 46.279430], // starting position [lng, lat]
+  zoom: 0, // starting zoom
+  
+  });
+  const marker = new mapboxgl.Marker()
+      .setLngLat([-119.850900, 46.279430])
+      .addTo(map);
+    setMap(map);
+    return () => {
+      map.remove();
+    };
+  }, []);
+
+
+  const FarmBreakDown = () => {
+    return(
+      <>
+      <div className='container space-y-8 py-4'>
+           <div className='flex justify-between pb-4 border-b border-gray-800'>
+                    <div className='flex gap-x-2 items-center'>
+                       <span className='text-xl'><FaMoneyBill /></span>
+                       <p className='sm:text-[24px] text-gray-800 font-semibold'>Farm Earnings</p>
+                    </div>
+                    <div>
+                        <p className='text-base sm:text-xl font-semibold text-gray-800'>$0.00</p>
+                    </div>
+           </div>
+           <div className='flex justify-between pb-4 border-b border-gray-800'>
+                    <div className='flex gap-x-2 items-center'>
+                        <span className='text-xl'><FaMoneyBill /></span>
+                        <p className='sm:text-[24px] text-gray-800 font-semibold'>Total Plots</p>
+                    </div>
+                    <div>
+                        <p className='text-base sm:text-xl font-semibold text-gray-800'>4</p>
+                    </div>
+           </div>
+          
+           <div className='flex justify-between pb-4 border-b border-gray-800'>
+                    <div className='flex gap-x-2 items-center'>
+                      <a className='text-xl'><FaClock/></a> 
+                       <p className='sm:text-[24px] text-gray-800 font-semibold'>Type</p>
+                    </div>
+                    <div>
+                        <p className='text-base sm:text-xl font-semibold text-gray-800'>Green-House</p>
+                    </div>
+           </div>
+      </div>
+      </>
+    )
   }
 
-  const showmodal = flexModal();
-
-  let view = <DebitCard />;
-
-  switch (activepage) {
-    case null:
-      break;
-
-    default:
-      break;
+  const BuyButton = () => {
+    return(
+      <>
+        <div className="py-4 z-[3000000] w-full flex flex-col gap-y-4 items-center fixed bottom-0 bg-white  px-2 md:hidden">
+            <button className="w-full bg-green-300 rounded-3xl p-4 text-2xl tracking-wide font-semibold">
+              Place Bid
+            </button>
+            {/* <button className="w-full bg-gray-600 rounded-3xl p-4 text-xl font-semibold text-white">
+              Auction Farm
+            </button> */}
+          </div>
+      </>
+    )
   }
+
+  const OwnershipActivity = ({investments}) => {
+
+    const OwnerActivity = ({name, amount, avatar, status}) => {
+        return(
+          <>
+           <li class="py-3 sm:py-4">
+                    <div class="flex items-center space-x-4">
+                        <div class="flex-shrink-0">
+                            <img class="w-8 h-8 rounded-full" src={avatar} alt="Neil image"/>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-sm font-medium text-gray-900 truncate ">
+                                {name}
+                            </p>
+                            <p class="text-sm text-gray-500 truncate ">
+                                {status}
+                            </p>
+                        </div>
+                        <div class="inline-flex items-center text-base font-semibold text-gray-900 ">
+                            {formatter.format(amount)}
+                        </div>
+                    </div>
+                </li>
+          </>
+        )
+      }
+     
+    return(
+        <div class="w-full max-w-2xl p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 ">
+        <div class="flex items-center justify-between mb-4">
+            <h5 class="text-xl font-bold leading-none text-gray-900 ">Ownership history</h5>
+            <a href="#bb" class="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">
+            <button id="dropdownButton" data-dropdown-toggle="dropdown" class="inline-block text-gray-500  hover:bg-gray-100  focus:ring-4 focus:outline-none focus:ring-gray-200  rounded-lg text-sm p-1.5" type="button">
+                <span class="sr-only">Open dropdown</span>
+                <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path></svg>
+            </button>
+            </a>
+       </div>
+       <div  class="flow-root my-4">
+            <ul  role="list" class="divide-y divide-gray-200 ">
+                 {investments?.map((investment)=>{
+          return(
+            <OwnerActivity status={investment.status} avatar={urlFor(investment.startup.image)} amount={investment.amount} name={investment?.startup?.name}/>
+          )
+         })}
+            </ul>
+       </div>
+       <div className="">
+           <div>
+               <h3 className="text-[18px] text-gray-600 font-semibold">Previous Owners:</h3>
+               <p className="text-2xl font-bold text-gray-800">1</p>
+           </div>
+       </div>
+    </div>
+    )
+}
+
+const RecentBids = ({investments}) => {
+
+  const Bid = ({name, amount, avatar, status}) => {
+      return(
+        <>
+         <li class="py-3 sm:py-4">
+                  <div class="flex items-center space-x-4">
+                      <div class="flex-shrink-0">
+                          <img class="w-8 h-8 rounded-full" src={avatar} alt="Neil image"/>
+                      </div>
+                      <div class="flex-1 min-w-0">
+                          <p class="text-sm font-medium text-gray-900 truncate ">
+                              {name}
+                          </p>
+                          <p class="text-sm text-gray-500 truncate ">
+                              {status}
+                          </p>
+                      </div>
+                      <div class="inline-flex items-center text-base font-semibold text-gray-900 ">
+                          {formatter.format(amount)}
+                      </div>
+                  </div>
+              </li>
+        </>
+      )
+    }
+   
+  return(
+      <div class="w-full max-w-2xl p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 ">
+      <div class="flex items-center justify-between mb-4">
+          <h5 class="text-xl font-bold leading-none text-gray-900 ">Recent Bids</h5>
+          <a href="#bb" class="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">
+          <button id="dropdownButton" data-dropdown-toggle="dropdown" class="inline-block text-gray-500  hover:bg-gray-100  focus:ring-4 focus:outline-none focus:ring-gray-200  rounded-lg text-sm p-1.5" type="button">
+              <span class="sr-only">Open dropdown</span>
+              <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path></svg>
+          </button>
+          </a>
+     </div>
+     <div  class="flow-root my-4">
+          <ul  role="list" class="divide-y divide-gray-200 ">
+               {investments?.map((investment)=>{
+        return(
+          <Bid status={investment.status} avatar={urlFor(investment.startup.image)} amount={investment.amount} name={investment?.startup?.name}/>
+        )
+       })}
+          </ul>
+     </div>
+     <div className="">
+         <div>
+             <h3 className="text-[18px] text-gray-600 font-semibold">Highest Bid:</h3>
+             <p className="text-2xl font-bold text-gray-800">$0.00</p>
+         </div>
+     </div>
+  </div>
+  )
+}
 
   return (
+    
     <>
-      <Layout>
-        {/* <Questions question={"Whats's your estimated pre-tax household income ?"}/> */}
-        <div className="flex flex-col items-center bg-white">
-           <div>
-             {posts.map((post)=>{
-              return(
-                <Post/>
-              )
-             })}
-           </div>
-          <ChatInput onSendMessage={()=> setposts([...posts, <Post/>])}/>
-        </div>
-      </Layout>
-      {/* <BottomNavigation /> */}
+     
+    
+    <Header halfmenu={true} />
+     <div className="min-h-screen bg-white overflow-y-scroll  pb-[120px] ">
+       <div id="map" className="w-[calc(100vw)]  h-[40vh]"  >  
+     
+       </div>
+      <div className="py-4">
+         <h3 className="text-2xl text-blk font-semibold text-center">Wemdon Farms</h3>
+      </div>
+       <div className="py-8 flex gap-y-10 flex-col items-center"> 
+          <FarmBreakDown/>
+          <div className="px-4 w-full">
+          <OwnershipActivity/>
+          </div>
+          <div className="px-4 w-full">
+          <RecentBids/>
+          </div>
+       </div>
+       <BuyButton/>
+     </div>
+     
     </>
   );
 };

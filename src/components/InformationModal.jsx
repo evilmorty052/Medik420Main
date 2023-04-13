@@ -369,11 +369,11 @@ export const BreakDownModal = ({modal , setmodal,}) => {
     <>
             <AnimatePresence>
      {modal && 
-     <div onClick={()=> modal && setmodal(false)} key={'moda'} className='fixed md:z-[500]  flex justify-center items-center inset-0 bg-black/40 px-2'>
+     <div onClick={()=> modal && setmodal(false)} key={'moda'} className='fixed md:z-[500]  flex justify-center items-center inset-0 bg-black/40 px-2 md-py-10'>
              <div className="relative">
              <motion.div key={'modalo'}  exit={{y:'200%'}} initial={{y:'-100%'}} animate={{y:'0'}} className='bg-white py-8 px-2 rounded-2xl space-y-5  min-w-[calc(100vw-5vw)] '>
-                 <div className="py-4 space-y-5">
                        <h3 className="text-center text-xl text-gray-800 font-semibold">Investment Breakdown</h3>
+                 <div className="py-4  md:px-10 space-y-5">
                       <Outstandings/>
                        <div className="px-2">
                            <h3 className="text-start text-lg text-gray-800 font-semibold mb-2">Diversification Score:</h3>

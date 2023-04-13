@@ -9,6 +9,7 @@ import { wrappedgift } from '../../assets'
 import { Empty, Progress } from 'antd'
 import {InformationModal} from '../../components'
 import { explainers } from '../../constants'
+import { Infobutton } from './index'
 
 
 
@@ -31,17 +32,7 @@ const personalAccount = accounts?.filter((account) => {
 })
 
 
-const Infobutton = ({func}) => {
-    return (
-      <>
-        <button onClick={func} className=''>
-            <a className='text-gray-500 '>
-            <FaInfoCircle style={{fontSize: '14px'}}/>
-            </a>
-        </button>
-      </>
-    );
-}
+
 
     const GiftCard = () => {
         return(
@@ -163,7 +154,7 @@ const TotalReturns = () => {
 const Outstandings = () => {
     return(
       <>
-      <div className='container space-y-8 py-4'>
+      <div className='container mx-auto space-y-8 py-4'>
            <div className='flex justify-between pb-4 border-b border-gray-800'>
                     <div className='flex gap-x-2 items-center'>
                        <span className='text-xl'><FaMoneyBill /></span>
@@ -396,7 +387,7 @@ const Refferal = () => {
              {claimed != true && <div className='px-2.5'><GiftCard/></div> }
         </div>
        <div key={'k'} className='space-y-12 px-4'>
-       <div className='ss:flex justify-center'><LatestTransactions/></div>
+       <div className='flex justify-center'><LatestTransactions/></div>
        <RecentInvestments/>
        <DigitalFarms/>
        <Outstandings/>
@@ -419,18 +410,21 @@ const Refferal = () => {
      {/* {tablet section} */}
 
      <motion.div onClick={()=> expanded && setexpanded(false)} key={'jiik'}  className=' h-screen pt-8 relative overflow-y-scroll pb-[73px] slide-in-left hidden sm:block md:hidden  '>
-        <div key={'jkkk'} className='flex ss:flex-col  gap-y-8 items-center pb-4 mb-4 sm:grid grid-cols-2'>
-             <div className='px-2'><DebitCard amount={personalAccount?.[0].balance} lastname={lastname} firstname={firstname}/></div> 
-             {claimed != true && <div className='px-2.5'><GiftCard/></div> }
+        <div key={'jkkk'} className={`flex sm:justify-center ${claimed != true && 'ss:flex-col  gap-y-8 items-center pb-4 mb-4 sm:grid grid-cols-2'}`} >
+             <div className='px-2'>
+                <DebitCard amount={personalAccount?.[0].balance} lastname={lastname} firstname={firstname}/>
+                </div> 
+             {claimed != true && 
+             <div className='px-2.5'><GiftCard/></div>
+              }
         </div>
        <div key={'k'} className='space-y-12 px-4'>
        <LatestTransactions/>
+       <div className='flex justify-center'><RecentInvestments/></div> 
         <Outstandings/>
         <TotalReturns/>
-         
         <Performance/>
          <Refferal/>
-       <div className='flex justify-center'><RecentInvestments/></div> 
        <div className=' w-full flex justify-center '>
          <div className=''>
          <NewsTab/>
