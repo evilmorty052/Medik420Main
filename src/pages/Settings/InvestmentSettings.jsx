@@ -273,7 +273,7 @@ return(
 
   return (
     <>
-      <ul className=" col-span-2 px-2  lg:items-start sm:pl-5  flex flex-col gap-y-5 slide-in-right">
+      <ul className=" col-span-2 px-2  lg:items-start sm:pl-5  flex flex-col gap-y-5 ">
       <div className=' flex items-center gap-x-8 px-4 sm:hidden'>
          <a className={styles.SettingsIcon} ><FaArrowLeft onClick={func} /></a>
          <div>
@@ -281,7 +281,7 @@ return(
          <p>{email}</p>
          </div>
          </div>
-          <div className='pl-4 block  sm:hidden  space-y-2'>
+          <div className=' block  sm:hidden  space-y-2'>
          
           <h3
               className={styles.UiSubHeading}

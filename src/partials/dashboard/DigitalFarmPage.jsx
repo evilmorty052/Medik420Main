@@ -1,10 +1,12 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Header from "../Header";
 import { Progress, Empty } from "antd";
 import { Infobutton } from "./Elements";
 import styles from "../../style";
 import Tabs  from "../../pages/hive/Tabs";
+import { LargeHeader } from "../../components/Dashboard/LaptopDisplay";
+import DigitalFarmShop from "./DigitalFarmShop";
 
 const DigitalFarmPage = () => {
   const navigate = useNavigate();
@@ -308,10 +310,12 @@ const DigitalFarmPage = () => {
   const BuyButton = () => {
     return(
       <>
-        <div className="py-4 w-full flex flex-col gap-y-4 items-center fixed bottom-0 bg-white px-2 md:hidden">
-            <button onClick={()=> setshoppingPage(true)} className="w-full bg-green-300 rounded-3xl p-4 text-xl font-semibold">
+        <div className="py-4 w-full flex flex-col gap-y-4 items-center fixed bottom-0 bg-white md:bg-gray-200 px-2 md:fixed md:right-4 md:bottom-4 md:w-64 md:rounded-2xl">
+            <Link className="w-full" to={'/dashboard/digitalfarmshop'}>      
+            <button  className="w-full bg-green-300 rounded-3xl p-4 text-xl font-semibold">
               Shop Farms
             </button>
+            </Link>
             {/* <button className="w-full bg-gray-600 rounded-3xl p-4 text-xl font-semibold text-white">
               Auction Farm
             </button> */}
@@ -350,16 +354,19 @@ const DigitalFarmPage = () => {
     )
   }
 
-  if (shoppingPage) {
-    return <h3>Shopping Page</h3>
-  }
+ 
 
   return (
     <>
+      <div className="md:hidden">
       <Header
-        func={() => window.location.replace("dashboard/dashboard")}
+        func={() => window.location.replace('/dashboard')}
         halfmenu={true}
       />
+      </div>
+
+     <LargeHeader/>
+      <div className="container max-w-4xl mx-auto md:pt-10 md:px-10">
       <div className="pt-4">
       <Tabs section1={'Personal'} section2={'Shared'} setactive={handleTabs} tab1={personalFarms} tab2={sharedFarms} />
       </div>
@@ -382,6 +389,7 @@ const DigitalFarmPage = () => {
      
        }
         <BuyButton/>
+      </div>
       </div>
     </>
   );

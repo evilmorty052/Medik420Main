@@ -1,12 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { Navbar } from '../../components'
 import styles from '../../style'
-import {CTA} from '../../components'
-import Pricing from './pricing/pricing'
-import {Footer} from '../../components'
-import CTA1 from './cta/cta1'
-import Img from '../../assets/phone.png'
-import Watch from '../../assets/watch.png'
 import Vid from '../../assets/smartportfoliovideo.mp4'
 import mail from '../../assets/mail.png'
 import options from '../../assets/investmentoptions.png'
@@ -17,13 +10,10 @@ import newinvestor from '../../assets/newinvestor.jpg'
 import ListBox from '../../components/listbox2'
 import { Player, Controls } from '@lottiefiles/react-lottie-player';
 import Switch from '../../assets/switch.json'
-import diversification from '../../assets/diversification.mp4'
 import { Disclosure } from '@headlessui/react'
-
-
-import {Hero }from '../../components'
-import AnimatedSidebar from '../../components/AnimatedSidebar'
+import { applewatch } from '../../assets'
 import { FaBrain, FaCoins, FaRecycle, FaChevronUp, FaChevronDown} from 'react-icons/fa'
+import { Footer, NewsLetter } from '../../partials/dashboard/Elements'
 
 
 const Smart = () => {
@@ -34,12 +24,12 @@ const Smart = () => {
     }
   return (
     <>
-    <AnimatedSidebar isExpanded={expanded} setIsExpanded={setexpanded}/>
+
     <div onClick={()=> expanded && setexpanded(false)} className="bg-white w-full overflow-hidden">
     <div className={`${styles.paddingX} ${styles.flexCenter}`}>
-        <div className={`${styles.boxWidth}`}>
+        {/* <div className={`${styles.boxWidth} hiddenfromtabupwards`}>
           <Navbar open={opensidebar} />
-        </div>
+        </div> */}
     </div>
     
     <div className={`bg-white ${styles.flexStart}`}>
@@ -48,28 +38,16 @@ const Smart = () => {
         {/* <Stats /> */}
       </div>
     </div>
+    <div className='flex flex-col sm:gap-y-8'>
     <Section/>
     <AboutYou/>
     <SmarterWay/>
-    <LeftCard image={Watch}/>
+    <LeftCard image={applewatch}/>
     <Diversified/>
-    <div className={`bg-plat ${styles.paddingX} ${styles.flexCenter}`}>
-      <div className={`${styles.boxWidth}`}>
-        <CTA1 />
-      </div>
     </div>
-    <Faq/>
     <NewsLetter/>
-    
-    {/* <div className={`bg-plat ${styles.paddingX} ${styles.flexCenter}`}>
-      <div className={`${styles.boxWidth}`}>
-        
-        <CTA/>
-      </div>
-    </div> */}
-
-    
-  
+    <Faq/>
+   <Footer/>
   </div>
     </>
   )
@@ -82,35 +60,35 @@ export default Smart
 
 
 
-function NewsLetter(params) {
-  return(
-    <>
-    <section class="text-gray-600 body-font bg-gray-200 font-space">
-  <div class=" py-8 mx-auto">
-    <div class="flex flex-col text-center w-full mb-8 px-10">
-      <div className='w-[65px] lg:w-20 mx-auto relative'>
-            <img src={mail} alt="" className='w-full' />
+// function NewsLetter(params) {
+//   return(
+//     <>
+//     <section class="text-gray-600 body-font bg-gray-200 font-space">
+//   <div class=" py-8 mx-auto">
+//     <div class="flex flex-col text-center w-full mb-8 px-10">
+//       <div className='w-[65px] lg:w-20 mx-auto relative'>
+//             <img src={mail} alt="" className='w-full' />
             
-      </div>
-      <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900 uppercase">Get Our Newsletter</h1>
-      <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Opt In To Get Full Details Of Every Future Opportunity <br className='hidden lg:block'/> Delivered Right Into Your Inbox. </p>
-    </div>
-    <div class="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
-      <div class="relative flex-grow w-full">
-        <label for="full-name" class="leading-7 text-sm text-gray-600">Full Name</label>
-        <input type="text" id="full-name" name="full-name" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"/>
-      </div>
-      <div class="relative flex-grow w-full">
-        <label for="email" class="leading-7 text-sm text-gray-600">Email</label>
-        <input type="email" id="email" name="email" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"/>
-      </div>
-      <button class="text-white bg-green-300 border-0 py-2 px-8 focus:outline-none  rounded text-lg">Yes!</button>
-    </div>
-  </div>
-</section>
-    </>
-  )
-}
+//       </div>
+//       <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900 uppercase">Get Our Newsletter</h1>
+//       <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Opt In To Get Full Details Of Every Future Opportunity <br className='hidden lg:block'/> Delivered Right Into Your Inbox. </p>
+//     </div>
+//     <div class="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
+//       <div class="relative flex-grow w-full">
+//         <label for="full-name" class="leading-7 text-sm text-gray-600">Full Name</label>
+//         <input type="text" id="full-name" name="full-name" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"/>
+//       </div>
+//       <div class="relative flex-grow w-full">
+//         <label for="email" class="leading-7 text-sm text-gray-600">Email</label>
+//         <input type="email" id="email" name="email" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"/>
+//       </div>
+//       <button class="text-white bg-green-300 border-0 py-2 px-8 focus:outline-none  rounded text-lg">Yes!</button>
+//     </div>
+//   </div>
+// </section>
+//     </>
+//   )
+// }
 
 
 function Services (){
@@ -234,8 +212,8 @@ function MainHero(params) {
 function Section(params) {
   return (
     <>
-      <div className="w-full bg-white mt-20 font-space container mx-auto lg:max-w-[1054px] pb-20 lg:pb-32">
-        <div className="text-center mb-8 px-4 lg:px-32">
+      <div className="w-full bg-white mt-20 font-space smcontainer sm:mx-auto lg:max-w-[1054px] pb-20 lg:pb-32">
+        <div className="text-center mb-8 px-4 lg::px-32">
           <h3 className="text-[38px] font-semibold mb-4 text-gray-700 ">
             Why automate your investing?
           </h3>
@@ -245,8 +223,8 @@ function Section(params) {
             invest for you regularly.
           </p>
         </div>
-        <div className="flex w-full flex-col lg:flex-row-reverse lg:justify-between ">
-          <div className=" space-y-8 px-4  mb-8">
+        <div className="flex w-full flex-col sm:flex-row-reverse sm:justify-between ">
+          <div className=" space-y-8 px-4 sm:pl-4 sm:pr-1  mb-8">
             <div className="">
               <h3 className=" leading-[32px] text-gray-800  font-semibold text-[24px] mb-2">
                 Designed by experts.
@@ -285,7 +263,7 @@ function Section(params) {
           </div>
           <div className=" ">
             <video
-              class="max-h-[525px] lg:min-w-[500px] w-full md:px-0 "
+              class="max-h-[525px] sm:min-w-[300px] md:min-w-[500px] w-full md:px-0 "
               autoPlay
               playsInline
               muted
@@ -321,26 +299,20 @@ function AboutYou(params) {
   const [selected, setSelected] = useState(plans && plans[0])
   let message
   
-
-
-
-  
-
-
   return(
     <>
-    <div className='pb-8 sm:px-10 md:container mx-auto max-w-7xl'>
+    <div className='pb-8 md:px-10 md:container md:mx-auto max-w-7xl'>
        <h3 className='text-center text-4xl font-bold mb-8'>Built For You.</h3>
-       <div className='px-2 sm:px-10 md:flex md:items-center md:justify-around md:mb-8 '>
+       <div className='px-2 md:px-10 sm:flex sm:items-center sm:justify-around sm:mb-8 '>
           <div className='  mb-8'>
-              <div className='md:flex md:items-center md:space-x-4 mb-2'>
-              <p className='text-3xl md:text-2xl text-green-400 font-bold '>1</p>
+              <div className='sm:flex sm:items-center sm:space-x-4 mb-2'>
+              <p className='text-3xl sm:text-2xl text-green-400 font-bold '>1</p>
               <p className='text-2xl font-semibold text-gray-800'>Tell Us About Yourself</p>
               </div>
               <p className='text-lg font-medium text-gray-600'>What’s your investor style? </p>
               <div className='lg:my-4 mb-4'>
                <div className='mt-8 mb space-y-4'>
-                <div className='sm:pr-32 md:pr-8 mb-6'>
+                <div className=' md:pr-8 mb-6'>
                 <ListBox  selected={selected} setSelected={setSelected} list={plans} />
                 </div>
                </div>
@@ -351,17 +323,17 @@ function AboutYou(params) {
                   <img className='w-full' src={Img}></img>
           </div> */}
        </div>
-       <div className='px-2 sm:px-10 md:flex md:flex-row-reverse md:mt-20 md:mb-20 md:gap-x-10 '>
+       <div className='px-2 md:px-10 sm:flex sm:flex-row-reverse sm:mt-20 sm:mb-20 sm:gap-x-10 '>
           <div className='mb-4'>
-             <div className='md:flex md:space-x-4'>
-             <p className='text-3xl md:text-2xl text-green-400 font-bold mb-[12px] '>2</p>
+             <div className='sm:flex sm:space-x-4'>
+             <p className='text-3xl sm:text-2xl text-green-400 font-bold mb-[12px] '>2</p>
               <p className='text-2xl font-semibold text-gray-800'>Just Add Cash</p>
             </div> 
              <div className='md:px-10'>
              <p className={styles.content}>Turn on auto-invest to build wealth over the long term—without even thinking about it.</p>
             </div> 
           </div>
-          <div className=' translate-x-[-30%] md:translate-x-0 flex justify-start md:justify-center items-center md:bg-gray-300 rounded-2xl  md:w-[450px] h-40'>
+          <div className=' translate-x-[-30%] sm:translate-x-0 flex justify-start sm:justify-center items-center sm:bg-gray-300 rounded-2xl sm:w-[300px]  md:w-[450px] h-40'>
             {/* <img src={Img}></img> */}
             <Player
   autoplay
@@ -374,21 +346,21 @@ function AboutYou(params) {
           </div>
           
        </div>
-       <div className='md:mt-[100px] py-8'>
-          <div className='px-2 sm:px-10 md:mt-10 md:flex md:gap-x-10'>
+       <div className='sm:mt-[100px] py-8 '>
+          <div className='px-2 md:px-10 sm:mt-10 sm:flex sm:gap-x-10'>
             <div>
-           <div className='md:flex md:space-x-4'>
+           <div className='sm:flex sm:space-x-4'>
             <p className='text-3xl md:text-2xl text-green-400 font-bold mb-[12px]'>3</p>
             <p className='text-2xl font-semibold text-gray-800'>Let us handle the rest</p>
             </div>
             <p className={`${styles.content} ${'mb-4 sm:mb-10'}`}>Smart Portfolio will build, monitor and automatically rebalance your investments, taking the time and stress out of investing.</p>
-             <div className='sm:px-32 md:pr-32 md:pl-0 flex justify-start mt-8 '>
+             <div className='md:px-32 md:pr-32 md:pl-0 flex justify-start mt-8 '>
              <button className="bg-green-300 shadow-xl hover:bg-green-400 text-black font-bold py-4 px-6  w-full rounded-3xl">
                 Get Started
               </button>
             </div> 
             </div>
-            <div className='hidden md:block'>
+            <div className='hidden sm:block'>
             <img src={options}></img>
           </div>
           </div>
@@ -402,32 +374,32 @@ function AboutYou(params) {
 function LeftCard({setSearchMode, image}) {
   return (
     <>
-      <div class="py-16 font-space">
+      <div class=" py-8 md:py-16 font-space max-w-5xl md:container mx-auto">
         <div class="xl:container m-auto px-6 text-gray-600 md:px-12 xl:px-16">
-          <div class="lg:bg-gray-600 dark:lg:bg-darker lg:p-16 rounded-[4rem] space-y-6 md:flex md:gap-6 justify-center md:space-y-0 lg:items-center">
-            <div class="md:5/12 lg:w-1/2">
+          <div class="lg:bg-gray-600  lg:p-16 rounded-[4rem] space-y-6 md:flex md:gap-6 justify-center md:space-y-0 lg:items-center">
+            <div class="md:5/12 lg:w-1/2 flex justify-center">
               <img
                 src={image}
                 alt="image"
                 loading="lazy"
-                className=' max-w-[275px] xl:max-w-[300px]'
+                className='  max-w-[435px] max-h-[430px] '
               />
             </div>
-            <div class="md:7/12 lg:w-1/2">
-              <h2 class="text-[38px] font-bold  md:text-4xl text-black lg:text-white">Set Up Investment Alerts</h2>
+            <div class="md:7/12 lg:w-1/2 sm:pl-12">
+              <h2 class="text-[28px] font-bold  md:text-4xl text-blk lg:text-white">Set up smart alerts</h2>
               {/* <h2 class="text-[44px] font-bold text-green-400 md:text-4xl dark:text-white"></h2> */}
-              <p class="my-8 lg:text-gray-300 text-gray-700 text-xl">
-              Always Stay in the Loop With Handy Information Always at your fingertips.
+              <p class="my-4 lg:text-gray-300 text-gray-700 text-xl">
+              Always stay in the loop with handy, curated information always at your fingertips. provided by our smart alerts A.I
               </p>
 
-              <div
-                href=""
-                class="relative flex h-12 w-full items-center justify-center px-8 before:absolute before:inset-0 before:rounded-full before:bg-green-300 before:bg-gradient-to-b before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95  sm:w-max"
+              {/* <div
+                
+                className="px-8"
               >
-                <span onClick={setSearchMode} class="relative text-base font-semibold text-sky-600 dark:text-white">
+                <button onClick={setSearchMode} className="btn">
                   Set Up Alerts
-                </span>
-              </div>
+                </button>
+              </div> */}
             </div>
           </div>
         </div>
@@ -440,7 +412,7 @@ function LeftCard({setSearchMode, image}) {
 function SmarterWay(params) {
   return(
   <>
-    <div className='w-full bg-plat  text-gray-800 py-10 px-4 md:py-24 font-space  max-w-7xl'>
+    <div className='w-full   text-gray-800 py-10 px-4 md:py-24 font-space md:container md:mx-auto max-w-7xl'>
        <div>
              <h2 className='text-center text-[38px] font-bold font-space'>The smarter way to invest.</h2>  
 
@@ -513,7 +485,7 @@ function Diversified(params) {
               muted
               loop
               preload="auto"
-              src={diversification}
+              src={"https://cdn.sanity.io/files/noj3nhym/production/6c9790fa24052239d83d73ea46e1aee120a3b90c.mp4"}
               type="video/mp4"
             >
               
@@ -529,7 +501,7 @@ function Diversified(params) {
 function Faq(params) {
   return(
     <>
-    <div className='bg-plat py-8'>
+    <div className='py-8'>
 
    
      <h3 className='text-3xl text-center font-semibold text-gray-800 my-8'>Frequently Asked Questions</h3>

@@ -7,7 +7,7 @@ import {Menuswitch, } from '../index'
 export function MenuItem({func, itemHeader, itemSubtext, list, buttonText, children, switcher}) {
     return (
       <>
-      <div className='slide-in-right col-span-2'>
+      <div className=' col-span-2'>
        <div className=' flex items-center gap-x-8 px-4  '>
            <a className={`${styles.SettingsIcon}  `} ><FaArrowLeft onClick={func} /></a>
            <div className=''>
@@ -63,7 +63,9 @@ export function MenuItem({func, itemHeader, itemSubtext, list, buttonText, child
         {buttonText && 
         
         <div className='py-12 w-full flex justify-end px-4 max-w-md'>
-          <a className='py-2 px-4 bg-green-300 rounded-md  text-gray-600 text-[15px] font-medium hover:bg-green-400 hover:text-gray-800 cursor-pointer outline outline-gray-200 shadow-md'>{buttonText}</a>
+          <button className="btnAlt">
+            {buttonText}
+          </button>
         </div>
         }
         </div>

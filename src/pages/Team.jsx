@@ -1,12 +1,13 @@
 import { useState } from 'react'
 import { urlFor } from '../../lib/client'
-import { Navbar } from '../components'
 import AnimatedSidebar from '../components/AnimatedSidebar'
-import useFetch from '../hooks/useFetch'
 import {LogoCloud} from '../components/index'
 import styles from '../style'
 import pie from '../assets/pie2.svg'
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa'
+import {Footer} from '../partials/dashboard/Elements'
+import { register } from 'swiper/element/bundle';
+import useFetch from "../hooks/useFetch"
 
 
 const Team = () => {
@@ -16,9 +17,8 @@ const [tab1, settab1] = useState(false)
 const [tab2, settab2] = useState(true)
 const [expanded, setexpanded] = useState(false)
 
-function open(params) {
-  !expanded ? setexpanded(true) : setexpanded(false)
-}
+register()
+
 
 function handleTabs(params) {
   if(tab1){
@@ -33,8 +33,6 @@ function handleTabs(params) {
 
   return (
     <>
-    <Navbar open={open}/>
-    <AnimatedSidebar isExpanded={expanded} setIsExpanded={setexpanded}/>
     <div onClick={()=> expanded && setexpanded(false)}>
     <MainHero/>
     <div>
@@ -43,6 +41,7 @@ function handleTabs(params) {
     </div>
 
 {!tab1 ? <TeamGrid data={data} /> : <AboutUs/>}
+  <Footer/>
     </>
   )
 }
@@ -111,15 +110,15 @@ function MainHero(params) {
   return(
    <>
    
-   <body class="bg-gray-900 md:pt-20 pb-4 ">
+   <body class="bg-gray-900 pt-10 md:pt-20 pb-4 ">
      
      <div class="border-b  ">
-         <div class="container  m-auto px-6 pt-12 md:px-12  md:pt-[1.8rem] lg:px-7">
+         <div class="sm:container sm:m-auto px-2 sm:px-6 pt-12 md:px-12  md:pt-[1.8rem] lg:px-7">
              <div class="grid  items-center gap-12 px-2 md:px-0">
                  <div class="relative col-span-1">
-                     <h1 class="font-bold text-5xl sm:text-6xl md:text-7xl xl:text-8xl text-white text-center">Our mission <br className='hidden sm:block'/> requires great people</h1>
-                     <div class="mt-8 lg:mt-16 space-y-8">
-                         <p class="text-gray-300 text-center text-3xl ">Meet the team shaping the future of personal finance.</p>
+                     <h1 class="font-bold text-3xl sm:text-6xl md:text-7xl xl:text-8xl text-white text-center">Our mission <br className=''/> requires great people</h1>
+                     <div class="sm:mt-8 lg:mt-16 space-y-8">
+                         <p class="text-gray-300 text-center text-xl sm:text-3xl ">Meet the team shaping the future of personal finance.</p>
                      </div>'
                  </div>
              </div>
@@ -245,64 +244,14 @@ They left their jobs with a simple mission: make investing easy and affordable f
  }
 
  function Values() {
-  const [text, settext] = useState(1)
-  const [disabled, setdisabled] = useState(false)
-  
-  let snippet
-  let title
-  
-  switch (text) {
-    case 1:
-      title = 'Prioritize people.'
-      snippet = 'We believe a diverse, authentic, and inclusive culture empowers us to grow together.'
-      break;
-  
-      case 2:
-      title = 'Obsess over the customer.'
-      snippet = 'We have a mission mindset and always strive to build the best experience for everyday Americans.'
-      break;
-      
-      case 3:
-      title = 'Take Ownership'
-      snippet = 'As the risk-takers, drivers, and doers behind each initiative, we take responsibility for our contributions individually and as a team.'
-      break;
-      
-      case 4:
-      title = 'Create Solutions'
-      snippet = 'We challenge the status quo and apply our creative energy to solve complex problems in fresh, new ways.'
-      break;
-  
-    default:
-      break;
-  }
 
-  function handleIncrease(params) {
-    if(text >= 4){
-      settext(1)
-      return
-    }
-
-    settext(prev => prev + 1)
-  }
-  
-  function handleDecrease(params) {
-    if(text <= 1){
-      settext(1)
-      return
-    }
-
-    settext(prev => prev -1)
-  }
-
-
-
+const Snippet = ({snippet, title}) => {
   return(
-    <>
     <div className='w-full bg-gray-300 py-10'>
         <div className='container mx-auto'>
           <div className='flex flex-col items-center'>
            <div className='mb-8'>
-               <div className='mb-2'>
+               <div className=''>
                <h3 className={`${styles.sectionHeading} text-center text-gray-800`}>Our Core Values</h3>
                </div>
                 <div
@@ -314,15 +263,75 @@ They left their jobs with a simple mission: make investing easy and affordable f
                 </div>
                 </div>
            </div>
-           <div className='flex  w-1/2 sm:w-[20%]'>
-              <div className='flex justify-between w-full '>
-                <FaAngleLeft style={{fontSize: '30px' , color: 'steelblue'}} onClick={handleDecrease} />
-                <FaAngleRight style={{fontSize: '30px' , color: 'steelblue'}} onClick={handleIncrease}/>
-              </div>
-           </div>
           </div>
         </div>
     </div>
+  )
+}
+
+  // return(
+  //   <>
+  //   <div className='w-full bg-gray-300 py-10'>
+  //       <div className='container mx-auto'>
+  //         <div className='flex flex-col items-center'>
+  //          <div className='mb-8'>
+  //              <div className='mb-2'>
+  //              <h3 className={`${styles.sectionHeading} text-center text-gray-800`}>Our Core Values</h3>
+  //              </div>
+  //               <div
+  //                className='px-4 w-72 sm:w-[400px] md:w-[600px] sm:h-[200px] md:h-[] h-40 '>
+  //               <h3
+  //                className={`${styles.sectionSubHeadingCenter} text-center text-gray-800 transition-all ease-in-out duration-300`}>{title}</h3>
+  //               <div className='py-4 '>
+  //               <p className={`${styles.contentCenter} text-gray-800 transition-all ease-in`}>{snippet}</p>
+  //               </div>
+  //               </div>
+  //          </div>
+  //          <div className='flex  w-1/2 sm:w-[20%]'>
+  //             <div className='flex justify-between w-full '>
+  //               <FaAngleLeft style={{fontSize: '30px' , color: 'steelblue'}} onClick={handleDecrease} />
+  //               <FaAngleRight style={{fontSize: '30px' , color: 'steelblue'}} onClick={handleIncrease}/>
+  //             </div>
+  //          </div>
+  //         </div>
+  //       </div>
+  //   </div>
+  //   </>
+  // )
+
+  return(
+    <>
+    <div class='pb-6'>
+       <swiper-container
+          class="relative"
+          autoPlay={true}
+          autoPlay-delay={"5000"}
+          pagination='true'
+          pagination-clickable='true'
+          disable-autoPlay-on-interaction='false'
+          >
+          <swiper-slide>
+           <Snippet title={"Prioritize people."} 
+           snippet={"We believe a diverse, authentic, and inclusive culture empowers us to grow together."}
+           />
+          </swiper-slide>
+          <swiper-slide>
+          <Snippet title={'Obsess over the customer.'}
+           snippet = {'We have a mission mindset and always strive to build the best experience for everyday people.'}
+           />
+          </swiper-slide>
+          <swiper-slide>
+          <Snippet title = {'Take Ownership'}
+           snippet = {'As the risk-takers, drivers, and doers behind each initiative, we take responsibility for our contributions individually and as a team.'}
+           />
+          </swiper-slide>
+          <swiper-slide>
+          <Snippet  title = {'Create Solutions'}
+          snippet = {'We challenge the status quo and apply our creative energy to solve complex problems in fresh, new ways.'}
+           />
+          </swiper-slide>
+        </swiper-container>
+       </div>
     </>
   )
  }

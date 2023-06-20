@@ -162,7 +162,7 @@ export default {
               title: 'Created',
               name: 'created',
               type: 'datetime',
-              initialValue: (new Date()).toISOString()
+              initialValue: (new Date().toISOString())
             } ,
             { 
               name: 'slug',
@@ -302,6 +302,12 @@ export default {
               title: 'Status',
               name: 'status',
               type: 'string'
+            } ,
+            {
+              title: 'Created',
+              name: 'created',
+              type: 'datetime',
+              initialValue: (new Date().toISOString())
             } ,
           ]
         }

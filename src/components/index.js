@@ -1,34 +1,33 @@
-import Navbar from "./Navbar";
 import Billing from "./Billing";
-import CardDeal from "./CardDeal";
-import Business from "./Business";
-import Clients from "./Clients";
 import CTA from "./CTA";
 import Stats from "./Stats";
-import Footer from "./Footer";
-import Testimonials from "./Testimonials";
-import Hero from "./Hero";
 import LogoCloud from "./LogoCloud";
 import AnimatedSidebar from '../components/AnimatedSidebar'
 import LaptopDisplay from "./Dashboard/LaptopDisplay";
-import InformationModal, {ClaimModal, BreakDownModal, RefferalModal} from './InformationModal'
+import Loader from "./Loader"
+import CurrencyInput from "./CurrencyInput"
+import RoundedNavBar from "./RoundedNavBar"
+import PaymentModal from "./PaymentModal"
+import InformationModal, {ClaimModal, BreakDownModal, RefferalModal, MoreActionsModal, WithdrawalModal, TransferModal} from './InformationModal'
+
 
 export {
-  Navbar,
   Billing,
-  CardDeal,
-  Business,
-  Clients,
   CTA,
   Stats,
-  Footer,
-  Testimonials,
-  Hero,
   LogoCloud,
   AnimatedSidebar,
   LaptopDisplay,
   InformationModal,
   ClaimModal,
   BreakDownModal,
-  RefferalModal
+  RefferalModal,
+  MoreActionsModal,
+  WithdrawalModal,
+  Loader,
+  CurrencyInput,
+  RoundedNavBar,
+  PaymentModal,
+  TransferModal
+  
 };

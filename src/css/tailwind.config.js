@@ -4,6 +4,7 @@ module.exports = {
   content: [
     './index.html',
     './src/**/*.{js,jsx,ts,tsx}',
+    'node_modules/preline/dist/*.js',
   ],
   mode: "jit",
   theme: {
@@ -29,6 +30,7 @@ module.exports = {
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
         space: ["space-grotesk", "sans-serif"],
+        inter: ["inter", "sans-serif"],
       
       },
       fontSize: {
@@ -75,7 +77,7 @@ module.exports = {
   },
   plugins: [
     // eslint-disable-next-line global-require
-    require('@tailwindcss/forms'),
+    require('preline/plugin'), 
     // add custom variant for expanding sidebar
     plugin(({ addVariant, e }) => {
       addVariant('sidebar-expanded', ({ modifySelectors, separator }) => {

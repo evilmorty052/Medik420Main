@@ -1,3 +1,22 @@
 .leftControl{
     position: fixed;
 }
+
+.mason{
+    display: grid;
+    grid-template-columns: 25% 1fr 380px;
+}
+
+.tabgrid{
+    display: grid;
+    grid-template-columns: 100px 1fr ;
+    
+}
+
+
+
+@media (min-width: 1024px){
+    .hiddenfromtabupwards{
+        display: none;
+    }
+}

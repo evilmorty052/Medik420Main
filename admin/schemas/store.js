@@ -37,7 +37,59 @@ export default {
         name: 'seats',
         title: 'Seats',
         type: 'number'
-      }
+      },
+      {
+        name: 'recommended',
+        title: 'Recommended',
+        type: 'boolean'
+      },
+      { 
+        name: 'topinvestors',
+        title: 'top Investors',
+        type: 'array',
+        of: [{type: 'reference',
+        to: [{type: 'users'},{type: 'members'}]}]
+      },
+      { 
+        name: 'investments',
+        title: 'Investments',
+        type: 'array',
+        of: [
+          {
+            title: 'investor',
+            type: 'object',
+            fields: [
+              {
+                title: 'payee',
+                name: 'payee',
+                type: 'reference',
+                to: [{type: 'users'},{type: 'members'}]
+              } ,
+              {
+                title: 'Investmentamount',
+                name: 'investmentamount',
+                type: 'number'
+              } ,
+              {
+                title: 'Type',
+                name: 'type',
+                type: 'string'
+              } ,
+              {
+                title: 'Status',
+                name: 'status',
+                type: 'string'
+              } ,
+              {
+                title: 'Created',
+                name: 'created',
+                type: 'datetime',
+                initialValue: (new Date().toISOString())
+              } ,
+            ]
+          }
+        ]
+      },
     ]
   }
   

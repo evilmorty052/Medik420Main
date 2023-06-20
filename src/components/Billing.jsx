@@ -1,11 +1,9 @@
-import { apple, bill, google } from "../assets";
-import Medicaman from "../assets/medikpeeps.png";
 import styles, { layout } from "../style";
 
 const Billing = () => (
   <section id="product" className={layout.sectionReverse}>
     <div className={`${layout.sectionImgReverse} rounded-xl`}>
-      <img src={Medicaman} alt="billing" className="w-[100%] h-[100%] relative z-[5] rounded-3xl" />
+      <img loading="lazy" src={"https://cdn.sanity.io/images/noj3nhym/production/44b4b5635207c86e292cbe41d9024bffad364764-1080x1080.png"} alt="billing" className="w-[100%] h-[100%] relative z-[5] rounded-3xl" />
 
       {/* gradient start */}
       <div className="absolute z-[3] -left-1/2 top-0 w-[50%] h-[50%] rounded-full white__gradient" />

@@ -1,22 +1,22 @@
 import { Avatar } from 'antd';
-import React, { useState } from 'react';
-import { client } from '../../lib/client';
-import { useQuery } from '@tanstack/react-query';
+import { useState,useMemo, useEffect  } from 'react';
+import { client, urlFor } from '../../lib/client';
 import Header from '../partials/Header';
-import Loader from '../components/Loader';
-import cbd from '../assets/airbnb.png'
-import Sidebar from '../partials/Sidebar2'
 import {Switch }from '@headlessui/react';
-import { PlusCircleFilled, PlusCircleOutlined } from '@ant-design/icons';
-import Dropdown from '../components/Dropdown';
+import { FaArrowLeft, FaAt } from 'react-icons/fa';
+import { LargeHeader } from '../components/Dashboard/LaptopDisplay';
+import { startupstab } from '../assets';
+import { VerifiedUser, Infobutton } from '../partials/dashboard/Elements';
+import { FundingChart } from '../partials/dashboard/HubElements';
+import { useNavigate, Link } from 'react-router-dom';
+import { createAvatar } from '@dicebear/core';
+import { personas, identicon, initials } from '@dicebear/collection';
 
-export default function ProfileSettingsPage() {
-  const [pin, setPin] = useState('');
-  const [address, setAddress] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [profileImage, setProfileImage] = useState('');
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+export default function ProfileSettingsPage({user}) {
+  const [following, setFollowing] = useState()
+
+  const navigate = useNavigate()
 
   // const handlePinChange = (event) => {
   //   setPin(event.target.value);
@@ -38,66 +38,438 @@ export default function ProfileSettingsPage() {
   //   setProfileImage(event.target.value);
   // };
 
-  const emailID = localStorage.getItem('email')
-  let query = `*[email == "${emailID}"]`
-  const { data: user } = useQuery(['userlist'], () => client.fetch(query))
-  ;
+  // const emailID = localStorage.getItem('email')
+  // let query = `*[email == "${emailID}"]`
+  // const { data: user } = useQuery(['userlist'], () => client.fetch(query))
+  // ;
  
-  let notifications = user && user[0].notifications 
+  // let notifications = user && user[0].notifications 
 
 
 
 
-  if(!user){
-    return(
-      <Loader/>
-    )
+  // if(!user){
+  //   return(
+  //     <Loader/>
+  //   )
+  // }
+
+  const avatar = useMemo(() => {
+    return createAvatar(initials, {
+      size: 128,
+      seed: `${user?.firstname} ${user?.lastname}`,
+      // ... other options
+    }).toDataUriSync();
+  }, []);
+
+  const coverPhoto = useMemo(() => {
+    return createAvatar(identicon, {
+      size: 128,
+      seed: `${user?.firstname} ${user?.lastname}`,
+      // ... other options
+    }).toDataUriSync();
+  }, []);
+
+  const FetchProfile = async () => {
+    const query = `*[_type == "users" && _id == "${user?._id}"]`
+    const following = `*[_type == "members" && references("${user?._id}")]`
+    const userdetails = await client.fetch(query).then((res) => res)
+    const followingdetails = await client.fetch(following).then((res) => res)
+    setFollowing(followingdetails)
+    console.log(followingdetails)
   }
 
+  useEffect(()=>{
+ FetchProfile()
+  }, [])
+
+
+
+
+  const HostPage = ({host}) => {
+    const [scrolled, setscrolled] = useState(false)
+      
+    
+    
+      
+      const formatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+      
+        // These options are needed to round to whole numbers if that's what you want.
+        //minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
+        //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
+      });
+    
+      const Followers = ({investments}) => {
+    
+        const InvestmentActivity = ({name, amount, avatar, status}) => {
+            return(
+              <>
+               <li class="py-3 sm:py-4">
+                        <div class="flex items-center space-x-4">
+                            <div class="flex-shrink-0">
+                                <img class="w-8 h-8 rounded-full" src={avatar} alt="Neil image"/>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <p class="text-sm font-medium text-gray-900 truncate ">
+                                    {name}
+                                </p>
+                                <p class="text-sm text-gray-500 truncate ">
+                                    Status:{" "}{status}
+                                </p>
+                            </div>
+                            <div class="inline-flex items-center text-base font-semibold text-gray-900 ">
+                                {formatter.format(amount)}
+                            </div>
+                        </div>
+                    </li>
+              </>
+            )
+          }
+         
+        return(
+            <div class="w-full max-w-2xl p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 ">
+            <div class="flex items-center justify-between mb-4">
+                <h5 class="text-xl font-bold leading-none text-gray-900 ">Followers</h5>
+               <Infobutton/>
+           </div>
+           <div  class="flow-root my-4">
+                <ul  role="list" class="divide-y divide-gray-200 ">
+                     {investments?.map((investment)=>{
+              return(
+                <InvestmentActivity status={investment.status} avatar={urlFor(investment.startup.image)} amount={investment.amount} name={investment?.startup?.name}/>
+              )
+             })}
+                </ul>
+           </div>
+           <div className=" flex gap-x-6 items-center">
+               <div>
+                   <h3 className="text-[18px] text-gray-600 font-semibold">Followers:</h3>
+                   <div className="flex gap-x-4 items-center">
+                      <p className="text-2xl font-bold text-gray-800">0</p>
+                      {/* <span className="text-sm text-gray-600 font-semibold">Projected: {formatter.format(Math.round(pending/2.7))} <Infobutton/></span> */}
+                   </div>
+               </div>
+               
+           </div>
+        </div>
+        )
+    }
+
+    const Following = ({investments}) => {
+    
+      const FollowerRow = ({name, amount, avatar, status, to}) => {
+          return(
+            <>
+             <li class="py-3 sm:py-4">
+                      <div class="flex items-center space-x-4">
+                          <div class="flex-shrink-0">
+                              <img class="w-8 h-8 rounded-full" src={avatar} alt="Neil image"/>
+                          </div>
+                          <div class="flex-1 min-w-0">
+                              <p class="text-sm font-medium text-gray-900 truncate ">
+                                  {name}
+                              </p>
+                              <p class="text-sm text-gray-500 truncate ">
+                                  @{status}
+                              </p>
+                          </div>
+                          <div class="inline-flex items-center text-base font-semibold text-gray-900 ">
+                              <Link to={`${to}`} className="text-sm font-semibold text-blk cursor-pointer">
+                                   View Profile
+                              </Link>
+                          </div>
+                      </div>
+                  </li>
+            </>
+          )
+        }
+       
+      return(
+          <div class="w-full max-w-2xl p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 ">
+          <div class="flex items-center justify-between mb-4">
+              <h5 class="text-xl font-bold leading-none text-gray-900 ">Following</h5>
+             <Infobutton/>
+         </div>
+         <div  class="flow-root my-4">
+              <ul  role="list" class="divide-y divide-gray-200 ">
+                   {investments?.map((investment)=>{
+            return(
+              <FollowerRow status={investment.username} avatar={urlFor(investment.avatar)} amount={investment.amount} name={investment.firstname} to={`/dashboard/hub/user/${investment._id}`}/>
+            )
+           })}
+              </ul>
+         </div>
+         {/* <div className=" flex gap-x-6 items-center">
+             <div>
+                 <h3 className="text-[18px] text-gray-600 font-semibold">Revenue:</h3>
+                 <div className="flex gap-x-4 items-center">
+                    <p className="text-2xl font-bold text-gray-800">{formatter.format(Math.round(revenue/2.7))}</p>
+                    <span className="text-sm text-gray-600 font-semibold">Projected: {formatter.format(Math.round(pending/2.7))} <Infobutton/></span>
+                 </div>
+             </div>
+             
+         </div> */}
+      </div>
+      )
+  }
+    
+    const RecentActivities = ({activities}) => {
+    
+      const Activity = ({name, amount, avatar, status}) => {
+          return(
+            <>
+             <li class="py-3 sm:py-4">
+                      <div class="flex items-center space-x-4">
+                          <div class="flex-shrink-0">
+                              <img class="w-8 h-8 rounded-full" src={avatar} alt="Neil image"/>
+                          </div>
+                          <div class="flex-1 min-w-0">
+                              <p class="text-sm font-medium text-gray-900 truncate ">
+                                  {name}
+                              </p>
+                              <p class="text-sm text-gray-500 truncate ">
+                                  Status:{" "}{status}
+                              </p>
+                          </div>
+                          <div class="inline-flex items-center text-base font-semibold text-gray-900 ">
+                              {formatter.format(amount)}
+                          </div>
+                      </div>
+                  </li>
+            </>
+          )
+        }
+       
+      return(
+          <div class="w-full max-w-2xl p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 ">
+          <div class="flex items-center justify-between mb-4">
+              <h5 class="text-xl font-bold leading-none text-gray-900 ">Recent Activity</h5>
+             <Infobutton/>
+         </div>
+         <div  class="flow-root my-4">
+              <ul  role="list" class="divide-y divide-gray-200 ">
+                   {activities?.map((investment)=>{
+            return(
+              <Activity status={investment.status} avatar={urlFor(investment.startup.image)} amount={investment.amount} name={investment?.startup?.name}/>
+            )
+           })}
+              </ul>
+         </div>
+         <div className="">
+             <div>
+                 <h3 className="text-[18px] text-gray-600 font-semibold">Requests:</h3>
+                 <p className="text-2xl font-bold text-gray-800">0</p>
+             </div>
+         </div>
+      </div>
+      )
+    }
+    
+      const InvestmentActivity = ({name, amount, avatar, status}) => {
+        return(
+          <>
+           <li class="py-3 sm:py-4">
+                    <div class="flex items-center space-x-4">
+                        <div class="flex-shrink-0">
+                            <img class="w-8 h-8 rounded-full" src={avatar} alt="Neil image"/>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-sm font-medium text-gray-900 truncate ">
+                                {name}
+                            </p>
+                            <p class="text-sm text-gray-500 truncate ">
+                                {status}
+                            </p>
+                        </div>
+                        <div class="inline-flex items-center text-base font-semibold text-gray-900 ">
+                            {formatter.format(amount)}
+                        </div>
+                    </div>
+                </li>
+          </>
+        )
+      }
+    
+      
+    
+      const revenue = host?.investments?.filter((investment)=>{
+        return investment.status.includes('completed')
+      }).map((investment)=>{
+        return investment.amount
+      }).reduce((a, b) => a + b, 0)
+      
+      const pending = host?.investments?.filter((investment)=>{
+        return !investment.status.includes('completed')
+      }).map((investment)=>{
+        return investment.amount
+      }).reduce((a, b) => a + b, 0)
+      
+    
+     
+    // const FollowStatus = () => {
+    //   let followed 
+    //   const following = host?.followers?.filter((follower)=>{
+    //        return follower._ref.includes("1ea0d8f0-d2b1-44c9-9d82-a04e47ceb237")
+    //      }
+    //      )
+    //     //  console.log(following)
+            
+    //         if (following.length > 0) {
+    //           followed = 'Following'
+    //           return(followed)
+    //         }
+    
+    //         else return 'Connect'
+    // }
+
+      return (
+        <>
+        
+    
+          <div className="flex flex-col container md:mx-auto max-w-7xl border-b pb-10 border-black/10 relative">
+    
+            {/* {backButton} */}
+            
+            <div
+  
+              className="absolute top-0 left-4 text-blk text-2xl md:flex items-center gap-x-4 hidden "
+            >
+              <FaArrowLeft /> <span className="">back</span>
+            </div>
+    
+            {/* {profilecoverimage} */}
+    
+            <div className="absolute top-0 w-full h-[140px]">
+              <img
+                src={coverPhoto}
+                alt=""
+                className="w-full h-full object-cover"
+              />
+            </div>
+            {/* {profileimage} */}
+    
+            <div className="absolute top-[100px] flex justify-center w-full overflow-hidden  ">
+              <Avatar size={100} src={avatar} />
+            </div>
+            <div></div>
+    
+    
+            <div className="pt-[250px]  flex flex-col items-center gap-4">
+              {/* {usernameBlock} */}
+    
+              <div className="flex gap-x-2">
+                <h3 className="text-xl font-semibold text-blk first-letter:uppercase">
+                  {host?.firstname}
+                </h3>
+                <span className="first-letter:uppercase text-xl font-semibold text-blk">{host?.lastname}</span>
+                {/* <VerifiedUser/> */}
+                <p>{host?.username}</p>
+              </div>
+    
+              {/* {statistics} */}
+    
+              <div class="flex justify-center  ">
+                <div class="mr-4 p-3 text-center">
+                  <span class="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
+                    {!host.partners ? "0" : host.followers?.length}
+                  </span>
+                  <span class="text-sm text-blueGray-400">Agents</span>
+                </div>
+                <div class="mr-4 p-3 text-center">
+                  <span class="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
+                    {/* {host.investments?.length} */}{!host.investments ? "0" : host.investments?.length}
+                  </span>
+                  <span class="text-sm text-blueGray-400">Investments</span>
+                </div>
+                <div class="lg:mr-4 p-3 text-center">
+                  <span class="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
+                    {!host.partners ? "0" : host.partners.length}
+                  </span>
+                  <span class="text-sm text-blueGray-400">Partners</span>
+                </div>
+              </div>
+    
+              {/* {followButton} */}
+    
+              {/* <div className="w-full px-2 sm:px-14 lg:px-20">
+                <button className="btn">
+                  <FollowStatus/>
+                </button>
+              </div> */}
+    
+               {/* {Additional Details} */}
+    
+              <div className="space-y-2 px-2  sm:flex sm:space-x-4 sm:items-center md:px-10 ">
+                <div class="text-sm leading-normal mt-0 mb-2 sm:mb-0 sm:mt-2 text-blueGray-400 font-bold uppercase flex items-center gap-x-2">
+                  <FaAt/>
+                  {host?.email}
+                </div>
+                <div class="mb-2 text-blueGray-600  sm:mt-0 sm:mb-0">
+                  <i class="fas fa-briefcase mr-2 text-lg text-blueGray-400"></i>
+                 Subscription: {host?.plan}
+                </div>
+              </div>
+            </div>
+    
+              {/* {RecentInvestments} */}
+    
+            {/* <div className="pt-8 px-2 md:px-10 ">
+             <div className="sm:flex justify-center  w-full mx-auto">
+            <RecentInvestments investments={host?.investments}/>
+             </div>
+          </div> */}
+
+           {/* {Recent Activites} */}
+           
+           <div className="pt-8  px-2 md:px-10 ">
+             <div className="sm:flex justify-center  w-full mx-auto">
+            <RecentActivities />
+             </div>
+          </div>
+
+          <div className="pt-8  px-2 md:px-10 ">
+             <div className="sm:flex justify-center  w-full mx-auto">
+            <Followers />
+             </div>
+          </div>
+
+          <div className="pt-8  px-2 md:px-10 ">
+             <div className="sm:flex justify-center  w-full mx-auto">
+            <Following investments={following} />
+             </div>
+          </div>
+    
+          {/* {funding Chart} */}
+    
+          {/* <div className="py-8  px-2 md:px-10 ">
+             <FundingChart/>
+          </div> */}
+    
+          
+          
+          
+          
+    
+          </div>
+    
+          
+        </>
+      );
+    }
   
 
-
-  return (
-    <>
-    { 
-      <div onClick={()=> {
-        sidebarOpen && setSidebarOpen(false)&console.log('clicked')}} className="flex h-screen overflow-hidden ">
-    
-      {/* Sidebar */}
-      <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} avatar={'https://www.svgrepo.com/show/260760/growth-investment.svg'}/>
-       
-      {/* Content area */}
-      <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden ">
-    
-        {/*  Site header */}
-        <div >
-        <Header 
-        
-        sidebarOpen={sidebarOpen}
-       setSidebarOpen={setSidebarOpen}
-        // name={user[0].firstname}
-        // notifications={user[0].notifications && notifications}
-        // unread={unread}
-        avatar={cbd} />
-        </div>
-    
-        <main>
-          <div className="">
-          <Profile user={user}/>
-          </div>
-          
-        </main>
-        
-        {/* <Banner /> */}
-      
+return(
+    <> 
+    <LargeHeader/>
+      <Header halfmenu={true} func={() => window.location.assign('/dashboard')}/>
+      <div className="min-h-screen bg-white pb-8">
+      <HostPage host={user}/>
       </div>
-    </div>
-    }
     </>
-        
-      );
+)
 }
-
 
 
 

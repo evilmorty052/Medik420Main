@@ -10,6 +10,8 @@ const [changePassword, setchangePassword] = useState(null)
 const [downloadData, setdownloadData] = useState(null)
 const [deleteData, setdeleteData] = useState(null)
 const email = localStorage.getItem('email')
+
+
 const AccountSettings = () => {
   const [emailchange, setemailchange] = useState(false)
   const [username, setusername] = useState(false)
@@ -52,11 +54,11 @@ const AccountSettings = () => {
     <>
     <div className='col-span-2 max-w-md'>
        <div>
-           <div className='flex items-center gap-x-5'>
+           <div className='flex items-center gap-x-5 px-2'>
              <a className={styles.SettingsIcon} onClick={()=> setaccount(false)}><FaArrowLeft/></a>
              <div className='flex-col gap-y-4'>
-             <h3 className={styles.UiHeading}> Account Information</h3>
-            <p className={styles.UiSubHeading}>Manage Your Account Information At Any Time</p>
+             <h3 className={'text-20px text-blk font-semibold'}> Account Information</h3>
+            <p className='text-[14px]'>Manage Your Account Information At Any Time</p>
              </div>
            </div>
            <div>
@@ -79,7 +81,6 @@ const ChangePassword = () => {
     <>
     <div>
       <PasswordUpdateScreen func={()=> setchangePassword(false)} header={'Change Your Password'}/>
-      
     </div>
     </>
   )
@@ -174,25 +175,26 @@ else if (deleteData) {
 
   return (
           <>
-            <ul className=" col-span-2 px-2  lg:items-start sm:pl-5  flex flex-col gap-y-5 slide-in-right">
-            <div className=' flex items-center gap-x-8 px-4 sm:hidden'>
+            <ul className=" col-span-2 px-2   lg:items-start sm:pl-5  flex flex-col gap-y-5 ">
+            <div className=' flex items-center gap-x-8  sm:hidden'>
          <a className={ styles.SettingsIcon} ><FaArrowLeft onClick={func} /></a>
          <div>
          <span>Your Account</span>
          <p>{email}</p>
          </div>
          </div>
-                <div className='pl-4 block  sm:hidden  space-y-2'>
+                <div className=' block  sm:hidden  space-y-2'>
                
                 <h3
-                    className={`text-gray-600 text-[14px] font-semibold font-space hidden lg:block`}
+                    className={`text-gray-600 text-[12px] font-semibold font-space hidden lg:block`}
                   >
                     See information about your account, download an archive of
                     your data, or learn about your account investment settings
                   </h3>
                 </div>
-                <div className="md:block hidden ">
-          <div className=" space-y-4  px-4">
+
+                <div className=" hidden md:block ">
+          <div className=" space-y-4  ">
             <h3 className={styles.UiHeading}>Your Account</h3>
             <h3 className={`${styles.UiSubHeading} `}>
             See information about your account, download an archive of your data, or learn about your account deactivation options
@@ -200,14 +202,14 @@ else if (deleteData) {
           </div>
         </div>
               <div className="lg:hidden ">
-                <div className="  px-4">
+                <div className="  ">
                   <h3 className={`${styles.UiSubHeading} lg:hidden`}>
                     See information about your account, download an archive of
                     your data, or learn about your account investment settings
                   </h3>
                 </div>
               </div>
-              <li onClick={()=> setaccount(true)} className='relative flex items-center sm:min-w-[80%] '>
+              <li onClick={()=> setaccount(true)} className='relative flex items-center sm:min-w-[80%] pt-4 sm:pt-0 '>
                   <div>
                   <a className={styles.SettingsIcon}>
                     <FaUser />
@@ -302,15 +304,15 @@ function ListItem({func , itemHeader, itemSubtext}) {
         role="tab"
         aria-selected="false"
         data-testid="pivot"
-        className="text-sm slide-in-right tap-transparent pointer-events-auto bg-transparent text-inherit font-inherit list-none  align-stretch border-0 box-border flex flex-col flex-shrink-0 mb-0 ml-0 mr-0 mt-0 min-w-0 relative z-0 pl-4 pr-4 pb-3 pt-3 transition duration-200 bg-none shadow-none outline-none cursor-pointer justify-between min-h-[48px]"
+        className="text-sm  tap-transparent pointer-events-auto bg-transparent text-inherit font-inherit list-none  align-stretch border-0 box-border flex flex-col flex-shrink-0 mb-0 ml-0 mr-0 mt-0 min-w-0 relative z-0 pl-4 pr-4 pb-3 pt-3 transition duration-200 bg-none shadow-none outline-none cursor-pointer justify-between min-h-[48px]"
       >
         <div className="flex-shrink-0 flex-grow-1 flex min-w-0 min-h-0 p-0 m-0 relative z-0 align-center justify-between">
-          <div className="select-none box-border flex flex-col items-stretch justify-start w-auto h-auto p-0 m-0 relative z-0 bg-transparent cursor-pointer text-inherit border-solid border-0 text-left whitespace-pre-wrap align-middle text-base font-normal leading-5 font-sans flex-grow flex-shrink" >
+          <div className="select-none box-border flex flex-col items-stretch justify-start w-auto h-auto p-0 m-0 relative z-0 bg-transparent cursor-pointer text-inherit border-solid border-0 text-left whitespace-pre-wrap align-middle text-base font-normal leading-5 flex-grow flex-shrink" >
             <div
               dir="ltr"
               class="inline-block leading-normal whitespace-pre-wrap break-words"
             >
-              <span class={styles.SettingOption}>
+              <span class={`${styles.SettingOption} uppercase`}>
                 {itemHeader}
               </span>
             </div>
@@ -326,7 +328,7 @@ function ListItem({func , itemHeader, itemSubtext}) {
           <svg
             viewBox="0 0 24 24"
             aria-hidden="true"
-            className={`${styles.SettingsIcon} -webkit-text-size-adjust-100 -webkit-tap-highlight-color-rgba-0-0-0-0 pointer-events-auto font-inherit list-none text-align-inherit cursor-pointer -webkit-box-direction-normal inline-block fill-current h-5 max-w-full relative align-text-bottom select-none flex-shrink-0  pl-3`}          >
+            className={`${styles.SettingsIcon} -webkit-text-size-adjust-100 -webkit-tap-highlight-color-rgba-0-0-0-0 pointer-events-auto font-inherit list-none text-align-inherit cursor-pointer -webkit-box-direction-normal inline-block fill-current h-5 max-w-full relative align-text-bottom select-none flex-shrink-0  pl-3 self-center`}          >
             <g>
               <path d="M14.586 12L7.543 4.96l1.414-1.42L17.414 12l-8.457 8.46-1.414-1.42L14.586 12z"></path>
             </g>
@@ -343,7 +345,7 @@ function ListItem({func , itemHeader, itemSubtext}) {
 const  PasswordUpdateScreen = ({func, header, updateText, placeholder,}) => {
   return(
     <>
-    <div className='slide-in-right'>
+    <div className=''>
        <div>
        <div className=' flex items-center gap-x-8 px-4 '>
          <a className={ styles.SettingsIcon} ><FaArrowLeft onClick={func} /></a>
@@ -363,7 +365,9 @@ const  PasswordUpdateScreen = ({func, header, updateText, placeholder,}) => {
            <input placeholder={'New Password'} type="text" className={styles.Input} /> 
            <input placeholder={'Confirm Password'} type="text" className={styles.Input} /> 
            <div className='flex w-full py-8'>
-              <MenuButton buttonText={'Update'}/>
+              <button className="btnAlt">
+                Update
+              </button>
             </div>
            </div>
        </div>

@@ -1,519 +1,539 @@
-import React from 'react'
-import { FaCheck } from 'react-icons/fa';
-import pie from '../assets/pie.svg'
-import pie2 from '../assets/pie2.svg'
-import { useNavigate } from 'react-router-dom';
+import { Footer } from '../partials/dashboard/Elements';
+
+
 
 const Pricing = () => {
-  
-  return (
-    <>
-    <Header/>
-{/* <section class="text-gray-600 body-font overflow-hidden">
-  <div class="container px-5 py-24 mx-auto">
-    <div class="flex flex-col text-center w-full mb-20">
-      <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900">Pricing</h1>
-      <p class="lg:w-2/3 mx-auto leading-relaxed text-base text-gray-500">Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical.</p>
-      <div class="flex mx-auto border-2 border-indigo-500 rounded overflow-hidden mt-6">
-        <button class="py-1 px-4 bg-indigo-500 text-white focus:outline-none">Monthly</button>
-        <button class="py-1 px-4 focus:outline-none">Annually</button>
-      </div>
-    </div>
-    <div class="flex flex-wrap -m-4">
-      <div class="p-4 xl:w-1/4 md:w-1/2 w-full">
-        <div class="h-full p-6 rounded-lg border-2 border-gray-300 flex flex-col relative overflow-hidden">
-          <h2 class="text-sm tracking-widest title-font mb-1 font-medium">START</h2>
-          <h1 class="text-5xl text-gray-900 pb-4 mb-4 border-b border-gray-200 leading-none">Free</h1>
-          <p class="flex items-center text-gray-600 mb-2">
-            <span class="w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-400 text-white rounded-full flex-shrink-0">
-              <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" class="w-3 h-3" viewBox="0 0 24 24">
-                <path d="M20 6L9 17l-5-5"></path>
-              </svg>
-            </span>Vexillologist pitchfork
-          </p>
-          <p class="flex items-center text-gray-600 mb-2">
-            <span class="w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-400 text-white rounded-full flex-shrink-0">
-              <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" class="w-3 h-3" viewBox="0 0 24 24">
-                <path d="M20 6L9 17l-5-5"></path>
-              </svg>
-            </span>Tumeric plaid portland
-          </p>
-          <p class="flex items-center text-gray-600 mb-6">
-            <span class="w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-400 text-white rounded-full flex-shrink-0">
-              <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" class="w-3 h-3" viewBox="0 0 24 24">
-                <path d="M20 6L9 17l-5-5"></path>
-              </svg>
-            </span>Mixtape chillwave tumeric
-          </p>
-          <button class="flex items-center mt-auto text-white bg-gray-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded">Button
-            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-auto" viewBox="0 0 24 24">
-              <path d="M5 12h14M12 5l7 7-7 7"></path>
-            </svg>
-          </button>
-          <p class="text-xs text-gray-500 mt-3">Literally you probably haven't heard of them jean shorts.</p>
-        </div>
-      </div>
-      <div class="p-4 xl:w-1/4 md:w-1/2 w-full">
-        <div class="h-full p-6 rounded-lg border-2 border-indigo-500 flex flex-col relative overflow-hidden">
-          <span class="bg-indigo-500 text-white px-3 py-1 tracking-widest text-xs absolute right-0 top-0 rounded-bl">POPULAR</span>
-          <h2 class="text-sm tracking-widest title-font mb-1 font-medium">PRO</h2>
-          <h1 class="text-5xl text-gray-900 leading-none flex items-center pb-4 mb-4 border-b border-gray-200">
-            <span>$38</span>
-            <span class="text-lg ml-1 font-normal text-gray-500">/mo</span>
-          </h1>
-          <p class="flex items-center text-gray-600 mb-2">
-            <span class="w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-400 text-white rounded-full flex-shrink-0">
-              <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" class="w-3 h-3" viewBox="0 0 24 24">
-                <path d="M20 6L9 17l-5-5"></path>
-              </svg>
-            </span>Vexillologist pitchfork
-          </p>
-          <p class="flex items-center text-gray-600 mb-2">
-            <span class="w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-400 text-white rounded-full flex-shrink-0">
-              <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" class="w-3 h-3" viewBox="0 0 24 24">
-                <path d="M20 6L9 17l-5-5"></path>
-              </svg>
-            </span>Tumeric plaid portland
-          </p>
-          <p class="flex items-center text-gray-600 mb-2">
-            <span class="w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-400 text-white rounded-full flex-shrink-0">
-              <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" class="w-3 h-3" viewBox="0 0 24 24">
-                <path d="M20 6L9 17l-5-5"></path>
-              </svg>
-            </span>Hexagon neutra unicorn
-          </p>
-          <p class="flex items-center text-gray-600 mb-6">
-            <span class="w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-400 text-white rounded-full flex-shrink-0">
-              <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" class="w-3 h-3" viewBox="0 0 24 24">
-                <path d="M20 6L9 17l-5-5"></path>
-              </svg>
-            </span>Mixtape chillwave tumeric
-          </p>
-          <button class="flex items-center mt-auto text-white bg-indigo-500 border-0 py-2 px-4 w-full focus:outline-none hover:bg-indigo-600 rounded">Button
-            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-auto" viewBox="0 0 24 24">
-              <path d="M5 12h14M12 5l7 7-7 7"></path>
-            </svg>
-          </button>
-          <p class="text-xs text-gray-500 mt-3">Literally you probably haven't heard of them jean shorts.</p>
-        </div>
-      </div>
-      <div class="p-4 xl:w-1/4 md:w-1/2 w-full">
-        <div class="h-full p-6 rounded-lg border-2 border-gray-300 flex flex-col relative overflow-hidden">
-          <h2 class="text-sm tracking-widest title-font mb-1 font-medium">BUSINESS</h2>
-          <h1 class="text-5xl text-gray-900 leading-none flex items-center pb-4 mb-4 border-b border-gray-200">
-            <span>$56</span>
-            <span class="text-lg ml-1 font-normal text-gray-500">/mo</span>
-          </h1>
-          <p class="flex items-center text-gray-600 mb-2">
-            <span class="w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-400 text-white rounded-full flex-shrink-0">
-              <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" class="w-3 h-3" viewBox="0 0 24 24">
-                <path d="M20 6L9 17l-5-5"></path>
-              </svg>
-            </span>Vexillologist pitchfork
-          </p>
-          <p class="flex items-center text-gray-600 mb-2">
-            <span class="w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-400 text-white rounded-full flex-shrink-0">
-              <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" class="w-3 h-3" viewBox="0 0 24 24">
-                <path d="M20 6L9 17l-5-5"></path>
-              </svg>
-            </span>Tumeric plaid portland
-          </p>
-          <p class="flex items-center text-gray-600 mb-2">
-            <span class="w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-400 text-white rounded-full flex-shrink-0">
-              <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" class="w-3 h-3" viewBox="0 0 24 24">
-                <path d="M20 6L9 17l-5-5"></path>
-              </svg>
-            </span>Hexagon neutra unicorn
-          </p>
-          <p class="flex items-center text-gray-600 mb-2">
-            <span class="w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-400 text-white rounded-full flex-shrink-0">
-              <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" class="w-3 h-3" viewBox="0 0 24 24">
-                <path d="M20 6L9 17l-5-5"></path>
-              </svg>
-            </span>Vexillologist pitchfork
-          </p>
-          <p class="flex items-center text-gray-600 mb-6">
-            <span class="w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-400 text-white rounded-full flex-shrink-0">
-              <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" class="w-3 h-3" viewBox="0 0 24 24">
-                <path d="M20 6L9 17l-5-5"></path>
-              </svg>
-            </span>Mixtape chillwave tumeric
-          </p>
-          <button class="flex items-center mt-auto text-white bg-gray-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded">Button
-            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-auto" viewBox="0 0 24 24">
-              <path d="M5 12h14M12 5l7 7-7 7"></path>
-            </svg>
-          </button>
-          <p class="text-xs text-gray-500 mt-3">Literally you probably haven't heard of them jean shorts.</p>
-        </div>
-      </div>
-      <div class="p-4 xl:w-1/4 md:w-1/2 w-full">
-        <div class="h-full p-6 rounded-lg border-2 border-gray-300 flex flex-col relative overflow-hidden">
-          <h2 class="text-sm tracking-widest title-font mb-1 font-medium">SPECIAL</h2>
-          <h1 class="text-5xl text-gray-900 leading-none flex items-center pb-4 mb-4 border-b border-gray-200">
-            <span>$72</span>
-            <span class="text-lg ml-1 font-normal text-gray-500">/mo</span>
-          </h1>
-          <p class="flex items-center text-gray-600 mb-2">
-            <span class="w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-400 text-white rounded-full flex-shrink-0">
-              <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" class="w-3 h-3" viewBox="0 0 24 24">
-                <path d="M20 6L9 17l-5-5"></path>
-              </svg>
-            </span>Vexillologist pitchfork
-          </p>
-          <p class="flex items-center text-gray-600 mb-2">
-            <span class="w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-400 text-white rounded-full flex-shrink-0">
-              <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" class="w-3 h-3" viewBox="0 0 24 24">
-                <path d="M20 6L9 17l-5-5"></path>
-              </svg>
-            </span>Tumeric plaid portland
-          </p>
-          <p class="flex items-center text-gray-600 mb-2">
-            <span class="w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-400 text-white rounded-full flex-shrink-0">
-              <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" class="w-3 h-3" viewBox="0 0 24 24">
-                <path d="M20 6L9 17l-5-5"></path>
-              </svg>
-            </span>Hexagon neutra unicorn
-          </p>
-          <p class="flex items-center text-gray-600 mb-2">
-            <span class="w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-400 text-white rounded-full flex-shrink-0">
-              <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" class="w-3 h-3" viewBox="0 0 24 24">
-                <path d="M20 6L9 17l-5-5"></path>
-              </svg>
-            </span>Vexillologist pitchfork
-          </p>
-          <p class="flex items-center text-gray-600 mb-6">
-            <span class="w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-400 text-white rounded-full flex-shrink-0">
-              <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" class="w-3 h-3" viewBox="0 0 24 24">
-                <path d="M20 6L9 17l-5-5"></path>
-              </svg>
-            </span>Mixtape chillwave tumeric
-          </p>
-          <button class="flex items-center mt-auto text-white bg-gray-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded">Button
-            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-auto" viewBox="0 0 24 24">
-              <path d="M5 12h14M12 5l7 7-7 7"></path>
-            </svg>
-          </button>
-          <p class="text-xs text-gray-500 mt-3">Literally you probably haven't heard of them jean shorts.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section> */}
-<HivePricing/>
-<PersonalPricing/>
-    </>
-  );
-};
 
-function Header({close, back}) {
-  const history = useNavigate()
-  return(
-      <div className='absolute top-0 left-0 w-full bg-blk px-4 py-2 flex justify-between z-50'>
-          <h2   className="uppercase md:hidden text-gray-50 text-2xl  font-poppins font-black tracking-wide  "> MEDIK<span className="text-green-200">420</span>  </h2> 
-          <div  className='flex justify-end items-center'>
-            <p onClick={()=> history(-1)}  className='text-white text-xl uppercase'>back</p>
-          </div>
-      </div>
-  )
-}
-
-function HivePricing(params) {
+const FreeTrialCard = () => {
   return(
     <>
-    
-    <div class="xl:container m-auto px-6 py-20 md:px-12 lg:px-20">
-  <div class="m-auto text-center lg:w-8/12 xl:w-7/12">
-  <h2 class="text-3xl font-bold text-gray-800 text-center py-4 md:text-4xl">
-      Pricing
-    </h2>
-    <h2 class="text-2xl font-bold text-gray-800 dark:text-white md:text-4xl">
-      Pick From One Of The Subscriptions Below To  Access Premium Features 
-    </h2>
-  </div>
-  <div
-    class="m-auto mt-12 items-center justify-center -space-y-4 md:flex md:space-y-0 md:-space-x-4 xl:w-10/12"
-  >
-    <div class="group relative z-10 -mx-4 md:mx-0 md:w-6/12 lg:w-5/12">
-      <div
-        aria-hidden="true"
-        class="absolute top-0 h-full w-full rounded-3xl border border-gray-100 dark:border-gray-700 dark:shadow-none bg-white dark:bg-gray-800 shadow-2xl shadow-gray-600/10 transition duration-500 group-hover:scale-105"
-      ></div>
-      <div class="relative space-y-6 p-8 sm:p-12">
-        <h3 class="text-center text-3xl font-semibold text-gray-700 dark:text-white">Organisation</h3>
-        <div>
-          <div class="relative flex justify-around">
-            <div class="flex items-end">
-              <span class="leading-0 text-8xl font-bold text-gray-800 dark:text-white">35</span>
-              <div class="pb-2">
-                <span class="block text-2xl font-bold text-gray-700 dark:text-white">%</span>
-                <span class="block text-xl font-bold  text-green-500">Off</span>
+    <div class="flex flex-col p-6 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow  xl:p-8  ">
+              <h3 class="mb-4 text-2xl font-semibold">Free Trial</h3>
+              <p class="font-light text-gray-500 sm:text-lg ">Best option for personal use & for your next project.</p>
+              <div class="flex justify-center items-baseline my-8">
+                  <span class="mr-2 text-5xl font-extrabold">$29</span>
+                  <span class="text-gray-500 ">/month</span>
               </div>
-            </div>
-          </div>
-        </div>
-        <ul role="list" class="m-auto w-max space-y-4 py-6 text-gray-600 dark:text-gray-300">
-          <li class="space-x-2">
-            <span class="font-semibold  text-green-500 inline-block"><FaCheck/></span>
-            <span>First premium advantage</span>
-          </li>
-          <li class="space-x-2">
-            <span class="font-semibold  text-green-500 inline-block"><FaCheck/></span>
-            <span>Second advantage weekly</span>
-          </li>
-          <li class="space-x-2">
-            <span class="font-semibold  text-green-500 inline-block"><FaCheck/></span>
-            <span>Third advantage donate to project</span>
-          </li>
-        </ul>
-        {/* <p
-          class="mt-6 flex items-center justify-center space-x-4 text-center text-lg text-gray-600 dark:text-gray-300"
-        >
-          <span>Call us at</span>
-          <a href="tel:+24300" class="flex items-center space-x-2  text-green-500">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="currentColor"
-              class="w-6"
-              viewBox="0 0 16 16"
-            >
-              <path
-                d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"
-              />
-            </svg>
-            <span class="font-semibold">+1 000 000</span>
-          </a>
-          <span>or</span>
-        </p> */}
-        <a href="mailto:" class="relative flex h-11 w-full items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:bg-primary before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95">
-          <span class="relative text-base font-semibold text-white dark:text-dark">Subscribe</span>
-        </a>
-      </div>
-    </div>
-
-    <div class="group relative md:w-6/12 lg:w-7/12">
-      <div
-        aria-hidden="true"
-        class="absolute top-0 h-full w-full rounded-3xl border border-gray-100 dark:border-gray-700 dark:shadow-none bg-white dark:bg-gray-800 shadow-2xl shadow-gray-600/10 transition duration-500 group-hover:scale-105"
-      ></div>
-      <div class="relative p-6 pt-16 md:rounded-r-2xl md:p-8 md:pl-12 lg:p-16 lg:pl-20">
-        <ul role="list" class="space-y-4 py-6 text-gray-600 dark:text-gray-300">
-          <li class="space-x-2">
-            <span class="font-semibold  text-green-500 inline-block"><FaCheck/></span>
-            <span>First premium advantage</span>
-          </li>
-          <li class="space-x-2">
-            <span class="font-semibold  text-green-500 inline-block"><FaCheck/></span>
-            <span>Second advantage weekly</span>
-          </li>
-          <li class="space-x-2">
-            <span class="font-semibold  text-green-500 inline-block"><FaCheck/></span>
-            <span>Third advantage donate to project</span>
-          </li>
-          <li class="space-x-2">
-            <span class="font-semibold  text-green-500 inline-block"><FaCheck/></span>
-            <span>Fourth, access to all components weekly</span>
-          </li>
-        </ul>
-        <p class="text-gray-700 dark:text-white">
-          Team can be any size, and you can add or switch members as needed. Companies using
-          our platform include:
-        </p>
-        <div class="mt-6 flex justify-between gap-6">
-          <img
-            class="w-16 lg:w-24"
-            src="images/clients/airbnb.svg"
-            loading="lazy"
-            alt="airbnb"
-          />
-          <img
-            class="w-8 lg:w-16"
-            src="images/clients/bissell.svg"
-            loading="lazy"
-            alt="bissell"
-          />
-          <img class="w-6 lg:w-12" src="images/clients/ge.svg" loading="lazy" alt="ge" />
-          <img
-            class="w-20 lg:w-28"
-            src="images/clients/microsoft.svg"
-            loading="lazy"
-            alt="microsoft"
-          />
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-                                    
-    </>
-  )
-}
-
-function PersonalPricing(params) {
-  return(
-    <>
-    
-   
-    <div class="xl:container m-auto px-6 py-20 md:px-12 lg:px-20">
-  <div class="m-auto text-center lg:w-8/12 xl:w-7/12">
-    <h2 class="text-2xl font-bold text-gray-800 dark:text-white md:text-4xl">
-      A Custom subscription gives you access to  flexible pricing and features
-    </h2>
-  </div>
-  <div
-    class="m-auto mt-12 items-center justify-center space-y-6 lg:flex lg:space-y-0 lg:space-x-6 xl:w-10/12"
-  >
-    <div class="group relative z-10 mx-auto sm:w-7/12 lg:w-4/12">
-      <div
-        aria-hidden="true"
-        class="absolute top-0 h-full w-full rounded-3xl border border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-2xl shadow-gray-600/10 dark:shadow-none transition duration-500 group-hover:scale-105 lg:group-hover:scale-110"
-      ></div>
-      <div class="relative space-y-8 p-8">
-        <div class="flex items-center justify-between">
-          <h5 class="text-xl font-semibold text-gray-700 dark:text-white">Monthly</h5>
-          <div class="relative flex justify-around">
-            <div class="flex">
-              <span class="-ml-6 text-xl font-bold text-sky-500">$</span>
-              <span class="leading-0 text-4xl font-bold text-gray-800 dark:text-white">19</span>
-            </div>
-          </div>
-        </div>
-        <img
-          src={pie2}
-          width="512"
-          height="512"
-          class="m-auto w-16"
-          alt="tanzanite illustration"
-        />
-        <p class="text-center text-gray-600 dark:text-gray-300">
-          If you only require access for one developer, this may be the plan for you.
-        </p>
-        <button class="relative flex h-11 w-full items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:bg-sky-50 before:border before:border-sky-500 dark:before:border-gray-600 dark:before:bg-gray-700 before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95">
-          <span class="relative text-base font-semibold text-sky-600 dark:text-white">Get Started</span>
-        </button>
-      </div>
-    </div>
-
-    <div class="group relative m-auto md:w-10/12 lg:w-8/12">
-      <div
-        aria-hidden="true"
-        class="absolute top-0 h-full w-full rounded-3xl border border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-2xl shadow-gray-600/10 dark:shadow-none transition duration-500 group-hover:scale-105 lg:group-hover:scale-110"
-      ></div>
-      <div class="relative sm:flex">
-        <div class="space-y-8 p-8 pb-20 sm:w-7/12 sm:pb-8">
-          <div class="flex items-center justify-between">
-            <h5 class="text-xl font-semibold text-gray-700 dark:text-white">Complete pack</h5>
-            <div class="relative flex justify-around">
-              <div class="flex">
-                <span class="-ml-6 text-xl font-bold text-sky-500">$</span>
-                <span class="leading-0 text-4xl font-bold text-gray-800 dark:text-white">1900</span>
-              </div>
-            </div>
-          </div>
-          <img
-            src={pie}
-            width="512"
-            height="512"
-            class="m-auto w-16"
-            alt="premium illustration"
-          />
-          <p class="text-center text-gray-600 dark:text-gray-300">
-            Wire your account to support 5 developers with a year's worth of unlimited access
-            to tailus blocks!
-          </p>
-          <div class="absolute inset-x-0 bottom-6 w-full px-6 sm:static sm:px-0">
-            <button class="relative flex h-11 w-full items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:bg-primary before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95">
-              <span class="relative text-base font-semibold text-white dark:text-dark">Start plan</span>
-            </button>
-          </div>
-        </div>
-
-        <div class="-mt-16 pb-20 sm:mt-0 sm:w-5/12 sm:pb-0">
-          <div
-            class="relative h-full before:absolute before:left-0 before:top-1 before:my-auto before:h-0.5 before:w-full before:rounded-full before:bg-gray-200 dark:before:bg-gray-700 sm:pt-0 sm:before:inset-y-0 sm:before:h-[85%] sm:before:w-0.5"
-          >
-            <div class="relative -mt-1 h-full overflow-x-auto pt-7 pb-6 sm:-ml-1 sm:pl-1">
-              <ul
-                class="flex h-full w-max justify-center space-x-2 px-6 sm:w-full sm:flex-col sm:space-x-0 sm:space-y-6 sm:px-8"
-              >
-                <li>
-                  <div class="relative">
-                    <input checked hidden class="peer" type="radio" name="devs" id="devs20" />
-                    <label
-                      for="devs20"
-                      class="block w-full cursor-pointer rounded-full bg-sky-50 dark:bg-gray-700 py-2 px-4 text-center text-sky-800 dark:text-sky-300 peer-checked: text-green-500 peer-checked:ring-1 peer-checked:ring-primary"
-                    >
-                      <span class="mx-auto text-sm font-semibold">20 developers</span>
-                    </label>
-                    <div
-                      aria-hidden="true"
-                      class="absolute inset-x-0 top-[-2.20rem] z-[1] mx-auto h-6 w-6 scale-0 rounded-full border-8 border-white dark:border-gray-800 bg-primary transition peer-checked:scale-100 sm:inset-y-0 sm:left-[-2.70rem] sm:my-auto sm:ml-0"
-                    ></div>
-                  </div>
-                </li>
-                <li>
-                  <div class="relative">
-                    <input hidden class="peer" type="radio" name="devs" id="devs15" />
-                    <label
-                      for="devs15"
-                      class="block cursor-pointer rounded-full bg-sky-50 dark:bg-gray-700 py-2 px-4 text-center text-sky-800 dark:text-sky-300 peer-checked: text-green-500 peer-checked:ring-1 peer-checked:ring-primary"
-                    >
-                      <span class="mx-auto block w-max text-sm font-semibold"
-                        >15 developers</span
-                      >
-                    </label>
-                    <div
-                      aria-hidden="true"
-                      class="absolute inset-x-0 top-[-2.20rem] z-[1] mx-auto h-6 w-6 scale-0 rounded-full border-8 border-white dark:border-gray-800 bg-primary transition peer-checked:scale-100 sm:inset-y-0 sm:left-[-2.70rem] sm:my-auto sm:ml-0"
-                    ></div>
-                  </div>
-                </li>
-                <li>
-                  <div class="relative">
-                    <input hidden class="peer" type="radio" name="devs" id="devs10" />
-                    <label
-                      for="devs10"
-                      class="block cursor-pointer rounded-full bg-sky-50 dark:bg-gray-700 py-2 px-4 text-center text-sky-800 dark:text-sky-300 peer-checked: text-green-500 peer-checked:ring-1 peer-checked:ring-primary"
-                    >
-                      <span class="mx-auto block w-max text-sm font-semibold"
-                        >10 developers</span
-                      >
-                    </label>
-                    <div
-                      aria-hidden="true"
-                      class="absolute inset-x-0 top-[-2.20rem] z-[1] mx-auto h-6 w-6 scale-0 rounded-full border-8 border-white dark:border-gray-800 bg-primary transition peer-checked:scale-100 sm:inset-y-0 sm:left-[-2.70rem] sm:my-auto sm:ml-0"
-                    ></div>
-                  </div>
-                </li>
-                <li>
-                  <div class="relative">
-                    <input hidden class="peer" type="radio" name="devs" id="devs5" />
-                    <label
-                      for="devs5"
-                      class="block cursor-pointer rounded-full bg-sky-50 dark:bg-gray-700 py-2 px-4 text-center text-sky-800 dark:text-sky-300 peer-checked: text-green-500 peer-checked:ring-1 peer-checked:ring-primary"
-                    >
-                      <span class="mx-auto block w-max text-sm font-semibold"
-                        >5 developers</span
-                      >
-                    </label>
-                    <div
-                      aria-hidden="true"
-                      class="absolute inset-x-0 top-[-2.20rem] z-[1] mx-auto h-6 w-6 scale-0 rounded-full border-8 border-white dark:border-gray-800 bg-primary transition peer-checked:scale-100 sm:inset-y-0 sm:left-[-2.70rem] sm:my-auto sm:ml-0"
-                    ></div>
-                  </div>
-                </li>
+              {/* <!-- List --> */}
+              <ul role="list" class="mb-8 space-y-4 text-left">
+                  <li class="flex items-center space-x-3">
+                      {/* <!-- Icon --> */}
+                      <svg class="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                      <span>Individual configuration</span>
+                  </li>
+                  <li class="flex items-center space-x-3">
+                      {/* <!-- Icon --> */}
+                      <svg class="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                      <span>No setup, or hidden fees</span>
+                  </li>
+                  <li class="flex items-center space-x-3">
+                      {/* <!-- Icon --> */}
+                      <svg class="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                      <span>Team size: <span class="font-semibold">1 developer</span></span>
+                  </li>
+                  <li class="flex items-center space-x-3">
+                      {/* <!-- Icon --> */}
+                      <svg class="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                      <span>Premium support: <span class="font-semibold">6 months</span></span>
+                  </li>
+                  <li class="flex items-center space-x-3">
+                      {/* <!-- Icon --> */}
+                      <svg class="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                      <span>Free updates: <span class="font-semibold">6 months</span></span>
+                  </li>
               </ul>
-            </div>
+              <a href="#" class="text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:ring-primary-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center   dark:focus:ring-primary-900">Get started</a>
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-                                    
-                                    
     </>
   )
 }
+
+const BasicPlan = () => {
+  return(
+    <> 
+    <div class="flex flex-col p-6 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow  xl:p-8  ">
+              <h3 class="mb-4 text-2xl font-semibold">Basic</h3>
+              <p class="font-light text-gray-500 sm:text-lg ">Relevant for multiple users, extended & premium support.</p>
+              <div class="flex justify-center items-baseline my-8">
+                  <span class="mr-2 text-5xl font-extrabold">$99</span>
+                  <span class="text-gray-500 " >/month</span>
+              </div>
+              {/* <!-- List --> */}
+              <ul role="list" class="mb-8 space-y-4 text-left">
+                  <li class="flex items-center space-x-3">
+                      {/* <!-- Icon --> */}
+                      <svg class="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                      <span>Individual configuration</span>
+                  </li>
+                  <li class="flex items-center space-x-3">
+                      {/* <!-- Icon --> */}
+                      <svg class="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                      <span>No setup, or hidden fees</span>
+                  </li>
+                  <li class="flex items-center space-x-3">
+                      {/* <!-- Icon --> */}
+                      <svg class="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                      <span>Team size: <span class="font-semibold">10 developers</span></span>
+                  </li>
+                  <li class="flex items-center space-x-3">
+                      {/* <!-- Icon --> */}
+                      <svg class="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                      <span>Premium support: <span class="font-semibold">24 months</span></span>
+                  </li>
+                  <li class="flex items-center space-x-3">
+                      {/* <!-- Icon --> */}
+                      <svg class="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                      <span>Free updates: <span class="font-semibold">24 months</span></span>
+                  </li>
+              </ul>
+              <a href="#" class="text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:ring-primary-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center   dark:focus:ring-primary-900">Get started</a>
+          </div>
+    </>
+  )
+}
+
+const GrowthPlan = () => {
+  return(
+    <>
+     <div class="flex flex-col p-6 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow  xl:p-8  ">
+              <h3 class="mb-4 text-2xl font-semibold">Growth</h3>
+              <p class="font-light text-gray-500 sm:text-lg ">Best for large scale uses and extended redistribution rights.</p>
+              <div class="flex justify-center items-baseline my-8">
+                  <span class="mr-2 text-5xl font-extrabold">$499</span>
+                  <span class="text-gray-500 ">/month</span>
+              </div>
+              {/* <!-- List --> */}
+              <ul role="list" class="mb-8 space-y-4 text-left">
+                  <li class="flex items-center space-x-3">
+                      {/* <!-- Icon --> */}
+                      <svg class="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                      <span>Individual configuration</span>
+                  </li>
+                  <li class="flex items-center space-x-3">
+                      {/* <!-- Icon --> */}
+                      <svg class="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                      <span>No setup, or hidden fees</span>
+                  </li>
+                  <li class="flex items-center space-x-3">
+                      {/* <!-- Icon --> */}
+                      <svg class="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                      <span>Team size: <span class="font-semibold">100+ developers</span></span>
+                  </li>
+                  <li class="flex items-center space-x-3">
+                      {/* <!-- Icon --> */}
+                      <svg class="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                      <span>Premium support: <span class="font-semibold">36 months</span></span>
+                  </li>
+                  <li class="flex items-center space-x-3">
+                      {/* <!-- Icon --> */}
+                      <svg class="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                      <span>Free updates: <span class="font-semibold">36 months</span></span>
+                  </li>
+              </ul>
+              <a href="#" class="text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:ring-primary-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center   dark:focus:ring-primary-900">Get started</a>
+          </div>
+    </>
+  )
+}
+
+  return(
+    <>
+<div className="pt-10 md:pt-0">
+<section class="bg-white ">
+  <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
+      <div class="mx-auto max-w-screen-md text-center mb-8 lg:mb-12">
+          <h2 class="mb-4 text-3xl tracking-tight font-extrabold text-gray-900 ">Transparent Pricing</h2>
+          <p class="mb-5 font-light text-gray-500 sm:text-xl ">Whatever your status, our offers evolve according to your needs..</p>
+      </div>
+      <div class="space-y-8 lg:grid lg:grid-cols-3 sm:gap-6 xl:gap-10 lg:space-y-0">
+          {/* <!-- Pricing Card --> */}
+          <FreeTrialCard/>
+          {/* <!-- Pricing Card --> */}
+          <BasicPlan/>
+          {/* <!-- Pricing Card --> */}
+         <GrowthPlan/>
+      </div>
+  </div>
+</section>
+</div>
+<Faq/>
+<Footer/>
+{/* <!-- End Comparison Table --> */}
+
+    </>
+  )
+}
+
+function ComparisonTable(params) {
+  return(
+    <>
+    <div class="overflow-hidden pt-8">
+ 
+ {/* <!-- Hero --> */}
+ <div class="relative">
+   {/* <!-- Gradients --> */}
+   <div aria-hidden="true" class="flex absolute -top-48 left-0 -z-[1]">
+     <div class="bg-purple-200 opacity-30 blur-3xl w-[1036px] h-[600px] "></div>
+     <div class="bg-slate-200 opacity-90 blur-3xl w-[577px] h-[300px] transform translate-y-32 "></div>
+   </div>
+   {/* <!-- End Gradients --> */}
+
+   <div class="max-w-[85rem] px-4 pt-10 sm:px-6 lg:px-8 lg:pt-14 mx-auto">
+     {/* <!-- Title --> */}
+     <div class="max-w-2xl mx-auto text-center mb-10">
+       <h2 class="text-3xl leading-tight font-bold md:text-4xl md:leading-tight lg:text-5xl lg:leading-tight bg-clip-text bg-gradient-to-r from-green-400 to-fuchsia-500 text-transparent">Simple, transparent pricing</h2>
+       <p class="mt-2 lg:text-lg text-gray-800 ">Whatever your status, our offers evolve according to your needs.</p>
+     </div>
+     {/* <!-- End Title --> */}
+
+     {/* <!-- Switch --> */}
+
+     {/* <div class="flex justify-center items-center">
+       <label for="pricing-switch" class="min-w-[3.5rem] text-sm text-gray-600 mr-3 ">
+         Monthly
+       </label>
+
+       <input type="checkbox" id="pricing-switch" class="relative shrink-0 w-[3.25rem] h-7 bg-gray-300 text-violet-900 checked:bg-none checked:bg-violet-900 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 border border-transparent ring-1 ring-transparent focus:border-violet-900 focus:ring-violet-900 ring-offset-white focus:outline-none appearance-none dark:bg-gray-700 dark:checked:bg-violet-900 dark:focus:ring-offset-gray-800 before:inline-block before:w-6 before:h-6 before:bg-white before:translate-x-0 checked:before:translate-x-full before:shadow before:rounded-full before:transform before:ring-0 before:transition before:ease-in-out before:duration-200 dark:before:bg-gray-400" checked/>
+       <label for="pricing-switch" class="min-w-[3.5rem] text-sm text-gray-600 ml-3 ">
+         Annually
+       </label>
+     </div> */}
+
+     {/* <!-- End Switch --> */}
+
+     {/* <!-- Grid --> */}
+     <div class="mt-6 md:mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6 lg:gap-3 xl:gap-6 lg:items-center">
+       {/* <!-- Free trial Card --> */}
+       <div class="flex flex-col bg-white border border-gray-200 text-center rounded-2xl p-4 md:p-8 ">
+         <h4 class="font-medium text-lg text-gray-800 dark:text-gray-200">Free Trial</h4>
+         <span class="mt-7 font-bold text-3xl md:text-4xl xl:text-5xl text-gray-800 dark:text-gray-200">$0</span>
+         <p class="mt-2 text-sm text-gray-500">Get started with basic features</p>
+
+         <ul class="mt-7 space-y-2.5 text-sm">
+           <li class="flex space-x-2">
+             <svg class="flex-shrink-0 h-5 w-5 text-violet-900" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+               <path d="M11.5219 4.0949C11.7604 3.81436 12.181 3.78025 12.4617 4.01871C12.7422 4.25717 12.7763 4.6779 12.5378 4.95844L6.87116 11.6251C6.62896 11.91 6.1998 11.94 5.9203 11.6916L2.9203 9.02494C2.64511 8.78033 2.62032 8.35894 2.86493 8.08375C3.10955 7.80856 3.53092 7.78378 3.80611 8.02839L6.29667 10.2423L11.5219 4.0949Z" fill="currentColor"/>
+             </svg>
+             <span class="text-gray-800 ">
+               Smart Portfolio
+             </span>
+           </li>
+
+           <li class="flex space-x-2">
+             <svg class="flex-shrink-0 h-5 w-5 text-violet-900" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+               <path d="M11.5219 4.0949C11.7604 3.81436 12.181 3.78025 12.4617 4.01871C12.7422 4.25717 12.7763 4.6779 12.5378 4.95844L6.87116 11.6251C6.62896 11.91 6.1998 11.94 5.9203 11.6916L2.9203 9.02494C2.64511 8.78033 2.62032 8.35894 2.86493 8.08375C3.10955 7.80856 3.53092 7.78378 3.80611 8.02839L6.29667 10.2423L11.5219 4.0949Z" fill="currentColor"/>
+             </svg>
+             <span class="text-gray-800 ">
+               Digital Farming
+             </span>
+           </li>
+
+           <li class="flex space-x-2">
+             <svg class="flex-shrink-0 h-5 w-5 text-violet-900" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+               <path d="M11.5219 4.0949C11.7604 3.81436 12.181 3.78025 12.4617 4.01871C12.7422 4.25717 12.7763 4.6779 12.5378 4.95844L6.87116 11.6251C6.62896 11.91 6.1998 11.94 5.9203 11.6916L2.9203 9.02494C2.64511 8.78033 2.62032 8.35894 2.86493 8.08375C3.10955 7.80856 3.53092 7.78378 3.80611 8.02839L6.29667 10.2423L11.5219 4.0949Z" fill="currentColor"/>
+             </svg>
+             <span class="text-gray-800 ">
+               Networking
+             </span>
+           </li>
+         </ul>
+
+         <a class="mt-5 inline-flex justify-center items-center gap-2 rounded-lg border-2 border-violet-900 font-semibold text-violet-900 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 transition-all text-sm py-3 px-4 dark:text-violet-500 dark:border-violet-900 dark:hover:border-violet-700" href="#">
+           Get started
+         </a>
+       </div>
+       {/* <!-- End Card --> */}
+
+       {/* <!-- Base Card --> */}
+       <div class="flex flex-col bg-white border-2 border-violet-900 text-center shadow-xl rounded-2xl p-4 md:p-8 ">
+         <p class="mb-3"><span class="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-md text-xs uppercase font-semibold bg-violet-100 text-violet-800 dark:bg-violet-900 ">Most popular</span></p>
+         <h4 class="font-medium text-lg text-gray-800 dark:text-gray-200">Basic</h4>
+         <span class="mt-5 font-bold text-3xl md:text-4xl xl:text-5xl text-gray-800 dark:text-gray-200">
+           $39
+         </span>
+         <p class="mt-2 text-sm text-gray-500">All the basics for starting a new business</p>
+
+         <ul class="mt-7 space-y-2.5 text-sm">
+           <li class="flex space-x-2">
+             <svg class="flex-shrink-0 h-5 w-5 text-violet-900" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+               <path d="M11.5219 4.0949C11.7604 3.81436 12.181 3.78025 12.4617 4.01871C12.7422 4.25717 12.7763 4.6779 12.5378 4.95844L6.87116 11.6251C6.62896 11.91 6.1998 11.94 5.9203 11.6916L2.9203 9.02494C2.64511 8.78033 2.62032 8.35894 2.86493 8.08375C3.10955 7.80856 3.53092 7.78378 3.80611 8.02839L6.29667 10.2423L11.5219 4.0949Z" fill="currentColor"/>
+             </svg>
+             <span class="text-gray-800 ">
+               2 users
+             </span>
+           </li>
+
+           <li class="flex space-x-2">
+             <svg class="flex-shrink-0 h-5 w-5 text-violet-900" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+               <path d="M11.5219 4.0949C11.7604 3.81436 12.181 3.78025 12.4617 4.01871C12.7422 4.25717 12.7763 4.6779 12.5378 4.95844L6.87116 11.6251C6.62896 11.91 6.1998 11.94 5.9203 11.6916L2.9203 9.02494C2.64511 8.78033 2.62032 8.35894 2.86493 8.08375C3.10955 7.80856 3.53092 7.78378 3.80611 8.02839L6.29667 10.2423L11.5219 4.0949Z" fill="currentColor"/>
+             </svg>
+             <span class="text-gray-800 ">
+               Plan features
+             </span>
+           </li>
+
+           <li class="flex space-x-2">
+             <svg class="flex-shrink-0 h-5 w-5 text-violet-900" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+               <path d="M11.5219 4.0949C11.7604 3.81436 12.181 3.78025 12.4617 4.01871C12.7422 4.25717 12.7763 4.6779 12.5378 4.95844L6.87116 11.6251C6.62896 11.91 6.1998 11.94 5.9203 11.6916L2.9203 9.02494C2.64511 8.78033 2.62032 8.35894 2.86493 8.08375C3.10955 7.80856 3.53092 7.78378 3.80611 8.02839L6.29667 10.2423L11.5219 4.0949Z" fill="currentColor"/>
+             </svg>
+             <span class="text-gray-800 ">
+               Product support
+             </span>
+           </li>
+         </ul>
+
+         <a class="mt-5 inline-flex justify-center items-center gap-x-3 text-center bg-violet-900 hover:bg-violet-700 text-white text-sm font-medium rounded-lg hover:shadow-md focus:outline-none focus:ring-2 focus:ring-violet-900 focus:ring-offset-2 focus:ring-offset-white transition py-3 px-4 dark:focus:ring-offset-gray-800" href="https://github.com/htmlstreamofficial/preline/tree/main/examples/html">
+           Get started
+         </a>
+       </div>
+       {/* <!-- End Card --> */}
+
+       {/* <!-- Growth Card --> */}
+       <div class="flex flex-col bg-white border border-gray-200 text-center rounded-2xl p-4 md:p-8 ">
+         <h4 class="font-medium text-lg text-gray-800 dark:text-gray-200">Growth</h4>
+         <span class="mt-5 font-bold text-3xl md:text-4xl xl:text-5xl text-gray-800 dark:text-gray-200">
+           $89
+         </span>
+         <p class="mt-2 text-sm text-gray-500">Everything you need for a growing business</p>
+
+         <ul class="mt-7 space-y-2.5 text-sm">
+           <li class="flex space-x-2">
+             <svg class="flex-shrink-0 h-5 w-5 text-violet-900" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+               <path d="M11.5219 4.0949C11.7604 3.81436 12.181 3.78025 12.4617 4.01871C12.7422 4.25717 12.7763 4.6779 12.5378 4.95844L6.87116 11.6251C6.62896 11.91 6.1998 11.94 5.9203 11.6916L2.9203 9.02494C2.64511 8.78033 2.62032 8.35894 2.86493 8.08375C3.10955 7.80856 3.53092 7.78378 3.80611 8.02839L6.29667 10.2423L11.5219 4.0949Z" fill="currentColor"/>
+             </svg>
+             <span class="text-gray-800 ">
+               5 users
+             </span>
+           </li>
+
+           <li class="flex space-x-2">
+             <svg class="flex-shrink-0 h-5 w-5 text-violet-900" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+               <path d="M11.5219 4.0949C11.7604 3.81436 12.181 3.78025 12.4617 4.01871C12.7422 4.25717 12.7763 4.6779 12.5378 4.95844L6.87116 11.6251C6.62896 11.91 6.1998 11.94 5.9203 11.6916L2.9203 9.02494C2.64511 8.78033 2.62032 8.35894 2.86493 8.08375C3.10955 7.80856 3.53092 7.78378 3.80611 8.02839L6.29667 10.2423L11.5219 4.0949Z" fill="currentColor"/>
+             </svg>
+             <span class="text-gray-800 ">
+               Plan features
+             </span>
+           </li>
+
+           <li class="flex space-x-2">
+             <svg class="flex-shrink-0 h-5 w-5 text-violet-900" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+               <path d="M11.5219 4.0949C11.7604 3.81436 12.181 3.78025 12.4617 4.01871C12.7422 4.25717 12.7763 4.6779 12.5378 4.95844L6.87116 11.6251C6.62896 11.91 6.1998 11.94 5.9203 11.6916L2.9203 9.02494C2.64511 8.78033 2.62032 8.35894 2.86493 8.08375C3.10955 7.80856 3.53092 7.78378 3.80611 8.02839L6.29667 10.2423L11.5219 4.0949Z" fill="currentColor"/>
+             </svg>
+             <span class="text-gray-800 ">
+               Product support
+             </span>
+           </li>
+         </ul>
+
+         <a class="mt-5 inline-flex justify-center items-center gap-2 rounded-lg border-2 border-violet-900 font-semibold text-violet-900 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 transition-all text-sm py-3 px-4 dark:text-violet-500 dark:border-violet-900 dark:hover:border-violet-700" href="#">
+           Get started
+         </a>
+       </div>
+       {/* <!-- End Card --> */}
+
+       {/* <!-- Growth plus Card --> */}
+       <div class="flex flex-col bg-white border border-gray-200 text-center rounded-2xl p-4 md:p-8 ">
+         <h4 class="font-medium text-lg text-gray-800 dark:text-gray-200">Growth +</h4>
+         <span class="mt-5 font-bold text-3xl md:text-4xl xl:text-5xl text-gray-800 dark:text-gray-200">
+           $149
+         </span>
+         <p class="mt-2 text-sm text-gray-500">Advanced features for scaling your business</p>
+
+         <ul class="mt-7 space-y-2.5 text-sm">
+           <li class="flex space-x-2">
+             <svg class="flex-shrink-0 h-5 w-5 text-violet-900" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+               <path d="M11.5219 4.0949C11.7604 3.81436 12.181 3.78025 12.4617 4.01871C12.7422 4.25717 12.7763 4.6779 12.5378 4.95844L6.87116 11.6251C6.62896 11.91 6.1998 11.94 5.9203 11.6916L2.9203 9.02494C2.64511 8.78033 2.62032 8.35894 2.86493 8.08375C3.10955 7.80856 3.53092 7.78378 3.80611 8.02839L6.29667 10.2423L11.5219 4.0949Z" fill="currentColor"/>
+             </svg>
+             <span class="text-gray-800 ">
+               10 users
+             </span>
+           </li>
+
+           <li class="flex space-x-2">
+             <svg class="flex-shrink-0 h-5 w-5 text-violet-900" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+               <path d="M11.5219 4.0949C11.7604 3.81436 12.181 3.78025 12.4617 4.01871C12.7422 4.25717 12.7763 4.6779 12.5378 4.95844L6.87116 11.6251C6.62896 11.91 6.1998 11.94 5.9203 11.6916L2.9203 9.02494C2.64511 8.78033 2.62032 8.35894 2.86493 8.08375C3.10955 7.80856 3.53092 7.78378 3.80611 8.02839L6.29667 10.2423L11.5219 4.0949Z" fill="currentColor"/>
+             </svg>
+             <span class="text-gray-800 ">
+               Plan features
+             </span>
+           </li>
+
+           <li class="flex space-x-2">
+             <svg class="flex-shrink-0 h-5 w-5 text-violet-900" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+               <path d="M11.5219 4.0949C11.7604 3.81436 12.181 3.78025 12.4617 4.01871C12.7422 4.25717 12.7763 4.6779 12.5378 4.95844L6.87116 11.6251C6.62896 11.91 6.1998 11.94 5.9203 11.6916L2.9203 9.02494C2.64511 8.78033 2.62032 8.35894 2.86493 8.08375C3.10955 7.80856 3.53092 7.78378 3.80611 8.02839L6.29667 10.2423L11.5219 4.0949Z" fill="currentColor"/>
+             </svg>
+             <span class="text-gray-800 ">
+               Product support
+             </span>
+           </li>
+         </ul>
+
+         <a class="mt-5 inline-flex justify-center items-center gap-2 rounded-lg border-2 border-violet-900 font-semibold text-violet-900 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 transition-all text-sm py-3 px-4 dark:text-violet-500 dark:border-violet-900 dark:hover:border-violet-700" href="#">
+           Get started
+         </a>
+       </div>
+       {/* <!-- End Card --> */}
+     </div>
+     {/* <!-- End Grid --> */}
+
+     {/* <!-- Title --> */}
+     <div class="w-2/3 sm:w-1/2 lg:w-1/3 mx-auto text-center mt-10 md:mt-14 mb-6 lg:mt-24">
+       <h2 class="text-gray-600 ">Trusted by Open Source, enterprise, and more than 99,000 of you</h2>
+     </div>
+     {/* <!-- End Title --> */}
+
+     {/* <!-- Clients --> */}
+     <div class="flex justify-center gap-x-6 sm:gap-x-12 lg:gap-x-24">
+       <svg class="py-3 lg:py-5 w-16 h-auto md:w-20 lg:w-24 mx-auto sm:mx-0 text-gray-500" enable-background="new 0 0 2499 614" viewBox="0 0 2499 614" xmlns="http://www.w3.org/2000/svg"><path d="m431.7 0h-235.5v317.8h317.8v-235.5c0-45.6-36.7-82.3-82.3-82.3zm-308.9 0h-40.5c-45.6 0-82.3 36.7-82.3 82.3v40.5h122.8zm-122.8 196.2h122.8v122.8h-122.8zm392.5 317.8h40.5c45.6 0 82.3-36.7 82.3-82.3v-39.2h-122.8zm-196.3-121.5h122.8v122.8h-122.8zm-196.2 0v40.5c0 45.6 36.7 82.3 82.3 82.3h40.5v-122.8zm828-359.6h-48.1v449.4h254.5v-43h-206.4zm360.8 119c-93.7 0-159.5 69.6-159.5 169.6v11.5c1.3 43 20.3 83.6 51.9 113.9 30.4 27.9 69.6 44.3 111.4 44.3h6.3c44.3 0 86.1-16.5 119-44.3l1.3-1.3-21.5-35.4-2.5 1.3c-26.6 24.1-59.5 38-94.9 38-58.2 0-117.7-38-121.5-122.8h243.1v-2.5s1.3-15.2 1.3-22.8c-.3-91.2-53.4-149.5-134.4-149.5zm-108.9 134.2c10.1-57 51.9-93.7 106.3-93.7 40.5 0 84.8 24.1 88.6 93.7zm521.6-96.2v16.5c-20.3-34.2-58.2-55.7-97.5-55.7h-3.8c-86.1 0-145.6 68.4-145.6 168.4 0 101.3 57 169.6 141.8 169.6 67.1 0 97.5-40.5 107.6-58.2v49.4h45.6v-447h-46.8v157zm-98.8 257c-59.5 0-98.7-50.6-98.7-126.6 0-73.4 41.8-125.3 100-125.3 49.4 0 98.7 39.2 98.7 125.3 0 93.7-51.9 126.6-100 126.6zm424.1-250.7v2.5c-8.9-15.2-36.7-48.1-103.8-48.1-84.8 0-140.5 64.6-140.5 163.3s58.2 165.8 144.3 165.8c46.8 0 78.5-16.5 100-50.6v44.3c0 62-39.2 97.5-108.9 97.5-29.1 0-59.5-7.6-86.1-21.5l-2.5-1.3-17.7 39.2 2.5 1.3c32.9 16.5 69.6 25.3 105.1 25.3 74.7 0 154.4-38 154.4-143.1v-311.3h-46.8zm-93.7 241.8c-62 0-102.5-48.1-102.5-122.8 0-76 35.4-119 96.2-119 67.1 0 98.7 39.2 98.7 119 1.3 78.5-31.6 122.8-92.4 122.8zm331.7-286.1c-93.7 0-158.2 69.6-158.2 168.4v11.4c1.3 43 20.3 83.6 51.9 113.9 30.4 27.9 69.6 44.3 111.4 44.3h6.3c44.3 0 86.1-16.5 119-44.3l1.3-1.3-22.8-35.4-2.5 1.3c-26.6 24.1-59.5 38-94.9 38-58.2 0-117.7-38-121.5-122.8h244.2v-2.5s1.3-15.2 1.3-22.8c0-89.9-53.2-148.2-135.5-148.2zm-107.6 134.2c10.1-57 51.9-93.7 106.3-93.7 40.5 0 84.8 24.1 88.6 93.7zm440.6-127.9c-6.3-1.3-11.4-1.3-17.7-2.5-44.3 0-81 27.9-100 74.7v-72.2h-46.8l1.3 320.3v2.5h48.1v-135.4c0-20.3 2.5-41.8 8.9-60.8 15.2-49.4 49.4-81 89.9-81 5.1 0 10.1 0 15.2 1.3h2.5v-46.8z" fill="currentColor"/></svg>
+
+       <svg class="py-3 lg:py-5 w-16 h-auto md:w-20 lg:w-24 mx-auto sm:mx-0 text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="-4.126838974812941 0.900767442746961 939.436838974813 230.18142889845947" width="2500" height="607"><path d="M667.21 90.58c-13.76 0-23.58 4.7-28.4 13.6l-2.59 4.82V92.9h-22.39v97.86h23.55v-58.22c0-13.91 7.56-21.89 20.73-21.89 12.56 0 19.76 7.77 19.76 21.31v58.8h23.56v-63c0-23.3-12.79-37.18-34.22-37.18zm-114.21 0c-27.79 0-45 17.34-45 45.25v13.74c0 26.84 17.41 43.51 45.44 43.51 18.75 0 31.89-6.87 40.16-21l-14.6-8.4c-6.11 8.15-15.87 13.2-25.55 13.2-14.19 0-22.66-8.76-22.66-23.44v-3.89h65.73v-16.23c0-26-17.07-42.74-43.5-42.74zm22.09 43.15h-44.38v-2.35c0-16.11 7.91-25 22.27-25 13.83 0 22.09 8.76 22.09 23.44zm360.22-56.94V58.07h-81.46v18.72h28.56V172h-28.56v18.72h81.46V172h-28.57V76.79zM317.65 55.37c-36.38 0-59 22.67-59 59.18v19.74c0 36.5 22.61 59.18 59 59.18s59-22.68 59-59.18v-19.74c-.01-36.55-22.65-59.18-59-59.18zm34.66 80.27c0 24.24-12.63 38.14-34.66 38.14S283 159.88 283 135.64v-22.45c0-24.24 12.64-38.14 34.66-38.14s34.66 13.9 34.66 38.14zm98.31-45.06c-12.36 0-23.06 5.12-28.64 13.69l-2.53 3.9V92.9h-22.4v131.53h23.56v-47.64l2.52 3.74c5.3 7.86 15.65 12.55 27.69 12.55 20.31 0 40.8-13.27 40.8-42.93v-16.64c0-21.37-12.63-42.93-41-42.93zM468.06 149c0 15.77-9.2 25.57-24 25.57-13.8 0-23.43-10.36-23.43-25.18v-14.72c0-15 9.71-25.56 23.63-25.56 14.69 0 23.82 9.79 23.82 25.56zm298.47-90.92L719 190.76h23.93l9.1-28.44h54.64l.09.28 9 28.16h23.92L792.07 58.07zm-8.66 85.53l21.44-67.08 21.22 67.08zM212.59 95.12a57.27 57.27 0 0 0-4.92-47.05 58 58 0 0 0-62.4-27.79A57.29 57.29 0 0 0 102.06 1a57.94 57.94 0 0 0-55.27 40.14A57.31 57.31 0 0 0 8.5 68.93a58 58 0 0 0 7.13 67.94 57.31 57.31 0 0 0 4.92 47A58 58 0 0 0 83 211.72 57.31 57.31 0 0 0 126.16 231a57.94 57.94 0 0 0 55.27-40.14 57.3 57.3 0 0 0 38.28-27.79 57.92 57.92 0 0 0-7.12-67.95zM126.16 216a42.93 42.93 0 0 1-27.58-10c.34-.19 1-.52 1.38-.77l45.8-26.44a7.43 7.43 0 0 0 3.76-6.51V107.7l19.35 11.17a.67.67 0 0 1 .38.54v53.45A43.14 43.14 0 0 1 126.16 216zm-92.59-39.54a43 43 0 0 1-5.15-28.88c.34.21.94.57 1.36.81l45.81 26.45a7.44 7.44 0 0 0 7.52 0L139 142.52v22.34a.67.67 0 0 1-.27.6l-46.3 26.72a43.14 43.14 0 0 1-58.86-15.77zm-12-100A42.92 42.92 0 0 1 44 57.56V112a7.45 7.45 0 0 0 3.76 6.51l55.9 32.28L84.24 162a.68.68 0 0 1-.65.06L37.3 135.33a43.13 43.13 0 0 1-15.77-58.87zm159 37l-55.9-32.28L144 70a.69.69 0 0 1 .65-.06l46.29 26.73a43.1 43.1 0 0 1-6.66 77.76V120a7.44 7.44 0 0 0-3.74-6.54zm19.27-29c-.34-.21-.94-.57-1.36-.81L152.67 57.2a7.44 7.44 0 0 0-7.52 0l-55.9 32.27V67.14a.73.73 0 0 1 .28-.6l46.29-26.72a43.1 43.1 0 0 1 64 44.65zM78.7 124.3l-19.36-11.17a.73.73 0 0 1-.37-.54V59.14A43.09 43.09 0 0 1 129.64 26c-.34.19-.95.52-1.38.77l-45.8 26.44a7.45 7.45 0 0 0-3.76 6.51zm10.51-22.67l24.9-14.38L139 101.63v28.74l-24.9 14.38-24.9-14.38z" fill="currentColor"/></svg>
+
+       <svg class="py-3 lg:py-5 w-16 h-auto md:w-20 lg:w-24 mx-auto sm:mx-0 text-gray-500" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2428 1002"><path fill-rule="evenodd" clip-rule="evenodd" d="M311.5 389.8h191.8l67 117.5 77.8-117.5h178.3L682.7 590.7l154 220.7H648.1l-77.8-135.8-91.7 135.8h-175l153.2-220.7-145.3-200.9Z" fill="currentColor"/><path fill-rule="evenodd" clip-rule="evenodd" d="M1279.3 640.7H955.4c2.9 26 10 45.2 21 58a76.5 76.5 0 0 0 61.1 27.3c16 0 31.5-4 45.3-12 8.8-5 18.2-13.7 28.2-26.5l159.2 14.7c-24.4 42.4-53.7 72.7-88 91.2-34.5 18.2-83.8 27.5-148.2 27.5-55.8 0-99.7-7.9-131.8-23.6a193.2 193.2 0 0 1-79.6-75c-21-34.4-31.6-74.6-31.6-121 0-65.8 21.2-119.2 63.3-159.8 42.3-40.8 100.6-61.3 175-61.3 60.3 0 108 9.2 142.8 27.5a184 184 0 0 1 79.8 79.3c18.3 34.7 27.4 79.8 27.4 135.3v18.4ZM1115 563.3c-3.2-31.3-11.6-53.7-25.2-67.1a73.1 73.1 0 0 0-53.8-20.3 73.6 73.6 0 0 0-61.6 30.6c-9.7 12.7-16 31.6-18.5 56.8H1115Zm137-173.5h168.3l81.9 267.1 84.5-267H1750l-179.1 421.5h-143.3L1252 389.8Zm463.2 212c0-64.3 21.7-117.4 65-159 43.5-41.7 102-62.6 176-62.6 84.4 0 148.2 24.5 191.3 73.5 34.6 39.4 52 88 52 145.8 0 64.7-21.5 117.8-64.5 159.3-43 41.3-102.4 62-178.5 62-67.7 0-122.5-17.1-164.3-51.5-51.4-42.6-77-98.4-77-167.6Zm162-.5c0 37.7 7.5 65.5 22.8 83.4a72 72 0 0 0 57.3 27.1c23.4 0 42.5-9 57.4-26.7 15-17.8 22.5-46 22.5-85.4 0-36.4-7.6-63.7-22.7-81.5a70.5 70.5 0 0 0-56-26.7c-23.5 0-43 9-58.3 27-15.4 18.2-23 45.9-23 82.8ZM2363.1.1a64 64 0 0 1 0 127.9 64 64 0 0 1 0-128Z" fill="currentColor"/><path fill-rule="evenodd" clip-rule="evenodd" d="M1912.1 671.5c220.3-135 326.4-327 334-419.2 8.7-106.7-71-235.9-358.9-238-345 3.6-790 158.3-1163.6 360.4h138c315.8-152.6 672-266.2 1000.8-275.2 287.7-7.8 304.4 149.2 302 199-3.6 71-74.7 234.5-252.3 373Zm-1315.7-222-36 22.7 10 17.5 26-40.1ZM419.8 567.5C212 717 57 873.2.8 1001.9 77.8 897.1 217 771 394.9 647l40.4-58.1-15.5-21.4Z" fill="currentColor"/><path fill-rule="evenodd" clip-rule="evenodd" d="M2036.3 580a819.8 819.8 0 0 0 114.2-122.8l-3-3.5c-8-9.2-17-17.5-26.5-25-21 39.8-50 83.7-88.2 128.3 1.6 7 2.8 14.7 3.5 23Z" fill="currentColor"/></svg>
+
+       <svg class="py-3 lg:py-5 w-16 h-auto md:w-20 lg:w-24 mx-auto sm:mx-0 text-gray-500" viewBox="0 -8.881784197001252e-16 267.51517722360785 65.24679557585003" xmlns="http://www.w3.org/2000/svg" width="2500" height="610"><path d="M263.043 56.411a4.418 4.418 0 1 0 .085 0zm0 8.33a3.874 3.874 0 1 1 3.809-3.938v.065a3.791 3.791 0 0 1-3.708 3.871h-.1m-16.96-9.535h-9.6V40.17c0-3.585-.064-8.2-4.993-8.2-5 0-5.765 3.906-5.765 7.939v15.294h-9.6V24.287h9.216v4.225h.129a10.1 10.1 0 0 1 9.093-4.994c9.73 0 11.524 6.4 11.524 14.726zm-40.79-35.143a5.571 5.571 0 1 1 5.57-5.572 5.571 5.571 0 0 1-5.57 5.572m4.8 35.143h-9.61V24.287h9.61zM250.87.004h-55.21a4.728 4.728 0 0 0-4.781 4.67v55.439a4.731 4.731 0 0 0 4.781 4.675h55.21a4.741 4.741 0 0 0 4.8-4.675V4.67a4.738 4.738 0 0 0-4.8-4.67m-86.12 31.749c-4.8 0-7.68 3.205-7.68 7.875s2.879 7.878 7.68 7.878 7.687-3.2 7.687-7.878-2.881-7.875-7.687-7.875m16.525 23.437h-8.838v-4.1h-.131a12.071 12.071 0 0 1-9.544 4.868c-9.224 0-15.3-6.657-15.3-16.071 0-8.646 5.377-16.585 14.216-16.585 3.973 0 7.684 1.087 9.861 4.1h.126V9.577h9.609zm-46.139-19.048a5.756 5.756 0 0 0-5.894-5.89 6.406 6.406 0 0 0-6.784 5.89zm8.132 13.7a16.909 16.909 0 0 1-13.128 6.151c-9.6 0-17.286-6.408-17.286-16.331s7.685-16.328 17.286-16.328c8.973 0 14.6 6.4 14.6 16.328v3.01h-22.282a7.171 7.171 0 0 0 7.235 6.019 8.193 8.193 0 0 0 6.851-3.778zM47.834 24.279h9.219v4.225h.131a10.085 10.085 0 0 1 9.09-4.994c9.735 0 11.527 6.405 11.527 14.726V55.19h-9.6V40.159c0-3.588-.066-8.2-5-8.2-4.99 0-5.76 3.907-5.76 7.939v15.288h-9.6zM82.669 9.58h9.6v27.265l10.88-12.583h11.77l-12.6 14.313 12.335 16.63h-12.066L92.397 39.923h-.126v15.28h-9.6zM32.911 24.276h9.6v30.916h-9.6zm4.8-15.37a5.569 5.569 0 1 1-5.57 5.569 5.569 5.569 0 0 1 5.57-5.569M0 9.587h9.993v36.4h18.5v9.222H0zm263.744 51.522a1.2 1.2 0 0 0 1.21-1.269c0-.9-.543-1.33-1.657-1.33h-1.8v4.712h.677v-2.054h.832l.019.025 1.291 2.029h.724l-1.389-2.1zm-.783-.472h-.785v-1.593h.995c.514 0 1.1.084 1.1.757 0 .774-.593.836-1.314.836" fill="currentColor"/></svg>
+     </div>
+     {/* <!-- End Clients --> */}
+   </div>
+
+   <div class="absolute top-1/2 left-1/2 -z-[1] transform -translate-y-1/2 -translate-x-1/2 w-[340px] h-[340px] border border-dashed border-violet-200 rounded-full "></div>
+   <div class="absolute top-1/2 left-1/2 -z-[1] transform -translate-y-1/2 -translate-x-1/2 w-[575px] h-[575px] border border-dashed border-violet-200 rounded-full opacity-80 "></div>
+   <div class="absolute top-1/2 left-1/2 -z-[1] transform -translate-y-1/2 -translate-x-1/2 w-[840px] h-[840px] border border-dashed border-violet-200 rounded-full opacity-60 "></div>
+   <div class="absolute top-1/2 left-1/2 -z-[1] transform -translate-y-1/2 -translate-x-1/2 w-[1080px] h-[1080px] border border-dashed border-violet-200 rounded-full opacity-40 "></div>
+ </div>
+ {/* <!-- End Hero --> */}
+
+ <Faq/>
+</div>
+
+    </>
+  )
+}
+
+function Faq(params) {
+  return(
+    <>
+    {/* <!-- FAQ --> */}
+<div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+  {/* <!-- Title --> */}
+  <div className="max-w-2xl mx-auto text-center mb-10 lg:mb-14">
+    <h2 className="text-2xl font-bold md:text-4xl md:leading-tight ">Your questions, answered</h2>
+    <p className="mt-1 text-gray-600 ">Answers to the most frequently asked questions.</p>
+  </div>
+  {/* <!-- End Title --> */}
+
+  <div className="max-w-2xl mx-auto">
+    {/* <!-- Accordion --> */}
+    <div className="hs-accordion-group">
+      <div className="hs-accordion hs-accordion-active:bg-gray-100 rounded-xl p-6  active" id="hs-basic-with-title-and-arrow-stretched-heading-one">
+        <button className=" active:border-0 active:ring-0 focus:border-0 focus:ring-0 focus:outline-none  a hs-accordion-toggle group pb-3 inline-flex items-center justify-between gap-x-3 w-full md:text-lg font-semibold text-left text-gray-800 transition hover:text-gray-500 " aria-controls="hs-basic-with-title-and-arrow-stretched-collapse-one">
+          Can I cancel at anytime?
+          <svg className="hs-accordion-active:hidden block w-3 h-3 text-gray-600 group-hover:text-gray-500 " width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <svg className="hs-accordion-active:block hidden w-3 h-3 text-gray-600 group-hover:text-gray-500 " width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 11L8.16086 5.31305C8.35239 5.13625 8.64761 5.13625 8.83914 5.31305L15 11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <div id="hs-basic-with-title-and-arrow-stretched-collapse-one" className="hs-accordion-content w-full overflow-hidden transition-[height] duration-300" aria-labelledby="hs-basic-with-title-and-arrow-stretched-heading-one">
+          <p className="text-gray-800 ">
+            Yes, you can cancel anytime no questions are asked while you cancel but we would highly appreciate if you will give us some feedback.
+          </p>
+        </div>
+      </div>
+
+      <div className="hs-accordion hs-accordion-active:bg-gray-100 rounded-xl p-6 " id="hs-basic-with-title-and-arrow-stretched-heading-two">
+        <button className="active:border-0 active:ring-0 focus:border-0 focus:ring-0 focus:outline-none hs-accordion-toggle group pb-3 inline-flex items-center justify-between gap-x-3 w-full md:text-lg font-semibold text-left text-gray-800 transition hover:text-gray-500 " aria-controls="hs-basic-with-title-and-arrow-stretched-collapse-two">
+          My team has credits. How do we use them?
+          <svg className="hs-accordion-active:hidden block w-3 h-3 text-gray-600 group-hover:text-gray-500 " width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <svg className="hs-accordion-active:block hidden w-3 h-3 text-gray-600 group-hover:text-gray-500 " width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 11L8.16086 5.31305C8.35239 5.13625 8.64761 5.13625 8.83914 5.31305L15 11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <div id="hs-basic-with-title-and-arrow-stretched-collapse-two" className="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300" aria-labelledby="hs-basic-with-title-and-arrow-stretched-heading-two">
+          <p className="text-gray-800 ">
+            Once your team signs up for a subscription plan. This is where we sit down, grab a cup of coffee and dial in the details.
+          </p>
+        </div>
+      </div>
+
+      <div className="hs-accordion hs-accordion-active:bg-gray-100 rounded-xl p-6 " id="hs-basic-with-title-and-arrow-stretched-heading-three">
+        <button className=" active:border-0 active:ring-0 focus:border-0 focus:ring-0 focus:outline-none hs-accordion-toggle group pb-3 inline-flex items-center justify-between gap-x-3 w-full md:text-lg font-semibold text-left text-gray-800 transition hover:text-gray-500 " aria-controls="hs-basic-with-title-and-arrow-stretched-collapse-three">
+          How does Preline's pricing work?
+          <svg className="hs-accordion-active:hidden block w-3 h-3 text-gray-600 group-hover:text-gray-500 " width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <svg className="hs-accordion-active:block hidden w-3 h-3 text-gray-600 group-hover:text-gray-500 " width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 11L8.16086 5.31305C8.35239 5.13625 8.64761 5.13625 8.83914 5.31305L15 11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <div id="hs-basic-with-title-and-arrow-stretched-collapse-three" className="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300" aria-labelledby="hs-basic-with-title-and-arrow-stretched-heading-three">
+          <p className="text-gray-800 ">
+            Our subscriptions are tiered. Understanding the task at hand and ironing out the wrinkles is key.
+          </p>
+        </div>
+      </div>
+
+      <div className="hs-accordion hs-accordion-active:bg-gray-100 rounded-xl p-6 " id="hs-basic-with-title-and-arrow-stretched-heading-four">
+        <button className="active:border-0 active:ring-0 focus:border-0 focus:ring-0 focus:outline-none hs-accordion-toggle group pb-3 inline-flex items-center justify-between gap-x-3 w-full md:text-lg font-semibold text-left text-gray-800 transition hover:text-gray-500 " aria-controls="hs-basic-with-title-and-arrow-stretched-collapse-four">
+          How secure is Preline?
+          <svg className="hs-accordion-active:hidden block w-3 h-3 text-gray-600 group-hover:text-gray-500 " width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <svg className="hs-accordion-active:block hidden w-3 h-3 text-gray-600 group-hover:text-gray-500 " width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 11L8.16086 5.31305C8.35239 5.13625 8.64761 5.13625 8.83914 5.31305L15 11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <div id="hs-basic-with-title-and-arrow-stretched-collapse-four" className="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300" aria-labelledby="hs-basic-with-title-and-arrow-stretched-heading-four">
+          <p className="text-gray-800 dark:text-gray-200">
+            Protecting the data you trust to Preline is our first priority. This part is really crucial in keeping the project in line to completion.
+          </p>
+        </div>
+      </div>
+
+      <div className="hs-accordion hs-accordion-active:bg-gray-100 rounded-xl p-6 " id="hs-basic-with-title-and-arrow-stretched-heading-five">
+        <button className="active:border-0 active:ring-0 focus:border-0 focus:ring-0 focus:outline-none hs-accordion-toggle group pb-3 inline-flex items-center justify-between gap-x-3 w-full md:text-lg font-semibold text-left text-gray-800 transition hover:text-gray-500 " aria-controls="hs-basic-with-title-and-arrow-stretched-collapse-five">
+          How do I get access to a theme I purchased?
+          <svg className="hs-accordion-active:hidden block w-3 h-3 text-gray-600 group-hover:text-gray-500 " width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <svg className="hs-accordion-active:block hidden w-3 h-3 text-gray-600 group-hover:text-gray-500 " width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 11L8.16086 5.31305C8.35239 5.13625 8.64761 5.13625 8.83914 5.31305L15 11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <div id="hs-basic-with-title-and-arrow-stretched-collapse-five" className="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300" aria-labelledby="hs-basic-with-title-and-arrow-stretched-heading-five">
+          <p className="text-gray-800 ">
+            If you lose the link for a theme you purchased, don't panic! We've got you covered. You can login to your account, tap your avatar in the upper right corner, and tap Purchases. If you didn't create a login or can't remember the information, you can use our handy Redownload page, just remember to use the same email you originally made your purchases with.
+          </p>
+        </div>
+      </div>
+
+      <div className="hs-accordion hs-accordion-active:bg-gray-100 rounded-xl p-6 " id="hs-basic-with-title-and-arrow-stretched-heading-six">
+        <button className=" active:border-0 active:ring-0 focus:border-0 focus:ring-0 focus:outline-none hs-accordion-toggle group pb-3 inline-flex items-center justify-between gap-x-3 w-full md:text-lg font-semibold text-left text-gray-800 transition hover:text-gray-500 " aria-controls="hs-basic-with-title-and-arrow-stretched-collapse-six">
+          Upgrade License Type
+          <svg className="hs-accordion-active:hidden block w-3 h-3 text-gray-600 group-hover:text-gray-500 " width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <svg className="hs-accordion-active:block hidden w-3 h-3 text-gray-600 group-hover:text-gray-500 " width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 11L8.16086 5.31305C8.35239 5.13625 8.64761 5.13625 8.83914 5.31305L15 11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <div id="hs-basic-with-title-and-arrow-stretched-collapse-six" className="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300" aria-labelledby="hs-basic-with-title-and-arrow-stretched-heading-six">
+          <p className="text-gray-800 ">
+            There may be times when you need to upgrade your license from the original type you purchased and we have a solution that ensures you can apply your original purchase cost to the new license purchase.
+          </p>
+        </div>
+      </div>
+    </div>
+    {/* <!-- End Accordion --> */}
+  </div>
+</div>
+{/* <!-- End FAQ --> */}
+    </>
+  )
+}
+
+
 
 export default Pricing

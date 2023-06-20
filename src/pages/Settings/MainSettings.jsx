@@ -1,8 +1,6 @@
 import { useState } from 'react'
 import { FaAngleRight } from 'react-icons/fa'
 import styles from '../../style'
-import {useDispatch} from 'react-redux'
-import { switchSettings } from '../../Redux/slices/settingsSlice'
 import AccountInfo from './AccountInfo'
 
 

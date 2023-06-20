@@ -9,7 +9,6 @@ import useFetch from '../hooks/useFetch'
 import { urlFor } from '../../lib/client'
 import Loader from '../components/Loader'
 import {Tabs} from './hive/index'
-import { useSelector, useDispatch } from 'react-redux'
 import { FaAngleDown, FaAngleLeft, FaAngleRight, FaAngleUp, FaCircle, FaDollarSign, FaInfo , FaLock, FaQuestion, FaSpinner} from 'react-icons/fa'
 import styles from '../style'
 import { Line, Bar } from 'react-chartjs-2';

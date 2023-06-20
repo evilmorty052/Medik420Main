@@ -13,9 +13,11 @@ import syndicates from './syndicates'
 import schemaTypes from 'all:part:@sanity/base/schema-type'
 import stocks from './stocks'
 import digitalFarms from './digitalFarms'
+import applicants from "./applicants"
+import jobs from "./jobs"
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
   name: 'default',
-  types: schemaTypes.concat([ users,agents,pricing,videos, store, executives, chatrooms, members , syndicates, stocks, digitalFarms]),
+  types: schemaTypes.concat([ users,agents,pricing,videos, store, executives, chatrooms, members , syndicates, stocks, digitalFarms, jobs, applicants]),
 })

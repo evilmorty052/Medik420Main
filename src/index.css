@@ -1,7 +1,44 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body{
+  background: white
+}
+
+.btn {
+  @apply w-full bg-green-300 rounded-3xl px-4 py-2 text-xl md:text-xl tracking-wide font-semibold hover:bg-green-400 disabled:bg-black/70  transition-all duration-500 ease-in-out hover:text-white cursor-pointer;
+}
+
+.btnAlt {
+  @apply w-full bg-blue-300 rounded-3xl px-4 py-2 text-lg md:text-xl tracking-wide font-semibold disabled:bg-black/70;
+}
+.btnHollow {
+  @apply w-full bg-transparent rounded-3xl text-blk outline outline-blk px-4 py-2 text-xl md:text-xl tracking-wide font-semibold;
+}
+
+@media (min-width: 1024px){
+  .hiddenfromtabupwards{
+      display: none;
+  }
+}
+
+.transparent-input{
+  @apply focus:ring-0 focus:outline-none focus:border-b-blue-400 border-t-0 border-b-2 border-r-0 border-l-0 text-lg sm:text-xl text-gray-700 font-bold
+}
+
+.laptopnav a.active{
+  @apply   text-green-400;
+}
+
+.modal-bg{
+  @apply fixed inset-0  bg-opacity-90 z-10;
+}
+
+
+
 
 :root {
   --black-gradient: linear-gradient(

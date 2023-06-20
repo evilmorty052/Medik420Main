@@ -1,5 +1,5 @@
-import React from 'react'
 import { motion, animate } from 'framer-motion'
+import ScaleLoader from "react-spinners/ScaleLoader";
 
 
 const Loader = () => {
@@ -28,18 +28,10 @@ const loadervariant = {
 
 
   return (
-    <div className='min-h-screen w-full  flex justify-center items-center'>
-        <motion.div className='flex gap-x-2 '>
-        <motion.div className=' w-20 h-20 bg-white rounded-full flex justify-center items-center '
-        variants={loadervariant}
-        animate='animationone'
-        transition='transition'>
-         <span className='text-[60px] font-poppins font-black text-green-300'>M</span>
-       </motion.div>
-     
-        </motion.div>
-       
-       
+    <div className='min-h-screen w-full bg-white  flex justify-center items-center'>
+      <ScaleLoader
+        width={30}
+        color={'#00c4ee'}/>
     </div>
   )
 }

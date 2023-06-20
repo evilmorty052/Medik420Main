@@ -19,7 +19,7 @@ const Path = ({close, handleclose}) => {
         <button className='w-full text-white py-2 border border-white shadow-xl  rounded-3xl'  style={{ background:"#1a1a1a", borderColor: "white" }} onClick={()=>history('/login')}   >
          Login
         </button>
-        <button className='w-full py-2 border border-white shadow-xl  rounded-3xl'  style={{ background:"#86efac", borderColor: "white" }}  shape='round' size='large'  type='primary'  onClick={()=>history('/pick')}>
+        <button className='w-full py-2 border border-white shadow-xl  rounded-3xl'  style={{ background:"#86efac", borderColor: "white" }}  shape='round' size='large'  type='primary'  onClick={()=>history('/register')}>
           Register
         </button>
              </div>

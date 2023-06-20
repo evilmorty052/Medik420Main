@@ -18,6 +18,16 @@
 
 @media (min-width: 768px) {
     .text{
+        font-size: 40px;
+    }
+
+    .cursor{
+        font-size: 60px;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .text{
         font-size: 60px;
     }
 

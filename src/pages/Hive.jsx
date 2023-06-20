@@ -6,7 +6,7 @@ import { Feature } from './SmallBiz'
 import { Highlight } from '../Home'
 import Header from '../partials/Header'
 import AnimatedSidebar from '../components/AnimatedSidebar'
-import { Navbar } from '../components'
+
 
 
 const Hive = () => {
@@ -29,11 +29,6 @@ const Hive = () => {
   ]
   return (
     <div className='flex flex-col relative bg-plat'>
-       <AnimatedSidebar
-       links = {links}
-       setIsExpanded={setisexpanded}
-       isExpanded={isexpanded} />
-       <Navbar/>
         <div className={`mt-20 container max-w-5xl mx-auto`}>
             <div className={`${styles.boxWidth} px-4`}>
             <Hero

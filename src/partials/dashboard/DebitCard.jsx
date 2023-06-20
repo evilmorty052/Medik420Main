@@ -3,13 +3,13 @@ import { FaChevronRight } from 'react-icons/fa';
 import stashlogo from '../../assets/stashlogo.png'
 
 
-function DebitCard({firstname, lastname, amount}) {
+function DebitCard({firstname, lastname, amount, func}) {
 
     
     return(
         <>
-        <div className='my-4  font-space  rounded-2xl '>
-            <div className={` drop-shadow-2xl shadow-2xl w-[340px] h-[200px] xxs:w-[370px] xxs:h-[230px] sm:min-w-[350px] sm:min-h-[200px]  2xl:min-w-[400px]    p-4  rounded-xl  relative flex items-center `}  style={{
+        <div onClick={func} className='my-4  font-space  rounded-2xl '>
+            <div className={` drop-shadow-2xl shadow-2xl w-[340px] h-[200px] xxs:w-[calc(100vw-20px)] ss:max-w-[370px] xxs:h-[230px] sm:min-w-[350px] sm:min-h-[200px]  2xl:min-w-[400px]    p-4  rounded-xl  relative flex items-center `}  style={{
     backgroundImage: `url(${pattern})`,
     backgroundSize: "cover",
   }}>

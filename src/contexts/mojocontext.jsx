@@ -2,7 +2,7 @@ import React, {useState, createContext, useContext, useEffect} from "react";
 import MojoAuth from "mojoauth-web-sdk"
 import { client } from "../../lib/client";
 import { useNavigate } from "react-router-dom";
-import { useQuery } from 'react-query';
+
 
 export const UserContext = createContext({
     login: () => Promise,

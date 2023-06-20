@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect, lazy, Suspense } from 'react';
 import {
   Routes,
   Route,
@@ -7,70 +7,39 @@ import {
   Outlet
 } from 'react-router-dom';
 
-import ProtectedRoutes from './components/protectedroutes';
-
-import { useAuth } from './contexts/AuthContext'
-
-import './css/style.css';
 import './index.css'
-
-import Confirmsignin from './pages/confirmsignin';
-
+import {Loader} from "./components"
 
 // Import pages
-
-
-
-import Dashboard from './pages/Dashboard';
-import DashboardAgents from './pages/DashboardAgents';
-import Notfound from './pages/notfound';
-import Pricing from './pages/Pricing';
-
-import Home  from './Home'
-
-import Registerpage from './pages/Registerpage'
-import Investing from './pages/invest/investing';
-// import Whoweare from './pages/whoweare';
-import Aboutus from './pages/Aboutus';
-import Retirement from './pages/invest/retirement'
-import Kids from './pages/invest/kids'
-import Smart from './pages/invest/Smartpofolio'
-import Learn from './pages/explore/learn/learn';
-import Explore from './pages/explore/explore';
-import Products from './pages/explore/products/products';
-import Registerpage1 from './pages/Registerpage1';
-import Registerpage2 from './pages/Registerpage2';
-import Hive from './pages/Hive';
-import Path from './pages/Path';
-import Jobs from './pages/Jobs';
-import Team from './pages/Team';
-
-import Test from './pages/Test';
-
-import Welcome from './pages/welcome';
-import Newuser from './pages/newuser';
-import Log from './pages/log';
-import SetPin from './pages/SetPin';
-import DashboardPortfolio from './pages/DashboardPortfolio';
-import Agents from './pages/Agents/Agents';
-import Agentprofile from './pages/Agents/Agentprofile';
-import ServicePicker from './pages/ServicePicker';
-import Digitalfarming from './pages/Digitalfarming';
-import SmallBiz from './pages/SmallBiz';
-import Withdrawal from './pages/Withdrawal';
-import Coach from './pages/Coach';
-import AgentEnlist from './pages/Agents/AgentEnlist';
-import ProfileSettingsPage from './pages/ProfilePage';
-import Advisor from './pages/Advisor';
-import HiveLanding from './pages/HiveLanding';
-import HiveBiz from './pages/HiveBiz';
-import {Settings,} from './pages/Settings/index'
+// import Home  from './Home'
+// import Smart from './pages/invest/Smartpofolio'
+// import Hive from './pages/Hive';
+// import Path from './pages/Path';
+// import Jobs from './pages/Jobs';
+// import Team from './pages/Team';
+// import Log from './pages/log';
+// import Digitalfarming from './pages/Digitalfarming';
+// import HiveLanding from './pages/HiveLanding';
+// import HiveBiz from './pages/HiveBiz';
 import {Bem} from './pages/index'
-import DashboardScreen from './partials/dashboard/DashboardScreen';
-import { AnimatePresence } from 'framer-motion';
+// import DashboardScreen from './partials/dashboard/DashboardScreen';
+// import DashboardPricing from './partials/dashboard/DashboardPricing';
+import {PublicRoutes, RegistrationRoutes} from './routes'
+
+const Home = lazy(()=> import('./Home'))
+const Jobs = lazy(()=> import('./pages/Jobs'))
+const Team = lazy(()=> import('./pages/Team'))
+const Smart = lazy(()=> import('./pages/invest/Smartpofolio'))
+const Path = lazy(()=> import('./pages/Path'))
+const Log = lazy(()=> import('./pages/log'))
+const Digitalfarming = lazy(()=> import('./pages/Digitalfarming'))
+const HiveLanding = lazy(()=> import('./pages/HiveLanding'))
+const HiveBiz = lazy(()=> import('./pages/HiveBiz'))
+const DashboardScreen = lazy(()=> import('./partials/dashboard/DashboardScreen'))
+const DashboardPricing = lazy(()=> import('./partials/dashboard/DashboardPricing'))
+
 
 function App() {
-  const { currentUser } = useAuth()
   const location = useLocation();
 
   useEffect(() => {
@@ -81,10 +50,9 @@ function App() {
 
   return (
     <>
-    <AnimatePresence exitBeforeEnter={true}>
-    <Routes>
+   
+    {/* <Routes>
       <Route exact path="/bem" element={<Bem/>} />
-        <Route exact path="/settings" element={<Settings />} />
         <Route exact path="/team" element={<Team />} />
         <Route exact path="/hive" element={<HiveLanding />} />
         <Route exact path="/hivebiz" element={<HiveBiz />} />
@@ -120,27 +88,36 @@ function App() {
         <Route path="/agentprofile/*"  element={<Outlet/>} >
         <Route path=":agentid" element={<Agentprofile />} ></Route>
         </Route>
-        
-        {/* <Route element={<ProtectedRoutes/>}>
-            <Route path ="/dashboard" element={<Dashboard />} />
-            <Route path ="/profile" element={<Dashboardprofile />} />
-        </Route> */}
-        
-        {/* <Route element={currentUser ? <Outlet /> : <Loginpage />}> */}
             <Route path ="/dashboard/*" element={<DashboardScreen />} />
             <Route path ="/pricing" element={<Pricing />} />
-            {/* <Route path ="/subscribe" element={<Dashboardsubscribe />} /> */}
-            {/* <Route exact path ="/dashboard/agents" element={<DashboardAgents />} /> */}
-            {/* <Route exact path ="/dashboard/portfolio" element={<DashboardPortfolio />} /> */}
-        {/* </Route> */}
-      
-        {/* <Route path="*" element={<Notfound />} /> */}
-      
-      {/* <ProtectedRoute exact path="/dashboard" element={<Dashboard />} /> */}
-      {/* <Route exact path="/profile" element={ProtectedRoute(<Dashboardprofile />)}/>
-      <Route exact path="/dashboard" element={ProtectedRoute(<Dashboard />)}/> */}
-   </Routes> 
-    </AnimatePresence>
+   </Routes>  */}
+   <Routes>
+              {/* PublicRoutes */}
+        <Route path="/" element={<PublicRoutes/>}>
+        <Route index element={<Suspense><Home fallback={<Loader/>}/></Suspense>} />
+        <Route path="smart" element={<Suspense><Smart/></Suspense>} />   
+        <Route path="digital" element={<Suspense><Digitalfarming/></Suspense>} />
+        <Route path="bem" element={<Bem/>} />
+        <Route path="pricing" element={<Suspense><DashboardPricing/></Suspense>} />
+        <Route path="team" element={<Suspense><Team/></Suspense>} />
+        
+        <Route path="hive" element={<Suspense><HiveLanding/></Suspense>} />
+        <Route path="hivebiz" element={<Suspense><HiveBiz/></Suspense>} />
+        </Route>
+        
+        <Route path="jobs/*" element={<Suspense><Jobs/></Suspense>} />
+
+        <Route  path="/path" element={<Suspense><Path /></Suspense>} />
+                {/* registration routes */}             
+        <Route>
+          <Route path='register/*' element={<RegistrationRoutes/>} />
+        </Route>
+
+        <Route path='/login' element={<Suspense><Log/></Suspense>} />
+
+                  {/* dasboard routes */}
+        <Route path='dashboard/*' element={<Suspense><DashboardScreen/></Suspense>}/>
+    </Routes>
     </>
   
   );
@@ -148,35 +125,4 @@ function App() {
 
 export default App;
 
-// function ProtectedRoute(props) {
-//   const { currentUser } = useAuth()
-//   const { path } = props
-//   console.log('path', path)
-//   const location = useLocation()
-//   console.log('location state', location.state)
-
-//   if (
-//     path === '/login' ||
-//     path === '/register' ||
-//     path === '/forgot-password' ||
-//     path === '/reset-password'
-//   ) {
-//     return currentUser ? (
-//       // <Navigate to={location.state?.from ?? '/dashboard'} />
-//       <Outlet />
-//     ) : (
-//       <Route {...props} />
-//     )
-//   }
-//   return currentUser ? (
-//     <Route {...props} />
-//   ) : (
-//     <Navigate
-//       to={{
-//         pathname: '/login',
-//         state: { from: path },
-//       }}
-//     />
-//   )
-// }
 

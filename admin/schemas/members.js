@@ -43,8 +43,8 @@ export default {
       },
       
       { 
-        name: 'type',
-        title: 'Type',
+        name: 'focus',
+        title: 'Focus',
         type: 'string',
       },
       { 
@@ -149,6 +149,65 @@ export default {
                 name: 'status',
                 type: 'string'
               } ,
+            ]
+          }
+        ]
+      },
+      { 
+        name: 'posts',
+        title: 'Posts',
+        type: 'array',
+        of: [
+          {
+            title: 'post',
+            type: 'object',
+            fields: [
+              
+              { 
+                name: 'partners',
+                title: 'Partners',
+                type: 'array',
+                of: [{type: 'reference',
+                to: [{type: 'members'}]}]
+                
+              },
+              {
+                title: 'Roi',
+                name: 'roi',
+                type: 'number'
+              } ,
+              {
+                title: 'Type',
+                name: 'type',
+                type: 'string'
+              } ,
+              {
+                title: 'Status',
+                name: 'status',
+                type: 'string'
+              } ,
+              {
+                title: 'Budget',
+                name: 'budget',
+                type: 'number'
+              } ,
+              {
+                title: 'Duration',
+                name: 'duration',
+                type: 'string'
+              } ,
+              {
+                title: 'Memo',
+                name: 'memo',
+                type: 'text'
+              } ,
+              {
+                title: 'Index',
+                name: 'index',
+                type: 'boolean'
+              } ,
+
+
             ]
           }
         ]

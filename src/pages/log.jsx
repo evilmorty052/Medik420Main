@@ -1,5 +1,3 @@
-import React from 'react'
-import { getAuth } from '../contexts/mojocontext'
 import { Spin } from 'antd'
 import { useEffect } from 'react'
 // import { Spin } from 'antd'
@@ -8,7 +6,6 @@ import { FaArrowRight } from 'react-icons/fa'
 import MojoAuth from "mojoauth-web-sdk"
 import { useState } from 'react'
 import { client } from '../../lib/client'
-import {useQuery} from '@tanstack/react-query'
 import { Button, Result } from 'antd'
 import Loader from '../components/Loader'
 
@@ -19,13 +16,12 @@ export const mojoauth = new MojoAuth("test-872efdab-6b61-418c-a0a6-5bc689a06f4d"
 
 function log () {
 const history = useNavigate()
-const getQuery = useQuery
-const {login, fetchuser, handleredirect, userInfo,  } = getAuth()
 const [payload, setPayload] = useState(null)
 const [isAuth, setIsAuth] = useState(false)
 const [currentuser, setcurrentuser] = useState(null)
 const userId = payload?.user.identifier
 const [test , setTest] =useState()
+const [error , setError] =useState("")
 
 
 
@@ -35,10 +31,16 @@ useEffect(() => {
         });
 
 	mojoauth.signIn().then(payload => {
+      if(payload.length < 1){
+        setError(true)
+        return
+      }
 	    setPayload(payload)
       setIsAuth(true)
 	    // document.getElementById("mojoauth-passwordless-form").remove();
-	})
+	}).catch((error)=>{
+    setError(error)
+  })
 }, [])
 
 
@@ -57,6 +59,8 @@ let query = isAuth? ` *[email == "${userId}" ]
 const navigate = () =>{
   if (currentuser) {
     localStorage.setItem('firstname', currentuser.firstname)
+    localStorage.setItem('lastname', currentuser.lastname)
+    localStorage.setItem('cookie', currentuser._id)
     setTimeout(() => {
       window.location.replace('/dashboard')
     }, 4000)
@@ -103,6 +107,17 @@ useEffect(() => {
 }, [currentuser])
 
 
+if(error){
+  console.log(payload)
+  return(
+    <Result
+    status="error"
+    title="Something went wrong!"
+    subTitle="Please try again"
+  />
+  )
+  }
+
 
 if(isAuth){
   
@@ -116,6 +131,7 @@ if(isAuth){
     </>
   )
 }
+
 
 
 

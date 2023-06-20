@@ -3,16 +3,7 @@ import Chart from 'chart.js/auto';
 import dayjs from 'dayjs';
 
 function LineChart({label, entries}) {
-    // const signups = [
-    //    10257,
-    //    11245,
-    //    11902,
-    //    10834,
-    //    12342,
-    //    10419,
-    //    12738,
-    //  ];
-//    const activeUsers = signups.map((value) => Math.round(value * 0.92));
+
    
      const data = {
        labels: label,
@@ -21,9 +12,9 @@ function LineChart({label, entries}) {
            label: 'last 30 days',
            data: entries,
            fill: true,
-           borderColor: 'rgb(75, 192, 192)',
+           borderColor: '#009ceb',
            tension: 0.1,
-           backgroundColor: '#8DB89B'
+           backgroundColor: '#e3eff6'
          },
        ],
        
@@ -31,22 +22,36 @@ function LineChart({label, entries}) {
      
      const options = {
        scales: {
-         yAxes: [
-           {
-             ticks: {
-               beginAtZero: true
-             },
-             
-           }
-         ]
+        x: {
+          grid:{
+            color: '#f6f8fa'
+          },
+          ticks: {
+            // Include a dollar sign in the ticks
+            callback: function(value, index, ticks) {
+              return index % 2 === 0 ? this.getLabelForValue(value) : '';
+
+            }
+        }
+        },
+        y: {
+          grid:{
+            color: '#f6f8fa'
+          },
+          ticks: {
+              // Include a dollar sign in the ticks
+              callback: function(value, index, ticks) {
+                  return '$' + value;
+              }
+          }
+      }
        },
        backgroundColor: 'white'
      };
      
      return(
    <>
-    {/* <h3 className='text-center'>2022 Performance</h3> */}
-   <div className='w-full'>
+   <div className='w-full '>
    <Line data={data} options={options} />
    </div>
    </>
@@ -72,39 +77,11 @@ function LineChart({label, entries}) {
       ],
       
     };
-    
-    // const options = {
-    //   scales: {
-    //     y: [
-    //       {
-    //         ticks: {
-    //           beginAtZero: true
-    //         },
-            
-    //       }
-    //     ],
-    //     x:{
-    //       skipNull:false
-    //     }
-          
-           
-    //   }, 
-    // };
-
-    
-    
-
   
-  
-  
-  
-  
-  
-    
     return(
   <>
    {/* <h3 className='text-center'>2022 Performance</h3> */}
-  <div className='w-full'>
+  <div className='w-full '>
   <Line  data={data}  />
   </div>
   </>

@@ -1,8 +1,8 @@
 const styles = {
   boxWidth: "xl:max-w-[1280px] w-full",
   sectionHeading : "text-gray-800 text-[38px] font-semibold font-space",
-  UiHeading : "text-gray-800 text-[28px] md:text-[25px] font-semibold font-space",
-  UIMenu: 'text-[24px] text-gray-700 font-semibold hover:text-blue-600',
+  UiHeading : "text-gray-800 text-[20px] md:text-[25px] font-semibold font-space",
+  UIMenu: 'text-[19px] text-gray-700 font-semibold hover:text-blue-600',
   MenuButton: 'py-4 px-8 bg-green-300 rounded-lg  text-gray-600 text-[15px] font-medium hover:bg-green-400 hover:text-gray-800 cursor-pointer outline outline-gray-200 shadow-md h-10 w-48',
   SettingsIcon: 'text-[20px] text-gray-500',
   Input: 'py-2.5 sm:py-4 border border-gray-200 shadow-inner rounded-lg w-72 sm:w-96 md:w-[400px] text-gray-400',

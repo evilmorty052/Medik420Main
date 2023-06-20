@@ -3,11 +3,10 @@ import styles from '../../style'
 import { FaAngleRight, FaUser } from 'react-icons/fa'
 import {AnimatedSidebar, LaptopDisplay} from '../../components/index'
 import Sidebar from '../../partials/Sidebar2'
-import { SettingPage, switchSettings } from '../../Redux/slices/settingsSlice'
-import {useDispatch} from 'react-redux'
 import {AccountInfo, SecuritySettings,MainSettings, MobileSettings, LaptopSettings} from './index'
 import Header from '../../partials/Header'
 import { useNavigate } from 'react-router-dom'
+import { LargeHeader } from '../../components/Dashboard/LaptopDisplay'
 
 
 
@@ -29,15 +28,16 @@ function handleSideBar(params) {
 }
 
 function AllSettings(params) {
-    const dispatch = useDispatch()
+
     const navigate = useNavigate()
     
     return(
         <>
         
         <div className='sm:hidden'><Header func={() => navigate(-1)} halfmenu={true}/></div>
-        <div className='flex  h-screen '>
-            <div className=' sm:pt-20 container mx-auto  '>
+        <LargeHeader/>
+        <div className=' sm:h-screen '>
+            <div className=' sm:pt-24 sm:container sm:mx-auto max-w-7xl  '>
                   <div>
                     <div className='hidden sm:block '>
                  <LaptopSettings/>

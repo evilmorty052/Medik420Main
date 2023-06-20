@@ -1,13 +1,9 @@
 import { useState } from 'react';
-import AnimatedCard from '../components/AnimatedCard';
-import ProfileSettingsPage from './ProfilePage';
-import Dynamicnav from '../partials/Dynamicnav';
-import Header from '../partials/Header';
 import AnimatedSidebar from '../components/AnimatedSidebar';
 import { FaHome } from 'react-icons/fa';
-import { Navbar } from '../components';
 import { Link } from 'react-router-dom';
 import mail from '../assets/mail.png'
+
 
 
 
@@ -145,24 +141,44 @@ export function Feature({ title, description, image, to }) {
 
 export function Video({ title, description, image, poster }) {
   return (
-    <div className="flex items-center md:flex-row flex-col mb-10">
-      <video
-       poster={poster}
-       autoPlay 
-       muted
-       loop
-       playsInline
-        className="w-full md:w-1/3 "
-        src={image}
-        alt={title}
-      />
-      <div className="md:ml-4 mt-4 md:mt-0">
-        <h3 className="text-2xl font-bold mb-2">{title}</h3>
-        <p className="text-lg leading-relaxed mb-4">{description}</p>
+    <div class="py-16">
+      <div class="xl:container m-auto px-6 text-gray-600 md:px-12 xl:px-16">
+        <div class="lg:bg-gray-200  lg:p-16 rounded-[4rem] space-y-6 sm:flex sm:gap-6 justify-center sm:space-y-0 lg:items-center">
+          <div class="sm:w-5/12 lg:w-1/2">
+            <video
+              poster={poster}
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="w-full sm:max-h-[300px] object-cover  "
+              src={image}
+              alt={title}
+            />
+          </div>
+          <div class="sm:w-7/12 lg:w-1/2">
+            <h2 class="text-3xl font-bold text-gray-900 sm:text-4xl ">
+              {title}
+            </h2>
+            <p class="my-8 text-gray-600 ">{description}</p>
+
+            <Link
+              to={"/bem"}
+              class="relative flex h-12 w-full items-center justify-center px-8 before:absolute before:inset-0 before:rounded-full before:bg-sky-100 before:bg-gradient-to-b before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95  sm:w-max"
+            >
+              <span class="relative text-base font-semibold text-sky-600 dark:text-white">
+                Explore
+              </span>
+            </Link>
+          </div>
+        </div>
       </div>
     </div>
   );
+
+
 }
+
 
 const SmallBiz = () => {
 const [isexpanded, setisexpanded] = useState(false)
@@ -171,7 +187,6 @@ const [isexpanded, setisexpanded] = useState(false)
   <>
   
   <div className='bg-plat min-h-screen relative flex flex-col'>
-   <Navbar open={setisexpanded}/>
    <div className='lg:hidden'>
   <AnimatedSidebar
    setIsExpanded={setisexpanded}

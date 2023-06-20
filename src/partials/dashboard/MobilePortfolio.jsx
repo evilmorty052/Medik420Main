@@ -1,4 +1,10 @@
-import { FaChild, FaCheck, FaSearch , FaArrowLeft, FaChevronLeft , FaChevronRight} from "react-icons/fa"
+import 
+{ FaChild, 
+ FaCheck, 
+ FaSearch ,
+ FaArrowLeft, 
+ FaChevronLeft ,
+ FaChevronRight} from "react-icons/fa"
 import styles from "../../style"
 import { useState, useEffect } from "react"
 import { Result } from 'antd'
@@ -6,8 +12,8 @@ import {
   PortfolioScreen, 
   CryptoinvestmentScreen, 
   SyndicatesInvestmentScreen,
-
-  Pricing,
+  BottomNavigation,
+  DashboardPricing,
   SearchInvestments
 } from "./index"
 import { Link, Route, Routes, useNavigate , useLocation} from "react-router-dom"
@@ -18,14 +24,15 @@ import ScaleLoader from "react-spinners/ScaleLoader";
 import JSConfetti from 'js-confetti'
 import Header from "../Header"
 import Startups from "./Startups"
-import Sidebar from "../Sidebar2"
 import './MobilePortfolio.css'
-import { bitcoin, startupstab, digitalfarmstab, syndicatesicon, stockstab } from "../../assets"
+import { brain, calendar, sharedpie, useroutlined, piggybank} from "../../assets"
 import { LargeHeader } from "../../components/Dashboard/LaptopDisplay"
+import {Loader} from "../../components"
 
 
 
-const MobilePortfolio = ({portfolios}) => {
+
+const MobilePortfolio = ({portfolios, user,}) => {
 const [activePortfolio, setactivePortfolio] = useState(false)
 const [crypto, setcrypto] = useState(false)
 const [sharedPortfolio, setSharedPortfolio] = useState(null)
@@ -37,23 +44,52 @@ const navigate = useNavigate()
 
 const AllPortfolios = () => {
 
-  const PortfolioCard = ({header, buttontext, func, description}) => {
+  const PortfolioCard = ({header, buttontext, func, description, icon, iconsize, active}) => {
     return(
         <>
-         <motion.div animate={{opacity: 1}} initial={{opacity: 0}}  className="flex items-center space-x-4 bg-gray-200 max-w-[350px] px-2 py-4 rounded-xl">
-             <div className="p-2 bg-white rounded-xl">
-                <FaChild/>
+         <motion.div onClick={func} whileInView={{opacity: 1}} initial={{opacity: 0}} transition={{ease: 'easeIn', duration: 0.2}}  className="flex items-center space-x-4 bg-gray-200/80 shadow-xl ring-1 ring-slate-200 max-w-[350px] px-2 py-4 rounded-xl">
+             <div className="">
+                <img src={icon} alt="" className={` ${iconsize}`} />
              </div>
              <div className="flex items-center space-x-2">
                  <div className="flex-1">
                     <h3 className="text-lg font-semibold mb-2">{header}</h3>
                      <p className=" text-sm leading-normal" >{description} </p>
                  </div>
-                 <button onClick={func} className="w-20  bg-green-300 py-1  rounded-3xl">{buttontext}</button>
+                 {
+                  !active ?
+                  <button  className="w-20  bg-green-300 py-1  rounded-3xl">{buttontext}</button>
+                  : <FaChevronRight onClick={func}/>}
              </div>
          </motion.div>
         </>
     )
+}
+
+function handleIcon (key) {
+  let icon
+
+  switch (key) {
+    case 'Smart':
+      icon = brain  
+      break;
+    
+      case 'Personal':
+      icon = useroutlined  
+      break;
+      
+      case 'Kids':
+      icon = piggybank  
+      break;
+
+      case 'Retirement':
+      icon = calendar  
+      break;
+  
+    default:
+      break;
+  }
+  return icon
 }
    
     
@@ -64,31 +100,18 @@ const AllPortfolios = () => {
 
     return(
         <>
-        
-        <div className="lg:hidden"><Header setisExpanded={setexpanded} fullmenu={true} halfmenu={false}/></div>
-        <div onClick={()=> expanded && setexpanded(false)} className="pb-[90px] pt-4 md:pt-20 min-h-screen  md:pb-10 md:container mx-auto bg-white  md:px-20">
+        <LargeHeader user={user}/>
+        <Header plan={user?.plan} notifications={user?.notifications} setisExpanded={setexpanded} fullmenu={true} halfmenu={false}/>
+        <div onClick={()=> expanded && setexpanded(false)} className=" mx-auto bg-white pt-4  pb-[90px] sm:pb-10 min-h-screen  md:pt-20  md:pb-10 md:container  md:px-20">
          <div className="w-full">
          <SearchInvestments/>
          </div>
-           <div className="px-2 pt-8 space-y-10 ">
-               <div className="space-y-8 md:space-y-10">
-                  <div className="md:px-14">
-                    <h3 className={styles.UiHeading}>New features</h3>
-                  </div>
-                <div className="sm:flex gap-x-10 hidden justify-center ">
-                <PortfolioCard func={() => setSharedPortfolio(true)} header={'Shared Portfolio'} description={'find out how easy it is to share a portfolio with another user.'} buttontext={'Explore'}/>
-                <div>
-                <PortfolioCard func={() => setSharedPortfolio(true)} header={'Shared Portfolio'} description={'find out how easy it is to share a portfolio with another user.'} buttontext={'Explore'}/>
-                </div>
-                </div>
-                 <div className="sm:hidden flex justify-center">
-                 <PortfolioCard func={() => setSharedPortfolio(true)} header={'Shared Portfolio'} description={'find out how easy it is to share a portfolio with another user.'} buttontext={'Explore'}/>
-                 </div>
-               </div>
-
+           <div className="px-2 pt-8 space-y-10 md:space-y-16 ">
+              
+               {/* your portfolios section */}
              { yourportfolios && 
               <div className="space-y-8 py-4 md:space-y-10">
-                  <div className="md:px-14"><h3 className={styles.UiHeading}>Your Portfolios</h3></div>
+                  <div className="md:px-14 "><h3 className={`text-2xl  text-blk font-semibold   sm:tracking-wide sm:text-center`}>Your Portfolios</h3></div>
                 <div className="flex  justify-center">
                 <div className="flex flex-col gap-x-10 gap-y-6 items-center sm:grid grid-cols-2 grid-flow-row ">
                  {yourportfolios?.map((portfolio) => (
@@ -96,23 +119,24 @@ const AllPortfolios = () => {
                               func={()=> {
                                  // setactivePortfolio(true)
                                  setactivePortfolio(portfolio)
+                                 navigate(`${portfolio._key}`)
                                  console.log(portfolio)
                              }} 
-                                 header={`${portfolio.type} Portfolio`} description={'Explore stocks startups and crypto and invest as you see fit '} buttontext={'View'}/>
+                                 header={`${portfolio.type} Portfolio`} description={portfolio.description} buttontext={'View'} icon={handleIcon(portfolio.type)} iconsize={'h-16 w-16'} active={portfolio.deployed}/>
                  ))}
                 </div>
                 </div>
                </div>
                }
-
+                {/* available portfolio section */}
                {
-                availableportfolios &&
+                availableportfolios?.length > 0 &&
                 <div className="space-y-8 py-4 md:space-y-10">
                   <div className="md:px-14">
-                  <h3 className={styles.UiHeading}>Available Portfolios</h3>
+                  <h3 className={`text-2xl  text-blk font-semibold   sm:tracking-wide sm:text-center`}>Available Portfolios</h3>
                   </div>
                  <div className="flex justify-center">
-                 <div className="flex gap-x-10 flex-col gap-y-8  items-center sm:grid grid-cols-2 grid-flow-row ">
+                 <div className="flex gap-x-10 flex-col gap-y-12  items-center sm:grid grid-cols-2 grid-flow-row ">
                 {availableportfolios?.map((portfolio, index)=>{
                     
                     return(
@@ -122,7 +146,7 @@ const AllPortfolios = () => {
                             setactivePortfolio(portfolio)
                             console.log(activePortfolio)
                             navigate('setup')
-                            }} header={`${portfolio.type} portfolio`} description={portfolio.description} buttontext={'Setup'}/>
+                            }} header={`${portfolio.type} portfolio`} description={portfolio.description} buttontext={'Setup'} icon={handleIcon(portfolio?.type)} iconsize={'h-14 w-14'}/>
                   
                         </>
                     )
@@ -132,8 +156,16 @@ const AllPortfolios = () => {
            
                </div>
                }
-           </div>
-         
+                {/* shared portfolio section */}
+                {/* <div className="space-y-8 md:space-y-10">
+                  <div className="md:px-14">
+                    <h3 className={`text-2xl  text-blk font-semibold sm:text-center  sm:tracking-wide`}>Shared Portfolios</h3>
+                </div>
+                 <div className=" flex justify-center">
+                 <PortfolioCard func={() => setSharedPortfolio(true)} header={'Shared Portfolio'} description={'find out how easy it is to share a portfolio with another user.'} buttontext={'Explore'} icon={useroutlined} iconsize={'h-20 w-20'}/>
+                 </div>
+               </div> */}
+           </div>     
          </div>
         
         </>
@@ -197,7 +229,7 @@ client
         if (loading) {
             return (
                 <>
-                <div className="flex w-full">
+                {/* <div className="flex w-full min-h-screen">
                     <div className="container mx-auto max-w-5xl bg-dimWhite">
                         <div className="flex  justify-center py-10">
                              <div className="flex flex-col gap-y-8 items-center">
@@ -211,15 +243,23 @@ client
                              </div>
                         </div>
                     </div>
+                </div> */}
+                <div className="bg-white min-h-screen container mx-auto flex flex-col justify-center items-center">
+                <h3 className={'text-[28px] font-semibold text-gray-800 text-center'}>Setting up Your Portfolio</h3>
+                <ScaleLoader
+                 width={30}
+                  color={'#00c4ee'}/>
                 </div>
                 </>
             )
         }
         return(
             <>
-            <Result  status="success"
+           <div className="h-screen bg-white">
+           <Result  status="success"
     title="Your Portfolio has been set up"
     subTitle="You Will Be Redirected To Your Dashboard Shortly"/>
+           </div>
             </>
         )
     }
@@ -239,10 +279,10 @@ client
         return (
             <>
             <AnimatePresence exitBeforeEnter={true} >
-            <motion.div key={'motion'} exit={{y: '100%'}} initial={{y: "-100%"}} animate={{y:'0'}} transition={{duration: 0.6}}  className='flex flex-col   px-4 space-y-8    '>
+            <motion.div key={'motion'} exit={{y: '100%'}} initial={{y: "-100%"}} animate={{y:'0'}} transition={{duration: 0.6}}  className='flex min-h-screen sm:pt-14 md:pt-20 flex-col   px-4 space-y-8    '>
                 <div  className='py-4 mx-auto sm:min-w-[600px] '>
                 <div className='text-start space-y-2 pb-4 max-w-[60ch]'>
-                  <h3 className={'sm:text-[28px] text-[25px] uppercase leading-tight  font-bold text-gray-800 text-center'}>we need some information to set up your {activePortfolio.type == 'Kids' ? 'Custodial' : activePortfolio.type } portfolio</h3>
+                  <h3 className={'sm:text-[28px] text-[20px] uppercase leading-tight  font-semibold text-gray-800 text-center'}>we need some information to set up your {activePortfolio.type == 'Kids' ? 'Custodial' : activePortfolio.type } portfolio</h3>
                  {/* <Why setshowmodal={handlemodal} showmodal={showmodal}/> */}
                 </div>
                 <div className="py-8">
@@ -348,10 +388,10 @@ client
         <div className="flex justify-center ">
             <Routes>
                 <Route path="/" element={<DefaultScreen/>}/>
-                <Route path="/question1" element={ <Questions back={()=> back()} func={() => handlepage1()} question={'What is your annual income ? '} answers={annualincome}/>}/>
-                <Route path="question2" element={ <Questions back={()=> back()} func={() => handlepage2()}  question={'how frequently Do you intend to withdraw ?  '} answers={withdawalfrequency}/>}/>
-                <Route path="question3" element={ <Questions back={()=> back()} func={() => handlepage3()}  question={'Set-up Auto invest For this Portfolio ? '} answers={autoinvest}/>}/>
-                <Route path="question4" element={ <Agreements account={activePortfolio.type == 'Kids' ? 'Custodial' : activePortfolio.type } func={()=> navigate('setup/created')}/>}/>
+                <Route path="/question1" element={ <Questions styles={'md:pt-14'} back={()=> back()} func={() => handlepage1()} question={'What is your annual income ? '} answers={annualincome}/>}/>
+                <Route path="question2" element={ <Questions styles={'md:pt-14'} back={()=> back()} func={() => handlepage2()}  question={'how frequently Do you intend to withdraw ?  '} answers={withdawalfrequency}/>}/>
+                <Route path="question3" element={ <Questions styles={'md:pt-14'} back={()=> back()} func={() => handlepage3()}  question={'Set-up Auto invest For this Portfolio ? '} answers={autoinvest}/>}/>
+                <Route path="question4" element={ <Agreements styles={'md:pt-14'}  account={activePortfolio.type == 'Kids' ? 'Custodial' : activePortfolio.type } func={()=> navigate('setup/created')}/>}/>
                 <Route path="created" element={ <AccountCreated/>}/>
             </Routes>
         </div>
@@ -377,31 +417,29 @@ if(sharedPortfolio){
     return(
         <>
         <div className="z-[7000]"><Header func={()=>{ 
-          console.log('clicked')
           setSharedPortfolio(false)}} halfmenu={true} /></div>
-        <Pricing/>
+        <DashboardPricing/>
         </>
     )
 }
 
-// if(!portfolios){
-// return(
-//   <h3>loading</h3>
-// )
-// }
+if(!portfolios){
+return(
+  <Loader/>
+)
+}
 
   return (
    <> 
-   <LargeHeader/>
-   <div className="md:hidden"><Sidebar sidebarOpen={expanded}  setSidebarOpen={setexpanded} /></div>
-   <div   className=" md:container mx-auto max-w-4xl  ">
+   
+   <div   className=" md:container mx-auto   ">
          {/* <div className="sm:flex sm:justify-center"><SearchInvestments/></div>  */}
         {/* <div className="w-full flex space-x-8 sm:justify-center  p-4 overflow-x-scroll"><Tabs/></div>  */}
         <Routes>
             <Route path="/" element={<AllPortfolios/>}/>
-            <Route path="crypto" element={<CryptoinvestmentScreen />}/>
-            <Route path="startups" element={<StartupsPage/>}/>
-            <Route path="portfolio" element={<PortfolioScreen ActivePortfolio={activePortfolio}/>}/>
+            <Route path="crypto/*" element={<CryptoinvestmentScreen />}/>
+            <Route path="startups/*" element={<StartupsPage/>}/>
+            <Route path="/:id" element={<PortfolioScreen />}/>
             <Route path="syndicates/*" element={<SyndicatesInvestmentScreen/>}/>
             {/* <Route path="stocks/*" element={<StocksScreen/>}/> */}
             <Route path="setup/*" element={<SetupScreen/>}/>

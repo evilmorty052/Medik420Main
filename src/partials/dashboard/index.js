@@ -1,43 +1,44 @@
-import BottomNavigation from "./BottomNavigation";
+import BottomNavigation, {BottomNavigation2} from "./BottomNavigation";
 import DebitCard from "./DebitCard";
 import NewsTab from "./NewsTab";
 import Agents from "./AgentCard";
 import MobileDashboard from "./MobileDashboard";
 import MobilePortfolio from "./MobilePortfolio";
-import MessageScreen from "./MessageScreen";
 import PortfolioScreen from "./PortfolioScreen";
 import MobileHub from "./MobileHub";
 import CryptoinvestmentScreen from "./CryptoinvestmentScreen";
 import LineChart from "../charts/Linechart";
 import SyndicatesInvestmentScreen from "./SyndicatesInvestmentScreen";
-import MessageUi from "./MessageUi";
 import Withdraw from "./Withdraw";
 import StocksScreen from "./StocksScreen";
-import { PortfolioCard, Pricing, SearchInvestments, Infobutton } from "./Elements";
+import { PortfolioCard, SearchInvestments, Infobutton, AnnouncementBanner } from "./Elements";
 import DigitalFarmPage from "./DigitalFarmPage";
 import DigitalFarmShop from "./DigitalFarmShop";
+import DashboardPricing from "./DashboardPricing"
+import Hub from "./hub/Hub";
 
 export { 
     BottomNavigation,
+    BottomNavigation2,
     DebitCard,
     NewsTab,
     Agents,
     MobileDashboard,
     MobilePortfolio,
-    MessageScreen,
     PortfolioScreen,
     MobileHub,
     CryptoinvestmentScreen,
     LineChart,
     SyndicatesInvestmentScreen,
-    MessageUi,
     Withdraw,
     StocksScreen,
     PortfolioCard,
-    Pricing,
+    DashboardPricing,
     SearchInvestments,
     DigitalFarmPage,
     Infobutton,
-    DigitalFarmShop
+    DigitalFarmShop,
+    AnnouncementBanner,
+    Hub
     
 }

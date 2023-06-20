@@ -1,11 +1,11 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import Transition from '../../utils/Transition';
-
-import UserAvatar from '../../images/user-avatar-32.png';
 import { Avatar } from 'antd';
+import { createAvatar } from '@dicebear/core';
+import { personas, identicon, initials } from '@dicebear/collection';
 
-function UserMenu({name, avatar}) {
+function UserMenu({name, avatar, plan,}) {
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
@@ -32,8 +32,19 @@ function UserMenu({name, avatar}) {
     return () => document.removeEventListener('keydown', keyHandler);
   });
 
+  const firstname = localStorage.getItem('firstname');
+  const lastname = localStorage.getItem('lastname');
+
+  const defaultAvatar = useMemo(() => {
+    return createAvatar(initials, {
+      size: 128,
+      seed: `${firstname} ${lastname}`,
+      // ... other options
+    }).toDataUriSync();
+  }, []);
+
   return (
-    <div className="relative inline-flex">
+    <div className="relative z-[70] inline-flex">
       <button
         ref={trigger}
         className="inline-flex justify-center items-center group"
@@ -41,8 +52,8 @@ function UserMenu({name, avatar}) {
         onClick={() => setDropdownOpen(!dropdownOpen)}
         aria-expanded={dropdownOpen}
       >
-        <Avatar className="w-8 h-8 rounded-full md:hidden border border-white" src={avatar} width="32" height="32" alt="User" />
-        <div className="flex items-center truncate">
+        <Avatar className="w-8 h-8 rounded-full  border border-white" src={!avatar ? defaultAvatar : avatar} width="32" height="32" alt="User" />
+        <div className="flex items-center truncate sm:hidden">
           <span className="truncate ml-2 text-sm text-black font-bold group-hover:text-green-300 uppercase">{name}</span>
           <svg className="w-3 h-3 shrink-0 ml-1 fill-current text-slate-400" viewBox="0 0 12 12">
             <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
@@ -51,7 +62,7 @@ function UserMenu({name, avatar}) {
       </button>
 
       <Transition
-        className="origin-top-right z-10 absolute top-full right-0 min-w-44 bg-white border border-slate-200 py-1.5 rounded shadow-lg overflow-hidden mt-1"
+        className="origin-top-right  z-[70] absolute top-full right-0 min-w-44 bg-white border border-slate-200 py-1.5 rounded shadow-lg overflow-hidden mt-1"
         show={dropdownOpen}
         enter="transition ease-out duration-200 transform"
         enterStart="opacity-0 -translate-y-2"
@@ -60,20 +71,20 @@ function UserMenu({name, avatar}) {
         leaveStart="opacity-100"
         leaveEnd="opacity-0"
       >
-        <div
+        <div className={"z-[70] "}
           ref={dropdown}
           onFocus={() => setDropdownOpen(true)}
           onBlur={() => setDropdownOpen(false)}
         >
-          <div className="pt-0.5 pb-2 px-3 mb-1 border-b border-slate-200">
+          {/* <div className="pt-0.5 pb-2 px-3 mb-1 border-b border-slate-200">
             <div className="font-medium text-slate-800">{name}</div>
-            <div className="text-xs text-slate-500 italic">Profile Active</div>
-          </div>
+            <div className="text-xs text-slate-500 italic">{plan}</div>
+          </div> */}
           <ul>
             <li>
               <Link
                 className="font-medium text-sm text-indigo-500 hover:text-indigo-600 flex items-center py-1 px-3"
-                to="/profile"
+                to="/dashboard/settings"
                 onClick={() => setDropdownOpen(!dropdownOpen)}
               >
                 Settings

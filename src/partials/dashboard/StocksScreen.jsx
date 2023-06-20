@@ -1,14 +1,15 @@
 import { useState , useEffect, useRef} from "react"
-import { FaAngleDown, FaAngleUp, FaChartLine, FaChevronCircleUp, FaChevronDown, FaChevronLeft, FaChevronRight, FaChevronUp, FaSearch } from "react-icons/fa"
-import { Link, Route, Routes, useLocation, useNavigate,  } from "react-router-dom"
+import { FaAngleDown, FaAngleUp, FaArrowLeft, FaChevronDown, FaChevronLeft, FaChevronRight, FaChevronUp, FaSearch } from "react-icons/fa"
+import {useNavigate,  } from "react-router-dom"
 import { client, urlFor } from "../../../lib/client"
 import { bitcoin, healthcaretab, financetab, technologytab, communicationtab } from "../../assets"
 import Header from "../Header"
-import {StockChart, SevenDayChart, AnnualChart} from "../charts/Linechart"
+import {SevenDayChart} from "../charts/Linechart"
 import { day } from "../../../lib/dayjs"
 import dayjs from 'dayjs';
-import { mockTimeSeries, mockNews } from "../../stocksupload"
 import { Pagination, } from "./Elements"
+import {Loader} from "../.././components"
+import { Avatar } from "antd"
 
 
 
@@ -21,8 +22,9 @@ const StocksScreen = () => {
     const [timeseries, settimeseries] = useState(null)
     const [activeListTitle, setactiveListTitle] = useState('Technology')
     
- const last = useRef()   
-const inputref = useRef()
+ const last = useRef()
+ const first = useRef()  
+ const inputref = useRef()
 
 const [searchTerm, setsearchTerm] = useState('')
 
@@ -55,7 +57,7 @@ const labels = Array.from({ length: 12 }, (_, i) => {
   return `${month}${year}`;
 }).reverse();
 
-console.log(labels)
+
 
 const lastYearSameMonth = today.subtract(1, 'year')
 const thisYearSameMonth = today
@@ -408,20 +410,27 @@ const annuallabels = [lastYearSameMonth, thisYearSameMonth];
    
 const [activeList, setactiveList] = useState(null)
   
-const pathhash = useLocation().hash
+const BackButton = () => {
+  return(
+    <>
+       {/* back button */}
+       <div className="w-full p-4  bg-white">
+           <div onClick={()=> navigate(-1)} className="flex items-center space-x-2">  <FaArrowLeft/> 
+           <span>Back</span> <span className="hidden sm:block">to all investments</span>
+           </div>
+       </div>
+    </>
+  )
+ }
   
     const StockTabs = () => {
       
-      
-      
-
-
-
       return(
         <>
-         <div className="gap-x-5 sm:gap-x-6 lg:gap-x-20 flex sm:overflow-x-scroll ">
+         <div className="relative">
+         <div className="gap-x-5 sm:gap-x-6 lg:gap-x-20 flex overflow-x-scroll ">
          
-         <div id="first" onClick={()=> {
+         <div ref={first} onClick={()=> {
           setactiveListTitle('Technology')
           setactiveList(techStocks)}}>
              <div className=" w-32 h-32 sm:w-36 sm:h-32 p-4 relative bg-gray-200 bg-cover bg-center bg-no-repeat rounded-xl"
@@ -461,7 +470,7 @@ const pathhash = useLocation().hash
          </div>
        
          
-         <div  id="last"  onClick={()=> {
+         <div  ref={last}  onClick={()=> {
           setactiveListTitle('Healthcare')
           setactiveList(healthcareStocks)}}>
              <div className="  w-32 h-32 sm:w-36 sm:h-32 p-4 relative bg-gray-200 bg-cover bg-center bg-no-repeat rounded-xl"
@@ -472,15 +481,17 @@ const pathhash = useLocation().hash
                <div className="absolute inset-0 bg-gray-700/40 rounded-xl"></div>   
              </div>
          </div>
-           {/* { path == '#last' && 
-           <a href="#first" className="fixed sm:hidden top-[40%] left-0 flex items-center justify-center h-10 w-10 pr-1 z-[4000000] bg-white rounded-full">
+           
+          
+         </div>
+         { 
+           <a onClick={() => {first.current.scrollIntoView({ behavior: 'smooth' })}} className="absolute sm:hidden top-[30%] left-0 flex items-center justify-center h-10 w-10 pr-1 z-[4000000] bg-white rounded-full">
               <FaChevronLeft/>
             </a>}
-           {!path | path == '#first' &&
-            <a  href="#last" className="fixed sm:hidden  top-[40%] right-0 flex items-center justify-center h-10 w-10 pl-1 z-[4000000] bg-white rounded-full">
+           {
+            <a onClick={() => {last.current.scrollIntoView({ behavior: 'smooth' })}}  className="absolute sm:hidden  top-[30%] right-0 flex items-center justify-center h-10 w-10 pl-1 z-[4000000] bg-white rounded-full">
               <FaChevronRight/>
-            </a>} */}
-          
+            </a>}
          </div>
         </>
       )
@@ -566,7 +577,7 @@ const pathhash = useLocation().hash
 
     const res = await fetch(`https://financialmodelingprep.com/api/v3/profile/${activeStock.symbol}?apikey=d3112acd4e081291c5239fb8af8763e7`)
     const data = await res.json()
-    const news = await fetch(`https://api.marketaux.com/v1/news/all?symbols=${activeStock.symbol}&filter_entities=true&language=en&api_token=1W6ETCE4CTKXVXa1mZrkQ5ZEoAt86cjOgNeZLSYV`)
+    const news = await fetch(`https://api.marketaux.com/v1/news/all?symbols=${activeStock.symbol}&filter_entities=true&language=en&api_token=HP0gdwtvzff4gjKdWlF064xUdSVIjGXSfbmYTEBi`)
     // const news = await fetch(`https://financialmodelingprep.com/api/v3/stock_news?tickers=${activeStock.symbol}&page=0&apikey=b2ae89f8d8566cc5d2f8da526e92a73f`)
     const newsdata = await news.json()
     setstockNews(newsdata)
@@ -601,27 +612,32 @@ const historicalPrices = timeSeries?.map((item)=>{
 
     const StockHeader = () => {
       return(
-        <div className="p-2">
-             <div className="py-2">
-                <img src={stockdata?.[0].image} className='rounded-full h-16 w-16'  />
+        <div className="p-2 md:flex justify-between items-center">
+            <div className="p-2 md:flex ">
+            <div className="py-2">
+                <img src={stockdata?.[0].image} className='rounded-lg h-16 w-16  object-contain'  />
              </div>
              <div className="px-2">
-                <p className="text-[20px] font-semibold">Ticker: {activeStock?.symbol}</p>
+                <p className="text-[20px] font-semibold">{activeStock?.symbol}</p>
                <h3 className="text-[24px] font-bold">{activeStock?.companyName}</h3>
                 <div>
                 <p className="text-[24px] font-bold">${activeStock?.price}</p>
                 <p>{activeStock?.change}</p>
                 </div>
              </div>
+            </div>
+            {/* <div className="hidden md:block">
+               <button className="btn">Buy Stock</button>
+            </div> */}
         </div>
       )
     }
 
     const StockChartGrid = () => {
   
-      const mockvalues = mockTimeSeries.map((day)=>{
-        return day.close
-      })
+      // const mockvalues = mockTimeSeries.map((day)=>{
+      //   return day.close
+      // })
       
       let view
 
@@ -643,9 +659,9 @@ const historicalPrices = timeSeries?.map((item)=>{
       
         return(
           <>
-          <div className='container max-w-3xl space-y-8 py-4 px-2 md:px-0'>
+          <div className='container space-y-8 py-4 px-2 md:px-0'>
                <div>
-                <h3 className="text-[20px] font-semibold text-gray-800">{activeStock?.symbol} Company Breakdown:</h3>
+                <h3 className="text-[20px] font-semibold text-gray-800 sm:text-center">{activeStock?.symbol} Company Breakdown:</h3>
                 </div>
                <div className='flex justify-between pb-4 border-b border-gray-800'>
                         <div className='flex gap-x-2 items-center'>
@@ -653,7 +669,7 @@ const historicalPrices = timeSeries?.map((item)=>{
                            <p className='sm:text-[16px] text-gray-800 font-semibold'>Share Price</p>
                         </div>
                         <div>
-                            <p className='text-base  font-semibold text-gray-800'>$0.00</p>
+                            <p className='text-base  font-semibold text-gray-800'>${activeStock?.price}</p>
                         </div>
                </div>
                <div className='flex justify-between pb-4 border-b border-gray-800'>
@@ -666,7 +682,7 @@ const historicalPrices = timeSeries?.map((item)=>{
                         </div>
                </div>
               
-               <div className='flex justify-between pb-4 border-b border-gray-800'>
+               {/* <div className='flex justify-between pb-4 border-b border-gray-800'>
                         <div className='flex gap-x-2 items-center'>
                           
                            <p className='sm:text-[16px] text-gray-800 font-semibold'>Year to Date Change</p>
@@ -674,7 +690,7 @@ const historicalPrices = timeSeries?.map((item)=>{
                         <div>
                             <p className='text-base  font-semibold text-gray-800'>$0.00</p>
                         </div>
-               </div>
+               </div> */}
                {/* <div className='flex justify-between pb-4 border-b border-gray-800'>
                         <div className='flex gap-x-2 items-center'>
                           
@@ -693,7 +709,7 @@ const historicalPrices = timeSeries?.map((item)=>{
                             <p className='text-base font-semibold text-gray-800'>{stockdata?.[0].ipoDate}</p>
                         </div>
                </div>
-               <div className='flex justify-between pb-4 border-b border-gray-800'>
+               {/* <div className='flex justify-between pb-4 border-b border-gray-800'>
                         <div className='flex gap-x-2 items-center'>
                           
                            <p className='sm:text-[16px] text-gray-800 font-semibold'>Industry</p>
@@ -701,14 +717,14 @@ const historicalPrices = timeSeries?.map((item)=>{
                         <div>
                             <p className='text-base  font-semibold text-gray-800'>{stockdata?.[0].industry}</p>
                         </div>
-               </div>
+               </div> */}
                <div className='flex justify-between pb-4 border-b border-gray-800'>
                         <div className='flex gap-x-2 items-center'>
                           
-                           <p className='sm:text-[16px] text-gray-800 font-semibold'>Company Website</p>
+                           <p className='sm:text-[16px] text-gray-800 font-semibold'>Website</p>
                         </div>
                         <div>
-                            <p className='text-base font-semibold text-gray-800'>{`${stockdata?.[0].website}`}</p>
+                            <p className='text-sm font-semibold text-gray-800'>{`${stockdata?.[0].website}`}</p>
                         </div>
                </div>
                {/* <div className='flex justify-between pb-4 border-b border-gray-800'>
@@ -750,7 +766,7 @@ const historicalPrices = timeSeries?.map((item)=>{
           <>
              <div>
                     <div className="py-4">
-                    <h3 className="text-[24px] font-semibold">About {activeStock.symbol}:</h3>
+                    <h3 className="text-[24px] font-semibold sm:text-center">About {activeStock.symbol}:</h3>
                     </div>
                    <div>
                         {
@@ -796,6 +812,11 @@ const historicalPrices = timeSeries?.map((item)=>{
                      <strong>{title}</strong>          
              </div> 
             <p>{snippet}</p>
+             <div className="py-2">
+             <a className="text-blue-300 text-lg font-semibold" href={`${url}`} target="_blank" rel="noopener noreferrer">
+                View Article
+              </a>
+             </div>
             </div>
             <div className="py-4">
                      <p className="text-sm font-semibold text-gray-600">{timeAgo}</p>
@@ -951,21 +972,19 @@ const historicalPrices = timeSeries?.map((item)=>{
 
 
   
-    if (loading) {
+    if (!stockNews) {
       return(
-        <div className="flex justify-center">
-           .... loading
-        </div>
+       <Loader/>
       )
       
     }
   
     return(
       <> 
-      <div className="md:hidden">
+      <div className="sm:hidden">
       <Header func={()=> setactiveStock(null)} halfmenu={true}/>
       </div>
-      <div id="top" className="pt-8 flex flex-col pb-[103px] h-screen overflow-scroll md:pb-0 bg-[#f6f8fa] md:hidden ">
+      <div id="top" className="pt-8 flex flex-col pb-[103px] h-screen overflow-scroll md:pb-0  md:hidden ">
           <div ><StockHeader/></div>
          <StockChartGrid/>
          <div className="flex justify-center">
@@ -981,7 +1000,7 @@ const historicalPrices = timeSeries?.map((item)=>{
              </div>
               <div className="flex flex-col items-center">
                   {stockNews?.data.map((news)=>(
-                    <News image={news.image_url} source={news.source} title={news.title} published={news.published_at} snippet={news.snippet}/>
+                    <News image={news.image_url} source={news.source} title={news.title} published={news.published_at} snippet={news.snippet} url={news.url}/>
                   ))}
               </div>
           </div>
@@ -1001,17 +1020,40 @@ const historicalPrices = timeSeries?.map((item)=>{
       {/* {latopdisplay} */}
 
       <div className="">
-          <div id="top" className="pt-8 hidden md:flex flex-col pb-[103px]  md:pb-0 bg-[#f6f8fa]  md:container md:mx-auto md:max-w-3xl  gap-y-10  ">
-              <div ><StockHeader/></div>
-             <div className="flex justify-center pb-12">
-             <div className="w-[768px] h-[300px]">
-             <StockChartGrid/>
+          <div id="top" className=" hidden md:flex flex-col pb-[103px]  md:pb-0   md:container md:mx-auto md:max-w-5xl  gap-y-10  ">
+          <div className="w-full p-4  bg-white">
+           <div onClick={()=> setactiveStock(null)} className="flex items-center space-x-2">  <FaArrowLeft/> 
+           <span>Back</span> <span className="hidden sm:block">to all stocks</span>
+           </div>
+       </div>
+                <div ><StockHeader/></div>
+             <div className="grid grid-cols-12 px-8 gap-x-8">
+             <div className="col-span-8">
+                <div className="flex justify-center pb-12">
+                    <div className="w-[768px] h-[300px]">
+                    <StockChartGrid/>
+                    </div>
+                </div>
+             </div>
+             <div className="col-span-4 " >
+               <div className=" rounded-xl bg-gray-200 px-4 ">
+               <div className="space-y-10 py-6 ">
+                 <h3 className="text-2xl font-bold ">
+                 Invest in {activeStock.symbol}
+                 </h3>
+                 
+                 {/* <p className="text-base ">
+                 To buy fractional shares of {activeStock.companyName} stock, you'll need to be subscribed to one of our growth plans.
+                 </p> */}
+                 <button className="btn">Buy Stock</button>
+               </div>
+               </div>
              </div>
              </div>
-            <div className="px-10">
+            <div className="px-10 sm:flex sm:justify-center">
             <StockBreakDown/>
             </div>
-              <div className="px-10 max-w-3xl">
+              <div className="px-10 sm:flex sm:justify-center ">
               <StockDescription/>
               </div>
               <div className="px-10 py-4 space-y-10 ">
@@ -1020,8 +1062,8 @@ const historicalPrices = timeSeries?.map((item)=>{
                   <p className="text-xs text-gray-700">This site provides links to other third-party internet sites, which are identified, indexed and compiled through an automated process with no advance review by Medik 420. By directing users to the below third-party websites, Medik 420 is not suggesting any endorsement, relationship, affiliation with any such websites.</p>
                  </div>
                   <div className="flex flex-col items-center gap-y-6">
-                      {mockNews?.data.map((news)=>(
-                        <News image={news.image_url} source={news.source} title={news.title} published={news.published_at} snippet={news.snippet}/>
+                      {stockNews?.data.map((news)=>(
+                        <News image={news.image_url} source={news.source} title={news.title} published={news.published_at} snippet={news.snippet} url={news.url}/>
                       ))}
                   </div>
               </div>
@@ -1031,13 +1073,11 @@ const historicalPrices = timeSeries?.map((item)=>{
                </div>
               <WhyInvest/>
               </div>
-              <div className="flex px-10 justify-center">
+              <div className=" px-10 justify-center hidden">
               <HowToInvest/>
               </div>
               {/* <MoreStocks/> */}
-              <a  className="fixed bottom-[104px] right-0" href="#top">
-                <FaChevronCircleUp size={20} />
-              </a>
+              
               <BuyButton/>
           </div>
           {/* <div className="py-4 bg-red-300 col-span-1 min-h-screen ">
@@ -1081,7 +1121,7 @@ const historicalPrices = timeSeries?.map((item)=>{
           <div onClick={func} className="flex items-center justify-between">
                <div>
                <div className="flex items-center gap-x-2">
-                        <img className=" h-12 w-12 object-cover" src={image} alt="" />
+                        <Avatar shape="square" src={`${image}`}/>
                     <div className="">
                         <div className="flex gap-x-4">
                         <h3 className="text-base">{ticker}</h3>
@@ -1101,7 +1141,7 @@ const historicalPrices = timeSeries?.map((item)=>{
         <div onClick={func} className="grid grid-cols-6 items-center gap-x-4 lg:gap-x-6">
                     
                     <div className="col-span-2 flex items-center gap-x-5">
-                        <img className=" rounded-full w-10 h-10" src={image} alt="" />
+                        <img className=" rounded-lg w-10 h-10 object-cover" src={image} alt="" />
                         <p className="text-gray-700 text-base flex-1">{companyName}</p>
                     </div>
                     <div className="flex justify-center">
@@ -1132,9 +1172,7 @@ const historicalPrices = timeSeries?.map((item)=>{
   
   if (!stockList) {
     return(
-      <div className="flex justify-center">
-         <h1>Loading...</h1>
-      </div>
+     <Loader/>
     )
   }
   function Page ({ data, func, tags, handleFilter, tab1 , tab2, tab3, tab4,mapElement, mapitem }) {
@@ -1148,7 +1186,6 @@ const historicalPrices = timeSeries?.map((item)=>{
     const  currentItems = data?.slice(indexOfFirstItem, indexOfLastItem);
     const totalPages = Math.round(data?.length / itemsPerPage)
 
-    console.log(healthcareStocks)
 
     function handleDecreaseSlide(params) {
       if(currentPage == 1) return
@@ -1213,41 +1250,10 @@ const historicalPrices = timeSeries?.map((item)=>{
         <div className="pt-4 pb-[120px] lg:container w-full  max-w-4xl">
        
        {!searchTerm && <div className="p-4">
-          <h3 className="text-2xl text-blk font-semibold">{activeListTitle} Stocks</h3>
+          <h3 className="text-2xl text-blk font-semibold sm:text-center">{activeListTitle} Stocks</h3>
        </div>}
-       {/* <div className="flex w-full">
-           <div className="flex flex-1 gap-y-8 py-8 px-2 flex-col">
-               {
-                 !activeList ? testStocks?.map((stock, index) => {
-                       return(
-                           <Stocks func={()=> {
-                             handleStockScreen(stock)
-                          }} key={index} image={bitcoin} name={stock.symbol} change={stock.change} companyName={stock.companyName} price={stock.price}/>
-                           )
-                   })
-                   :
-                   activeList?.map((stock, index) => {
-                    return(
-                        <Stocks func={()=> {
-                          handleStockScreen(stock)
-                       }} key={index} image={bitcoin} name={stock.symbol} change={stock.change} companyName={stock.companyName} price={stock.price}/>
-                        )
-                })
-               }
-           </div>
-       </div> */}
        <Page data={activeList ? activeList : techStocks
        }/>
-
-       {/* <Page data={()=>{
-        if (searchTerm) {
-          stockList?.filter((stock)=>{
-            return stock?.companyName.toLowerCase().includes(searchTerm.toLowerCase())
-          })
-        }
-       return activeList ? activeList : techStocks
-       } }/> */}
-       
       </div>
       </div>
     )
@@ -1281,8 +1287,9 @@ const historicalPrices = timeSeries?.map((item)=>{
 
     return(
       <>
-      <div className=" lg:hidden"><Header func={()=> window.location.replace('/dashboard/portfolio')} halfmenu={true}/></div>
-      <div className="space-y-4 sm:min-w-[700px] pt-8">
+      <div className=" md:hidden"><Header func={()=> window.location.replace('/dashboard/portfolio')} halfmenu={true}/></div>
+      <BackButton/>
+      <div className="space-y-4 sm:min-w-[700px] pt-8 sm:pt-0 ">
           <div className="flex  px-4 sm:px-6 sm:justify-center">
               <h3 className="text-[28px] font-bold ">Invest in curated stocks Algorhitmically </h3>
           </div>
@@ -1295,18 +1302,17 @@ const historicalPrices = timeSeries?.map((item)=>{
           </div>
           </div>
           </div>
-          <div className="relative ">
+          <div className="relative sm:flex justify-center ">
             {!searchTerm && <div className="overflow-x-scroll"><StockTabs/></div>}
-            {/* <div className={` z-[-30] absolute top-[40%] flex w-full justify-between bg-red-100  `}>
-            </div> */}
-       { !searchTerm &&
+            
+       {/* { !searchTerm &&
            <a href="#first" className={`sm:hidden absolute top-[60px] left-0 flex items-center justify-center h-10 w-10 pr-1 z-[4000000]  rounded-full ${pathhash == '#last' ? 'bg-white' : 'bg-white/10' }`}>
               <FaChevronLeft/>
             </a>}
            { !searchTerm &&
             <a  href="#last" className={`sm:hidden absolute top-[60px]  right-0 flex items-center justify-center h-10 w-10 pl-1 z-[4000000]  rounded-full ${!pathhash | pathhash == '#first' ? 'bg-white' : 'bg-white/10'}`}>
               <FaChevronRight/>
-            </a>}
+            </a>} */}
             </div>
        </div>
       <HomeScreen/>
