@@ -14,6 +14,7 @@ import DashboardCard03 from './DashboardCard03'
 import { day } from '../../../lib/dayjs'
 import { SmartPortfolio, AnnouncementBanner } from './Elements'
 import {UsePaymentModalContext,} from "../../contexts/PaymentModalContext"
+import {LaptopDashboard} from "../../components/Dashboard/LaptopDisplay"
 
 
 
@@ -515,7 +516,7 @@ const RecentNews = () => {
 
     return(
      <>
-     <div className=''>
+     <div className='hiddenfromtabupwards'>
     
      <Sidebar setSidebarOpen={setexpanded} sidebarOpen={expanded}/>
      <Header user={user} setisExpanded={setexpanded} fullmenu={true} notifications={user?.notifications} plan={user?.plan}/>  
@@ -573,7 +574,7 @@ const RecentNews = () => {
        </div> 
      </motion.div>
      </div>
-     
+     <LaptopDashboard user={user}/>
     <ClaimModal modal={claim} setmodal={setClaim}/>
     <BreakDownModal modal={breakDown} setmodal={setbreakDown}/>
     <RefferalModal modal={referral} setmodal={setReferral}/>

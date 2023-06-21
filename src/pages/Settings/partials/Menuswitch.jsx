@@ -7,10 +7,10 @@ import { useState } from 'react'
 // const Menuswitch = ({checked, onClick}) => <Switch checked={checked} onClick={onClick}   onChange={onChange} />;
 
 
-export const MenuCheckBox = () =>{
+export const MenuCheckBox = ({disabled, checked, setChecked, defaultValue}) =>{
   return(
     <>
-    <input className='rounded-md border-gray-400  focus:border-green-300' type="checkbox" />
+    <input checked={checked ? checked : ""} value={checked} onChange={()=> {setChecked(!checked)&console.log(checked)}} disabled={disabled} className={`${"disabled:border-gray-200 cursor-not-allowed"} rounded-md border-gray-400  focus:border-green-300`} type="checkbox" />
     </>
   )
 }
@@ -21,8 +21,8 @@ export const MenuCheckBox = () =>{
 
 
 
-export function Menuswitch() {
-  const [enabled, setEnabled] = useState(false)
+export function Menuswitch({enabled, setEnabled}) {
+  // const [enabled, setEnabled] = useState(false)
 
   return (
     <div className="">

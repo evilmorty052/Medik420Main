@@ -2,60 +2,88 @@ import { useState } from 'react';
 import styles from '../../style';
 import { FaAngleRight, FaArrowLeft, FaDownload, FaLock, FaPowerOff, FaUser } from 'react-icons/fa';
 import {MenuCheckBox, Menuswitch, MenuItem, UpdateScreen, MenuButton }from './index'
+import {Link,Route, Routes, useParams, useNavigate} from "react-router-dom"
+import {updateUserName, updateEmail, updatePhone, updatePassword} from "./Features"
+import {SuccessMessage, ErrorMessage} from "./partials/Message"
+import {Loader} from "../../components"
 
-const AccountInfo = ({func}) => {
+const AccountInfo = ({func, user}) => {
 
-const [account, setaccount] = useState(null)
-const [changePassword, setchangePassword] = useState(null)
-const [downloadData, setdownloadData] = useState(null)
-const [deleteData, setdeleteData] = useState(null)
-const email = localStorage.getItem('email')
+
+
+const navigate = useNavigate()
 
 
 const AccountSettings = () => {
-  const [emailchange, setemailchange] = useState(false)
-  const [username, setusername] = useState(false)
-  const [phone, setphone] = useState(false)
-  const [mailing, setmailing] = useState(false)
+
   
-  const [email, setemail] = useState(null)
-  const [usernameValue, setusernameValue] = useState(null)
-  const [phoneValue, setphoneValue] = useState(null)
-  const [mailingValue, setmailingValue] = useState(null)
   
-
-
-  if(emailchange){
-    return(
-      <UpdateScreen cleanupFunction={()=> setemailchange(false)} onChange={(e)=> setemail(e.target.value)} update={email} succestext={'Email updated'} updateText={'Update'} header={"Change Email Address"} placeholder={'evilmorty052@proton.me'} func={()=> setemailchange(false)}/>
-    )
-  }
-
-  else if(username){
-    return(
-      <UpdateScreen cleanupFunction={()=> setusername(false)} onChange={(e)=> setusernameValue(e.target.value)} update={usernameValue} succestext={'Username Updated'} updateText={'Update'} header={"Change Username"} placeholder={'evilmorty052'} func={()=> setusername(false)}/>
-    )
-  }
-
-  else if(phone){
-    return(
-      <UpdateScreen cleanupFunction={()=> setphone(false)} onChange={(e)=> setphoneValue(e.target.value)} update={phoneValue} succestext={'Phone Number Updated'} updateText={'Update'} header={"Phone Number"} placeholder={'216-788-8899'} func={()=> setphone(false)}/>
-    )
-  }
   
-  else if(mailing){
+  
+  const UsernameUpdatePage = () =>{
+    const [usernameValue, setusernameValue] = useState("")
     return(
-      <UpdateScreen cleanupFunction={()=> setmailing(false)} onChange={(e)=> setmailingValue(e.target.value)} update={mailingValue} succestext={'Mailing Address Updated'} updateText={'Update'} header={"Change Mailing Address"} placeholder={'evilmorty052@proton.me'} func={()=> setmailing(false)}/>
+      <UpdateScreen handleUpdate={() =>  updateUserName(usernameValue, user?._id)} cleanupFunction={()=> setusername(false)} onChange={(e)=> setusernameValue(e.target.value)} update={usernameValue} succestext={'Username Updated'} updateText={'Update'} header={"Change Username"} placeholder={user?.username} func={()=> navigate(-1)}/>
     )
   }
 
+  const EmailUpdatePage = () =>{
+    const [email, setemail] = useState("")
+    return(
+      <UpdateScreen handleUpdate={() =>  updateEmail(email, user?._id)} cleanupFunction={()=> setemailchange(false)} onChange={(e)=> setemail(e.target.value)} update={email} succestext={'Email updated'} updateText={'Update'} header={"Change Email Address"} placeholder={user?.email} func={()=> navigate(-1)}/>
+    )
+  }
 
-  return(
-    <>
-    <div className='col-span-2 max-w-md'>
+  const PhoneUpdatePage = () =>{
+    const [phoneValue, setphoneValue] = useState()
+    
+    return(
+      <UpdateScreen handleUpdate={() =>  updatePhone(Number(phoneValue), user?._id)} cleanupFunction={()=> setphone(false)} onChange={(e)=> setphoneValue(e.target.value)} update={phoneValue} succestext={'Phone Number Updated'} updateText={'Update'} header={"Phone Number"} placeholder={'216-788-8899'} func={()=> navigate(-1)}/>
+    )
+  }
+
+  const MailingAddressUpdatePage = () =>{
+    const [mailingValue, setmailingValue] = useState("")
+    return(
+      <UpdateScreen cleanupFunction={()=> setmailing(false)} onChange={(e)=> setmailingValue(e.target.value)} update={mailingValue} succestext={'Mailing Address Updated'} updateText={'Update'} header={"Change Mailing Address"} placeholder={'evilmorty052@proton.me'} func={()=> navigate(-1)}  /> 
+    )
+  }
+
+  // if(emailchange){
+  //   return(
+  //     <UpdateScreen cleanupFunction={()=> setemailchange(false)} onChange={(e)=> setemail(e.target.value)} update={email} succestext={'Email updated'} updateText={'Update'} header={"Change Email Address"} placeholder={user?.email} func={()=> setemailchange(false)}/>
+  //   )
+  // }
+
+  // else if(username){
+  //   return(
+  //     <UpdateScreen cleanupFunction={()=> setusername(false)} onChange={(e)=> setusernameValue(e.target.value)} update={usernameValue} succestext={'Username Updated'} updateText={'Update'} header={"Change Username"} placeholder={user?.username} func={()=> setusername(false)}/>
+  //   )
+  // }
+
+  // else if(phone){
+  //   return(
+  //     <UpdateScreen cleanupFunction={()=> setphone(false)} onChange={(e)=> setphoneValue(e.target.value)} update={phoneValue} succestext={'Phone Number Updated'} updateText={'Update'} header={"Phone Number"} placeholder={'216-788-8899'} func={()=> setphone(false)}/>
+  //   )
+  // }
+  
+  // else if(mailing){
+  //   return(
+  //     <UpdateScreen cleanupFunction={()=> setmailing(false)} onChange={(e)=> setmailingValue(e.target.value)} update={mailingValue} succestext={'Mailing Address Updated'} updateText={'Update'} header={"Change Mailing Address"} placeholder={'evilmorty052@proton.me'} func={()=> setmailing(false)}/>
+  //   )
+  // }
+
+  const AccountSettingsHome = () => {
+
+  if(!user){
+    return(<Loader/>)
+  }
+
+    return(
+      <div className='col-span-2 max-w-md'>
        <div>
            <div className='flex items-center gap-x-5 px-2'>
-             <a className={styles.SettingsIcon} onClick={()=> setaccount(false)}><FaArrowLeft/></a>
+             <a className={styles.SettingsIcon} onClick={()=> navigate(-1)}><FaArrowLeft/></a>
              <div className='flex-col gap-y-4'>
              <h3 className={'text-20px text-blk font-semibold'}> Account Information</h3>
             <p className='text-[14px]'>Manage Your Account Information At Any Time</p>
@@ -63,53 +91,75 @@ const AccountSettings = () => {
            </div>
            <div>
              <ul className='flex flex-col  gap-y-2 px-2 py-8'>
-                 <ListItem func={()=> setusername(true)} itemHeader={'Username'} itemSubtext={'Morty619052'}/>
-                 <ListItem func={()=> setemailchange(true)} itemHeader={'Email'} itemSubtext={'evilmorty@mail.com'}/>
-                 <ListItem func={()=> setphone(true)} itemHeader={'Phone'} itemSubtext={'Not Added'}/>
-                 <ListItem func={()=> setmailing(true)} itemHeader={'Mailing Address'} itemSubtext={'12 White Hart Lane Michigan 8080  usa'}/>
+                 <ListItem func={()=> navigate("accountinformation/updateusername")} itemHeader={'Username'} itemSubtext={user?.username}/>
+                 <ListItem func={()=> navigate("accountinformation/updateemail")} itemHeader={'Email'} itemSubtext={user?.email}/>
+                 <ListItem func={()=> navigate("accountinformation/updatephone")} itemHeader={'Phone'} itemSubtext={user?.phone ? user.phone : 'Not Added'}/>
+                 {/* <ListItem func={()=> navigate("accountinformation/updatemailing")} itemHeader={'Mailing Address'} itemSubtext={user?.address ? user.address : 'Not Added'}/> */}
                  {/* <ListItem func={()=> seteverified(true)}itemHeader={'Verified'} itemSubtext={'No'}/> */}
              </ul>
            </div>
        </div>
     </div>
-    </>
+    )
+  }
+
+  return(
+   <Routes>
+     <Route path="/" element={<AccountSettingsHome/>}/>
+     <Route path="updateusername" element={<UsernameUpdatePage/>}/>
+     <Route path="updateemail" element={<EmailUpdatePage/> }/>
+     <Route path="updatephone" element={<PhoneUpdatePage/>}/>
+     <Route path="updatemailing" element={<MailingAddressUpdatePage/>}/>
+   </Routes>
   )
 }
+
+
 const ChangePassword = () => {
   
   return(
     <>
     <div>
-      <PasswordUpdateScreen func={()=> setchangePassword(false)} header={'Change Your Password'}/>
+      <PasswordUpdateScreen userid={user?._id} userpassword={user?.password} func={()=> navigate(-1)} header={'Update Password'}/>
     </div>
     </>
   )
 }
 
 const DownloadData = () => {
+  const [checked, setChecked] = useState(false)
   const list =[
     {
-      itemHeader: 'Trading History',
-      itemSubtext: 'Download An Archive Of All Trading Activity ',
-      switch:      <MenuCheckBox/>
+      itemHeader: <span className="text-gray-400">Trading History</span>,
+      itemSubtext: <span className="text-gray-400">Download An Archive Of All Trading Activity</span> ,
+      switch:      <MenuCheckBox disabled={true} />
     },
     {
-      itemHeader: 'Investment Portfolio',
-      itemSubtext: 'Download An Archive Of Your Investment Portfolio ',
-      switch:      <MenuCheckBox/>
+      itemHeader: <span className="text-gray-400">Investment Portfolio</span>,
+      itemSubtext: <span className="text-gray-400">Download An Archive Of Your Investment Portfolio </span>,
+      switch:      <MenuCheckBox disabled={true}/>
     },
     {
       itemHeader: 'One Hive Activity',
       itemSubtext: 'Download A Visualization Of One Hive Activity',
-      switch:      <MenuCheckBox/>
+      switch:      <MenuCheckBox setChecked={setChecked} checked={checked}/>
     },
   ]
 
+  const handleUpdate = () => {
+    if(checked){
+      ErrorMessage("Not enough hive activity to download!")
+      return
+    }
+
+    ErrorMessage("Choose at least one dataset.")
+
+  }
 
   return(
     <>
-    <div>
-    <MenuItem func={()=> setdownloadData(false)} buttonText={'Download'} itemHeader={'Download Your Data'} itemSubtext={'Choose Which datasets You are Interested In downloading Now.'} list={list}/>
+    <div className={'sm:col-span-2'}>
+    <MenuItem handleUpdate={handleUpdate} func={()=>  navigate(-1)} buttonText={'Download'} itemHeader={'Download Your Data'} itemSubtext={'Choose Which datasets You are Interested In downloading Now.'} list={list}/>
     </div>
     </>
   )
@@ -130,162 +180,159 @@ const DeactivateAccount = () => {
   const itemSubtext = 'Confirm Termination Of Your Account'
   return(
     <>
-   <MenuItem func={()=>  setdeleteData(false)}  list={list} itemHeader={itemHeader} itemSubtext={itemSubtext} buttonText={'Deactivate'}/>
+   <MenuItem func={()=>  navigate(-1)}  list={list} itemHeader={itemHeader} itemSubtext={itemSubtext} buttonText={'Deactivate'}/>
     </>
   )
 }
 
+const AllAccountSettings = () => {
+  return (
+    <ul className=" col-span-2 px-2   lg:items-start sm:pl-5  flex flex-col gap-y-5 ">
+      <Link to={"/dashboard/settings/"} className=" flex items-center gap-x-8  sm:hidden">
+        <a className={styles.SettingsIcon}>
+          <FaArrowLeft />
+        </a>
+        <div>
+          <span>Your Account</span>
+          <p>{user?.email}</p>
+        </div>
+      </Link>
+      <div className=" block    space-y-2">
+        <h3
+          className={`text-gray-600 text-[12px] font-semibold `}
+        >
+          See information about your account, download an archive of your data,
+          or learn about your account investment settings
+        </h3>
+      </div>
 
+      {/* <div className=" hidden md:block ">
+        <div className=" space-y-4  ">
+          <h3 className={styles.UiHeading}>Your Account</h3>
+          <h3 className={`${styles.UiSubHeading} `}>
+            See information about your account, download an archive of your
+            data, or learn about your account deactivation options
+          </h3>
+        </div>
+      </div> */}
+      {/* <div className="lg:hidden ">
+        <div className="  ">
+          <h3 className={`${styles.UiSubHeading} lg:hidden`}>
+            See information about your account, download an archive of
+            your data, or learn about your account investment settings
+          </h3>
+        </div>
+      </div> */}
 
+      {/* account link */}
+      <Link
+        to={"accountinformation"}
+        className="relative flex items-center sm:min-w-[80%] pt-4 sm:pt-0 "
+      >
+        <div>
+          <a className={styles.SettingsIcon}>
+            <FaUser />
+          </a>
+        </div>
+        <div className="min-w-[80%] ml-8 pr-4">
+          <p className={styles.UIMenu}>Account Information</p>
+          <p className="text-[14px]">
+            See your account information like your email address.
+          </p>
+        </div>
+        <div className=" absolute right-2 hidden sm:block">
+          <a>
+            <FaAngleRight />
+          </a>
+        </div>
+      </Link>
 
-if (account) {
-  return(
-    <>
-    <AccountSettings/>
-    </>
-  )
+      {/* change password link */}
+      <Link
+        to={"changepassword"}
+        className="relative sm:min-w-[80%] flex items-center  "
+      >
+        <div>
+          <a className={styles.SettingsIcon}>
+            <FaLock />
+          </a>
+        </div>
+        <div className=" ml-8 pr-8">
+          <p className={styles.UIMenu}>Change Password</p>
+          <p className="text-[14px]">Change Your Password At Any Time</p>
+        </div>
+        <div className=" absolute right-2 hidden sm:block">
+          <a>
+            <FaAngleRight />
+          </a>
+        </div>
+      </Link>
+
+      {/* download data link */}
+      <Link
+        to={"downloaddata"}
+        className="relative sm:min-w-[80%] flex items-center  "
+      >
+        <div>
+          <a className={styles.SettingsIcon}>
+            <FaDownload />
+          </a>
+        </div>
+        <div className=" ml-8 pr-8">
+          <p className={styles.UIMenu}>Download Your Data</p>
+          <p className="text-[14px]">
+            Download A copy Of All your Activity
+            <br className="hidden sm:block" /> On Medik 420
+          </p>
+        </div>
+        <div className=" absolute right-2 hidden sm:block">
+          <a>
+            <FaAngleRight />
+          </a>
+        </div>
+      </Link>
+
+      {/* delete data link */}
+      {/* <Link
+        to={"deletedata"}
+        className="relative sm:min-w-[80%] flex items-center  "
+      >
+        <div>
+          <a className={styles.SettingsIcon}>
+            <FaPowerOff />
+          </a>
+        </div>
+        <div className=" ml-8 pr-8">
+          <p className={styles.UIMenu}>Deactivate Your Account</p>
+          <p className="text-[14px]">
+            Find out How you Can Delete Your Account
+          </p>
+        </div>
+        <div className=" absolute right-2 hidden sm:block">
+          <a>
+            <FaAngleRight />
+          </a>
+        </div>
+      </Link> */}
+    </ul>
+  );
 }
-else if (changePassword) {
-  return(
-    <>
-    <ChangePassword/>
-    </>
-  )
-}
 
-else if (downloadData) {
-  return(
-    <>
-   <DownloadData/>
-    </>
-  )
-}
 
-else if (deleteData) {
-  return(
-    <>
-   <DeactivateAccount/>
-    </>
-  )
-}
+
 
 
 
 
 
   return (
-          <>
-            <ul className=" col-span-2 px-2   lg:items-start sm:pl-5  flex flex-col gap-y-5 ">
-            <div className=' flex items-center gap-x-8  sm:hidden'>
-         <a className={ styles.SettingsIcon} ><FaArrowLeft onClick={func} /></a>
-         <div>
-         <span>Your Account</span>
-         <p>{email}</p>
-         </div>
-         </div>
-                <div className=' block  sm:hidden  space-y-2'>
-               
-                <h3
-                    className={`text-gray-600 text-[12px] font-semibold font-space hidden lg:block`}
-                  >
-                    See information about your account, download an archive of
-                    your data, or learn about your account investment settings
-                  </h3>
-                </div>
-
-                <div className=" hidden md:block ">
-          <div className=" space-y-4  ">
-            <h3 className={styles.UiHeading}>Your Account</h3>
-            <h3 className={`${styles.UiSubHeading} `}>
-            See information about your account, download an archive of your data, or learn about your account deactivation options
-            </h3>
-          </div>
-        </div>
-              <div className="lg:hidden ">
-                <div className="  ">
-                  <h3 className={`${styles.UiSubHeading} lg:hidden`}>
-                    See information about your account, download an archive of
-                    your data, or learn about your account investment settings
-                  </h3>
-                </div>
-              </div>
-              <li onClick={()=> setaccount(true)} className='relative flex items-center sm:min-w-[80%] pt-4 sm:pt-0 '>
-                  <div>
-                  <a className={styles.SettingsIcon}>
-                    <FaUser />
-                  </a>
-                  </div>
-                    <div className='min-w-[80%] ml-8 pr-4'>
-                      <p className={styles.UIMenu}>Account Information</p>
-                      <p className="text-[14px]">
-                        See your account information like your 
-                        email address.
-                      </p>
-                    </div>
-                <div className=' absolute right-2 hidden sm:block'>
-                      <a>
-                        <FaAngleRight />
-                      </a>
-                </div>
-              </li>
-              <li onClick={()=> setchangePassword(true)} className='relative sm:min-w-[80%] flex items-center  '>
-                  <div>
-                  <a className={styles.SettingsIcon}>
-                    <FaLock />
-                  </a>
-                  </div>
-                    <div className=' ml-8 pr-8'>
-                      <p className={styles.UIMenu}>Change Password</p>
-                      <p className="text-[14px]">
-                        Change Your Password At Any Time
-                      </p>
-                    </div>
-                <div className=' absolute right-2 hidden sm:block'>
-                      <a>
-                        <FaAngleRight />
-                      </a>
-                </div>
-              </li>
-              <li onClick={()=> setdownloadData(true)} className='relative sm:min-w-[80%] flex items-center  '>
-                  <div>
-                  <a className={styles.SettingsIcon}>
-                  <FaDownload/>
-                  </a>
-                  </div>
-                    <div className=' ml-8 pr-8'>
-                      <p className={styles.UIMenu}>Download Your Data</p>
-                      <p className="text-[14px]">
-                        Download A copy Of All your Trading And Investment Activity<br className='hidden sm:block'/> On Medik 420
-                      </p>
-                    </div>
-                <div className=' absolute right-2 hidden sm:block'>
-                      <a>
-                        <FaAngleRight />
-                      </a>
-                </div>
-              </li>
-              <li onClick={()=> setdeleteData(true)} className='relative sm:min-w-[80%] flex items-center  '>
-                  <div>
-                  <a className={styles.SettingsIcon}>
-                    <FaPowerOff/>
-                  </a>
-                  </div>
-                    <div className=' ml-8 pr-8'>
-                      <p className={styles.UIMenu}>Deactivate Your Account</p>
-                      <p className="text-[14px]">
-                       Find out How you Can Delete Your Account
-                      </p>
-                    </div>
-                <div className=' absolute right-2 hidden sm:block'>
-                      <a>
-                        <FaAngleRight />
-                      </a>
-                </div>
-              </li>
-             
-            
-            </ul>
-          </>
+          <Routes>
+             <Route path="/" element={<AllAccountSettings/>}/>
+             <Route path="accountinformation/*" element={<AccountSettings/>}/>
+             <Route path="changepassword" element={<ChangePassword/>}/>
+             <Route path="downloaddata" element={<DownloadData/>}/>
+             <Route path="deletedata" element={<DeactivateAccount/>}/>
+          </Routes>
         );
     
    
@@ -312,7 +359,7 @@ function ListItem({func , itemHeader, itemSubtext}) {
               dir="ltr"
               class="inline-block leading-normal whitespace-pre-wrap break-words"
             >
-              <span class={`${styles.SettingOption} uppercase`}>
+              <span class={`${styles.SettingOption} `}>
                 {itemHeader}
               </span>
             </div>
@@ -342,34 +389,69 @@ function ListItem({func , itemHeader, itemSubtext}) {
 
 
 
-const  PasswordUpdateScreen = ({func, header, updateText, placeholder,}) => {
+const  PasswordUpdateScreen = ({func, header, updateText, placeholder, userpassword, userid }) => {
+
+  const [currentPassword, setCurrentPassword] = useState("")
+  const [Password, setPassword] = useState("")
+  const [confirmPassword, setConfirmPassword] = useState("")
+  const [unlocked, setUnlocked] = useState(false)
+  const [error, setError] = useState(false)
+
+  const handleunlock = () => {
+    if(currentPassword != userpassword){
+    setError(true)
+    ErrorMessage(`invalid password  `)
+    return
+    }
+
+    setUnlocked(true)
+    setError(false)
+  }
+
+  const handleUpdate = () => {
+    if(Password != confirmPassword ){
+      ErrorMessage(`both fields must match `)
+      return
+    }
+    updatePassword(confirmPassword, userid)
+  }
+
   return(
     <>
     <div className=''>
        <div>
-       <div className=' flex items-center gap-x-8 px-4 '>
+
+       <div className=' flex items-center gap-x-8 px-8 pt-2 sm:pt-0 sm:px-0'>
          <a className={ styles.SettingsIcon} ><FaArrowLeft onClick={func} /></a>
          <div>
-         <span>{header}</span>
+         <p>{header}</p>
          {/* <p>evilmorty052@proton.me</p> */}
          </div>
          </div>
-           <div className='py-8 px-8'>
-            {/* <label className='ml-2 mb-2'>Current Password</label> */}
-              <input placeholder={'Current Password'} type="text" className={styles.Input} /> 
-              {/* <div className='py-8 text-center'>
-                  <span>{updateText}</span>
-              </div> */}
+
+         {/* {"Current Password sections"} */}
+           <div className='py-8 pl-8'>
+              <label className="text-xs">Confirm your current password.</label>
+              <input value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)} placeholder={'Current Password'} type="text" className={`${styles.Input} ${error && "border border-red-500"}`} /> 
            </div>
-           <div className='px-8 flex flex-col gap-y-4'>
-           <input placeholder={'New Password'} type="text" className={styles.Input} /> 
-           <input placeholder={'Confirm Password'} type="text" className={styles.Input} /> 
-           <div className='flex w-full py-8'>
-              <button className="btnAlt">
-                Update
+
+           {/* {"Confirm Password sections"} */}
+          {unlocked &&
+          <div className='px-8 flex flex-col gap-y-4'>
+           <input value={Password} onChange={(e) => setPassword(e.target.value)} placeholder={'New Password'} type="text" className={styles.Input} /> 
+           <input value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}  placeholder={'Confirm Password'} type="text" className={styles.Input} /> 
+
+           
+           </div>}
+
+           {/* update button */}
+           <div className='flex w-full px-8 py-8 sm:ml-8 sm:px-0'>
+              <button onClick={() => {
+                !unlocked ? handleunlock() : handleUpdate()
+              }} className="btnAlt">
+                {unlocked ? "Update Password" : "Confirm"}
               </button>
             </div>
-           </div>
        </div>
     </div>
     </>

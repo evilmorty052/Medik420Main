@@ -4,7 +4,7 @@ import { FaArrowLeft } from "react-icons/fa"
 import { SuccessMessage } from "./index"
 import { useState, useEffect } from "react"
 
-export default function UpdateScreen({func, succestext, header, updateText, placeholder, update, onChange, cleanupFunction}) {
+export default function UpdateScreen({func, succestext, header, updateText, placeholder, update, onChange, cleanupFunction, handleUpdate}) {
  const [disabled, setdisabled] = useState(true)
   
  useEffect(() => {
@@ -17,11 +17,11 @@ export default function UpdateScreen({func, succestext, header, updateText, plac
  }, [update])
  
 
- function handleupdate() {
-     if(!update) return
-     SuccessMessage(`${succestext}`)
-     cleanupFunction()
- }
+//  function handleupdate() {
+//      if(!update) return
+//      SuccessMessage(`${succestext}`)
+//      cleanupFunction()
+//  }
 
     return (
       <>
@@ -49,7 +49,7 @@ export default function UpdateScreen({func, succestext, header, updateText, plac
 
               {/* <MenuButton disabled={disabled} onClick={handleupdate} buttonText={'Update'}/> */}
               <div className="py-8 w-full">
-                <button onClick={handleupdate} className="btnAlt">
+                <button disabled={disabled} onClick={handleUpdate} className="btnAlt">
                   Update
                 </button>
               </div>

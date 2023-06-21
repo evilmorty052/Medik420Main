@@ -1,18 +1,18 @@
-import { useState } from "react";
+import { useState,useLayoutEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Header from "../Header";
 import { Progress, Empty } from "antd";
 import { Infobutton } from "./Elements";
-import styles from "../../style";
 import Tabs  from "../../pages/hive/Tabs";
-import { LargeHeader } from "../../components/Dashboard/LaptopDisplay";
 import DigitalFarmShop from "./DigitalFarmShop";
+import {UseBottomNavigationContext} from "../../contexts/BottomNavigationContext"
 
 const DigitalFarmPage = () => {
   const navigate = useNavigate();
   const [personalFarms, setPersonalFarms] = useState(true);
   const [sharedFarms, setsharedFarms] = useState(null);
   const [shoppingPage, setshoppingPage] = useState(null)
+  
+  const {setInvisible} = UseBottomNavigationContext()
 
   function handleTabs(params) {
     if (personalFarms) {
@@ -354,32 +354,38 @@ const DigitalFarmPage = () => {
     )
   }
 
- 
+  useLayoutEffect(() => {
+    setInvisible(true)
+         
+       }, [])
 
   return (
     <>
-      <div className="md:hidden">
+      {/* <div className="md:hidden">
       <Header
         func={() => window.location.replace('/dashboard')}
         halfmenu={true}
       />
       </div>
 
-     <LargeHeader/>
-      <div className="container max-w-4xl mx-auto md:pt-10 md:px-10">
-      <div className="pt-4">
+     <LargeHeader/> */}
+      <div className="container max-w-4xl mx-auto md:pt-10 md:px-10 min-h-screen bg-white">
+      <div className="pt-4 sm:hidden">
       <Tabs section1={'Personal'} section2={'Shared'} setactive={handleTabs} tab1={personalFarms} tab2={sharedFarms} />
       </div>
-      <div className="flex flex-col items-center gap-y-10 py-8 px-2 pb-[110px]">
+      <div className="flex flex-col items-center gap-y-10 py-8 px-2 pb-[110px] ">
+        {/* {default layout} */}
+        <div className="sm:hidden">
        { 
         
-       !sharedFarms ? 
-      <div className="flex flex-col gap-y-8 items-center w-full">
+         !sharedFarms ? 
+      <div className="flex flex-col gap-y-8 items-center w-full col-span-6">
        <DigitalFarms />
        <FarmEvents/>
        <ChemistryCard />
        <ActionButtons/>
-     </div> :
+     </div> 
+     :
         <div className="flex flex-col gap-y-8 items-center w-full">
           <SharedFarms />
           <FarmEvents/>
@@ -387,8 +393,33 @@ const DigitalFarmPage = () => {
           <SharedFarmButtons/>
         </div>
      
-       }
-        <BuyButton/>
+    }
+      </div>
+         
+         {/* tablet layout */}
+        <div className="hidden sm:grid grid-cols-12 gap-x-4">
+          
+   
+      <div className="flex  flex-col gap-y-8 items-center w-full col-span-6">
+      <div className="pt-4 sm:hidden">
+      <Tabs section1={'Personal'} section2={'Shared'} setactive={handleTabs} tab1={personalFarms} tab2={sharedFarms} />
+      </div>
+       <DigitalFarms />
+       <FarmEvents/>
+       <ChemistryCard />
+       <ActionButtons/>
+     </div> 
+    
+        <div className="flex flex-col gap-y-8 items-center w-full col-span-6">
+          {/* <SharedFarms />
+          <FarmEvents/> */}
+          <ChemistryCard />
+          <SharedFarmButtons/>
+        </div>
+     
+
+      </div>
+        {/* <BuyButton/> */}
       </div>
       </div>
     </>

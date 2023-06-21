@@ -91,6 +91,93 @@ export default {
       type: 'boolean',
     },
     { 
+      name: 'autoinvest',
+      title: 'AutoInvest',
+      type: 'boolean',
+    },
+    { 
+      name: 'pipefunding',
+      title: 'Pipefunding',
+      type: 'boolean',
+    },
+    { 
+      name: 'risklevel',
+      title: 'Risklevel',
+      type: 'string',
+    },
+    { 
+      name: 'cryptoinvestments',
+      title: 'Cryptoinvestments',
+      type: 'boolean',
+    },
+    { 
+      name: 'smartportfolioison',
+      title: 'Smartportfolioison',
+      type: 'boolean',
+    },
+    {
+      name:"privacysettings",
+      title:"Privacysettings",
+      type:"object",
+      fields:[
+         {
+         name:"tradinginformation",
+         title:"Tradinginformation",
+         type:"boolean"
+         },
+         {
+         name:"investmentinformation",
+         title:"Investmentinformation",
+         type:"boolean"
+         },
+         {
+         name:"locationinformation",
+         title:"Locationinformation",
+         type:"boolean"
+         },
+      ]
+    },
+    {
+      name:"defaultaccount",
+      title:"Defaultaccount",
+      type:"object",
+      fields:[
+         {
+         name:"accountname",
+         title:"Accountname",
+         type:"string"
+         },
+         {
+         name:"accountnumber",
+         title:"Accountnumber",
+         type:"number"
+         },
+         {
+         name:"routingnumber",
+         title:"Routingnumber",
+         type:"number"
+         },
+         {
+         name:"bankname",
+         title:"Bankname",
+         type:"string"
+         },
+         {
+         name:"checking",
+         title:"Checking",
+         type:"boolean",
+         
+         },
+         {
+         name:"savings",
+         title:"Savings",
+         type:"boolean",
+
+         },
+      ]
+    },
+    
+    { 
       name: 'earnings',
       title: 'Earnings',
       type: 'array',

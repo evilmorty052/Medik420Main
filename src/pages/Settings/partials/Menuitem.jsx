@@ -4,12 +4,12 @@ import {Menuswitch, } from '../index'
 
 
 
-export function MenuItem({func, itemHeader, itemSubtext, list, buttonText, children, switcher}) {
+export function MenuItem({func, itemHeader, itemSubtext, list, buttonText, children, switcher, handleUpdate}) {
     return (
       <>
-      <div className=' col-span-2'>
-       <div className=' flex items-center gap-x-8 px-4  '>
-           <a className={`${styles.SettingsIcon}  `} ><FaArrowLeft onClick={func} /></a>
+      <div className='sm:min-h-screen col-span-2'>
+       <div onClick={func} className=' flex items-center gap-x-8 px-4  '>
+           <a className={`${styles.SettingsIcon}  `} ><FaArrowLeft  /></a>
            <div className=''>
            <span className={styles.UiHeading}>{itemHeader}</span>
            </div>
@@ -59,11 +59,11 @@ export function MenuItem({func, itemHeader, itemSubtext, list, buttonText, child
           })
         }
         </>
-        <div className="px-4">{children}</div>
+        <div className="px-4 sm:pr-12">{children}</div>
         {buttonText && 
         
         <div className='py-12 w-full flex justify-end px-4 max-w-md'>
-          <button className="btnAlt">
+          <button onClick={handleUpdate} className="btnAlt">
             {buttonText}
           </button>
         </div>

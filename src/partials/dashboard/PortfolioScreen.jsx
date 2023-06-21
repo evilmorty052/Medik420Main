@@ -6,6 +6,7 @@ import { RecentInvestments } from './Elements'
 import { autoinvestsvg, calendar, moneybag } from '../../assets'
 import { client } from '../../../lib/client'
 import { useParams } from 'react-router-dom'
+import {Loader} from "../../components"
 
 
 export default function PortfolioScreen ({}) {
@@ -37,7 +38,15 @@ export default function PortfolioScreen ({}) {
     }, [])
     
     
- 
+   const WelcomePage = () => {
+    return(
+        <div>
+            <div className=" container mx-auto max-w-4xl grid place-content-center ">
+               <p className="text-4xl">Welcome to Medik 420</p>
+            </div>
+        </div>
+    )
+   }
    
     const PortfolioCard = ({header, buttontext, func, description}) => {
         return(
@@ -69,7 +78,8 @@ export default function PortfolioScreen ({}) {
       if (!ActivePortfolio) {
         return(
             <>  
-            loading
+            <Loader/>
+            
             </>
         )
       }

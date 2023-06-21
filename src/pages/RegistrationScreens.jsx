@@ -3,10 +3,7 @@ import { FaArrowLeft } from 'react-icons/fa'
 import { motion } from '../hooks/useMotion';
 import { useNavigate, Link } from 'react-router-dom';
 import { Result, Slider} from 'antd';
-import { gearanimation, hexagonloading } from '../assets';
-import base from '../assets/base.png'
-import neutral from '../assets/neutral.png'
-import growthgraph from '../assets/growthgraph.png'
+import { gearanimation, hexagonloading, base, neutral, growthgraph } from '../assets';
 import { Player, Controls } from '@lottiefiles/react-lottie-player';
 import { client } from '../../lib/client';
 import JSConfetti from 'js-confetti'
@@ -461,8 +458,7 @@ const RegisterInputs = ({handleComplete, firstname, lastname, setfirstname, setl
               losses
             </p>
           </div>
-        </motion.div>
-          
+        </motion.div>       
         </>
       );
     }

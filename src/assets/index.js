@@ -81,9 +81,15 @@ import stashlogo from './stashlogo.png'
 import futurevideo from './crypto.webm'
 import Gate from "./gate.png"
 import Globe from "./globe.png"
+import base from './base.png'
+import neutral from './neutral.png'
+import growthgraph from './growthgraph.png'
 
 
 export {
+  base,
+  neutral,
+  growthgraph,
   plant,
   send,
   star,

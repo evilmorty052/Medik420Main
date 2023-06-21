@@ -405,7 +405,7 @@ const {avatar, firstname, lastname, transactions, accounts, claimed, notificatio
     <>
     <BottomNavigationProvider>
    <Sidebar setSidebarOpen={setexpanded}  sidebarOpen={expanded}/>
-   <div className="min-h-screen bg-white   hiddenfromtabupwards">
+   <div className="min-h-screen bg-white   ">
    <Routes>
         {/* <Route  path="dashboard/*" element={<MobileDashboard notifications={notifications}  accounts={accounts}  claimed={claimed} transactions={transactions} firstname={firstname} lastname={lastname} plan={plan}/>} /> */}
         <Route exact path="/" element={<MobileDashboard user={userdetails} notifications={notifications} plan={plan}   accounts={accounts} claimed={claimed} transactions={transactions} firstname={firstname} lastname={lastname}/>} />
@@ -416,22 +416,19 @@ const {avatar, firstname, lastname, transactions, accounts, claimed, notificatio
         <Route  path="/digitalfarm/*" element={<DigitalFarmPage/>} />
         <Route  path="/digitalfarmshop/*" element={<DigitalFarmShop/>} />
         <Route  path="/verification/*" element={<GetVerified/>} />
-        <Route  path="/settings/*" element={<Settings/>} />
+        <Route  path="/settings/*" element={<Settings user={userdetails}/>} />
         <Route  path="/profile/*" element={<ProfileSettingsPage user={userdetails}/>} />
     </Routes>
     {/* <BottomNavigation2/> */}
    </div>
-   
-    
-
-    
-    <div className=" hidden md:block bg-white">
+   </BottomNavigationProvider>
+ 
+    {/* <div className=" hidden md:block bg-white">
    <Routes>
         <Route  path="dashboard/*" element={
         <LaptopDisplay>
            <LaptopDashboard user={userdetails}/>
         </LaptopDisplay>} />
-        {/* <Route key={'kk'} path="/" element={<MobileDashboard    accounts={accounts} claimed={claimed} transactions={transactions} firstname={firstname} lastname={lastname}/>} /> */}
         <Route  path="/" element={
         <LaptopDisplay>
            <LaptopDashboard user={userdetails}/>
@@ -443,11 +440,11 @@ const {avatar, firstname, lastname, transactions, accounts, claimed, notificatio
     <Route  path="/digitalfarm/*" element={<DigitalFarmPage/>} />
     <Route  path="/digitalfarmshop/*" element={<DigitalFarmShop/>} />
     <Route  path="/verification/*" element={<GetVerified/>} />
-    <Route  path="/settings/*" element={<Settings/>} />
+    <Route  path="/settings/*" element={<Settings user={userdetails}/>} />
     <Route  path="/profile/*" element={<ProfileSettingsPage user={userdetails}/>} />
     </Routes>
-   </div>
-   </BottomNavigationProvider>
+   </div> */}
+   
     </>
   )
 

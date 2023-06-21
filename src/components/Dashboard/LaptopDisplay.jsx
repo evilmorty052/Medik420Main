@@ -1380,10 +1380,11 @@ const RecentNews = () => {
 
   return(
    <>
+   <LargeHeader user={user}/>
      <div>
-     <div className='  container  flex flex-col items-center gap-y-14 mx-auto min-h-screen overflow-y-scroll max-w-[1080px] pb-20 '>
+     <div className='  container hidden  md:flex flex-col items-center gap-y-14 mx-auto min-h-screen overflow-y-scroll max-w-[1080px] pb-20  '>
       <AnnouncementBanner hidden={hidden} setHidden={setHidden}/>
-          <div className={`${!hidden ? "pt-[54px] " : ""}flex gap-x-8 items-center `}>
+          <div className={`${!hidden ? "pt-[140px] " : "pt-20"} flex gap-x-8 items-center `}>
           <DebitCard func={()=> setActionsModal(true)} firstname={user?.firstname} lastname={user?.lastname} amount={personalAccount?.[0].balance} />
           <SmartPortfolio func={()=> setActionsModal(true)} amount={smartPortfolio?.[0].balance}/>
         </div>

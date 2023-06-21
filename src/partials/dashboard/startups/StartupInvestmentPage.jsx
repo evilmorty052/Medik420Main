@@ -6,13 +6,15 @@ import {FaArrowLeft,FaChevronRight} from 'react-icons/fa'
 import {Tabs} from '../../../pages/hive/index'
 import {StatisticsCard, LockupPeriods, GridCard, LockupCard, InvestmentModal, PictureLine} from "./index"
 import {hemplogo} from "../../../assets"
+import { ErrorMessage } from '../../../pages/Settings'
 
 function StartupInvestmentPage({back, }) {
     const [statsTab, setstatsTab] = useState(true)
     const [invesTab, setinvesTab] = useState(false)
     const [investors, setinvestors] = useState(false)
     const [ActiveCompany, setActiveCompany] = useState(null)
-    const [investmentSize, setinvestmentSize] = useState(null)
+    // const [investmentSize, setinvestmentSize] = useState(null)
+    // const [openModal, setopenModal] = useState(null)
     const navigate = useNavigate()
   
   
@@ -86,21 +88,7 @@ function StartupInvestmentPage({back, }) {
       console.log('clcked')
     }
   
-    function handleModal(e) {
-      // if(!investmentSize){
-      //   ErrorMessage('Investment Size must be greater than 0')
-      //   console.log('clcked')
-      //   return
-      // } 
-      
-      openModal ? setopenModal(false) : setopenModal(true)
-  
-      if (e.target.id == 'modalcontainer'|| e.target.id == 'closemodalbutton') {
-        openModal ? setopenModal(false) : setopenModal(true)
-        
-      }
-      console.log('clcked')
-    }
+   
 
     function Faq(params) {
       return (
@@ -391,6 +379,21 @@ function StartupInvestmentPage({back, }) {
       )
     }
   
+    function handleModal(e) {
+      if(!investmentSize){
+        ErrorMessage('Investment Size must be greater than 0')
+        console.log('clcked')
+        return
+      } 
+      
+      openModal ? setopenModal(false) : setopenModal(true)
+  
+      if (e.target.id == 'modalcontainer'|| e.target.id == 'closemodalbutton') {
+        openModal ? setopenModal(false) : setopenModal(true)
+        
+      }
+      console.log('clcked')
+    }
   
   
       return (
